@@ -20,24 +20,22 @@ public static int startIndex = 0;
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    int[] numbers = new int[8];
+    
     ArrayList <String> colours = new ArrayList<String>();
     String[] individualColours = new String [3];
     String chosenColours = "";
     colours.add("Black");
     colours.add("Brown");
     colours.add("Red");
-    colours.add("White");
     colours.add("Orange");
+    colours.add("Yellow");
     colours.add("Green");
     colours.add("Blue");
     colours.add("Violet");
     colours.add("Grey");
+    colours.add("White");
     printOptions(colours);
     
-    for (int i = 0; i < numbers.length;i++){
-        numbers[i] = i;
-    }
     chosenColours = getColours();
     if (chosenColours.indexOf(chosenColours.length() - 1) != '-'){
         chosenColours += "-";
@@ -45,9 +43,27 @@ public static int startIndex = 0;
     individualColours[0] = separateColours(chosenColours);
     individualColours[1] = separateColours(chosenColours);
     individualColours[2] = separateColours(chosenColours);
-    System.out.println(individualColours[0]);
-    System.out.println(individualColours[1]);
-    System.out.println(individualColours[2]);
+    
+    determineAnswer(individualColours, colours);
+    }
+    
+    public static void determineAnswer(String[] indivCol, ArrayList coloursList){
+    double[] numbers = new double[3];  
+    double answer;
+        for (int i = 0; i < coloursList.size() - 1; i++){
+            if (indivCol[0].equals( coloursList.get(i))){
+                numbers[0] = i;
+            }
+            if (indivCol[1].equals( coloursList.get(i))){
+                numbers[1] = i;
+            }
+            if (indivCol[2].equals( coloursList.get(i))){
+                numbers[2] = i;
+            }
+        }
+
+    answer = ((numbers[0] * 10) + numbers[1]) * Math.pow(10, numbers[2]);
+    System.out.println("Resistance in ohms: " + answer);
     }
     
     public static String separateColours(String chosenColours){
