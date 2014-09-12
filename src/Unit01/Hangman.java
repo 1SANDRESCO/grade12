@@ -13,49 +13,85 @@ import java.util.Scanner;
  */
 public class Hangman {
 public static int startIndex = 0;
+public static int numberOfWords = 0;
+public static Scanner input = new Scanner (System.in);
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         String[][]wordOptions = new String[5][3];
+        String[] answer = new String[5];
         wordOptions[0][0] = "Lost ";
         wordOptions[0][1] = "TV SHOWS";
-        wordOptions[0][2] = "1";
+        
         
         wordOptions[1][0] = "Ben Hur ";
         wordOptions[1][1] = "MOVIE";
-        wordOptions[1][2] = "2";
+       
         
         wordOptions[2][0] = "Children of God ";
         wordOptions[2][1] = "BOOK SERIES";
-        wordOptions[2][2] = "3";
         
-        wordOptions[3][0] = "Stairway to Heaven ";
+        
+        wordOptions[3][0] = "Stairway to Heaven sdf s ";
         wordOptions[3][1] = "SONGS";
-        wordOptions[3][2] = "3";
+        
         
         wordOptions[4][0] = "Twin Atlantic ";
         wordOptions[4][1] = "BANDS";
-        wordOptions[4][2] = "2";
+       
         
         int choice = getUserChoice(wordOptions);
-        displayPhrase(wordOptions, choice);
+        wordOptions[choice][0] = wordOptions[choice][0].toLowerCase();
+        answer = storeWords(wordOptions, choice);
+        //System.out.println(numberOfWords);
+        playTurn(answer, choice, wordOptions);
+    }
+    public static void playTurn(String[] answer, int choice, String[][]options){
+        
+        System.out.println();
+        System.out.println("CATEGORY: " + options[choice][1]);
+        System.out.println("NUMBER OF WORDS " + numberOfWords);
+        String letter = "";
+        
+        for (int i = 0; i < numberOfWords; i ++){
+            for (int letterIndex = 0; letterIndex < answer[i].length(); letterIndex++){
+                System.out.print("___ ");
+            }
+            System.out.print("      ");
+        }
+        letter = input.nextLine();
+        System.out.print("\n\nNow, guess a lower case letter: ");
+        letter = input.nextLine();
+        System.out.println();
+       
+        for (int i = 0; i < numberOfWords; i ++){
+            for (int letterIndex = 0; letterIndex < answer[i].length(); letterIndex++){
+                if (answer[i].charAt(letterIndex) == letter.charAt(0)) {
+                System.out.print(" " + letter.toUpperCase() + "  " ) ;   
+                    
+                } else {
+                System.out.print("___ ");}
+             }
+            System.out.print("      ");
+        }
     }
     
-    public static void displayPhrase(String[][] options, int choice){
+    public static String[] storeWords(String[][] options, int choice){
     int length1, length2;
-    int numberOfWords = 0;
-    String word1, word2, word3;
+   
+    String [] words = new String[5];
     
     for (int i = 0; i < options[choice][0].length(); i++){
         if (options[choice][0].charAt(i) == ' '){
             numberOfWords++;
         }
     }
-    word1 = separateWords(options[choice][0]);
-    word2 = separateWords(options[choice][0]);
-    System.out.println(word1);
-    System.out.println(word2);
+    for (int i = 0; i < numberOfWords; i ++){
+        words[i] = separateWords(options[choice][0]); 
+        //System.out.print(words[i] + " ");
+    }
+    return words;
     }
     public static String separateWords(String phrase){
         int endWordIndex = phrase.indexOf(" ", startIndex ) ;
@@ -66,7 +102,7 @@ public static int startIndex = 0;
         return word;
     }
     public static int getUserChoice(String[][]options){
-        Scanner input = new Scanner (System.in);
+        
         int chosenCategory;
         System.out.println("Please choose from the follow categories: ");
         for (int i = 0; i < options.length; i++){
