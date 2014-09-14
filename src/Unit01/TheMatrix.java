@@ -77,18 +77,21 @@ public class TheMatrix {
     public static void multiplyMatrix(double[][] array) {
         boolean defined = false;
         final boolean NO_WORDS = true;
+        
         System.out.println();
         System.out.println("For Matrix #1...");
         double[][] array1 = generateMatrix();
-         System.out.println("ARRAY 1 TEST");
-        displayArray(array1);
+        
         System.out.println();
         System.out.println("For Matrix #2...");
         double[][] array2 = generateMatrix();
-        System.out.println("ARRAY 2 TEST");
+
+        System.out.println("Therefore, we are multiplying: ");
+        displayArray(array1);
+        System.out.println("by :");
         displayArray(array2);
-        double sum1, sum2, sum3;
-        if (array1.length == array2[0].length){
+        double sum = 0;
+        if (array1[0].length == array2.length){
             defined = true;
             System.out.println("Product is defined: number of array#1 rows = number of array#2 columns ");
             double[][]array3 = new double[array1.length][array2[0].length];
@@ -96,12 +99,18 @@ public class TheMatrix {
             System.out.println("ARRAY 2 TEST 2");
             displayArray(array2);
             
-//            for (int rowIndex = 0; rowIndex < array1.length; rowIndex++){
-//                for (int colIndex = 0; colIndex < array2[rowIndex].length; colIndex++){
-//                array3[rowIndex]    
-//                }
-//            }
-            
+
+        for (int matrix1Row = 0; matrix1Row < array1.length; matrix1Row ++){
+            for (int matrix2Row = 0; matrix2Row < array2.length; matrix2Row++){
+                sum = 0;
+                for (int col = 0; col < array1[matrix1Row].length; col++){
+                sum += array1[matrix1Row][col] * array2[matrix2Row][col];     
+                }
+                array3[matrix1Row][matrix2Row] = sum;
+            }
+        }  
+        System.out.println("And the answer is:");
+        displayArray(array3);
             
         } else {
             System.out.println("Array is not defined! Incorrect matching of rows and columns! Try again!");
