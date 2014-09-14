@@ -24,31 +24,31 @@ public class TheMatrix {
         System.out.println("----------Welcome to the Matrix Program----------");
         double[][] theMatrix;
         int optionNumber = 0;
-        boolean goodOptionNumber = false;
+        boolean goodOptionNumber = false;//if user submits a number that is not an option
         boolean exit = false;
-        boolean arrayHasBeenMade = false;
+        boolean arrayHasBeenMade = false;//if user selects option without having selected number 1 first, and therefore no matrix has been made
 
-        while (exit == false) {
-            optionNumber = displayOptions(optionNumber);
-            if (optionNumber > 0 && optionNumber < 6) {
+        while (exit == false) {//loop to continues to run progam until user wishes to exit
+            optionNumber = displayOptions(optionNumber);//displays menu
+            if (optionNumber > 0 && optionNumber < 6) {//ensures good user input
                 goodOptionNumber = true;
             } else {
                 System.out.println("Opps! Choice entered is not possible. Try again!");
                 optionNumber = displayOptions(optionNumber);
             }
-            if (optionNumber == 5) {
+            if (optionNumber == 5) {//exits
                 exit = true;
             }
 
             if (goodOptionNumber == true) {
                 switch (optionNumber) {
-                    case 1:
+                    case 1://first task of creating matrix
                         arrayHasBeenMade = true;
                         theMatrix = generateMatrix();
                         displayArray(theMatrix);
                         matrixHolder = theMatrix;
                         break;
-                    case 2:
+                    case 2://2nd task of transposing matrix
                         if (arrayHasBeenMade == true) {
                             generateTranspose(matrixHolder);
                         } else {
@@ -57,7 +57,7 @@ public class TheMatrix {
                             generateTranspose(theMatrix);
                         }
                         break;
-                    case 3:
+                    case 3://3rd task of multiplying matrix by constant
                         if (arrayHasBeenMade == true) {
                             multiplyMatrixByConstant(matrixHolder);
                         } else {
@@ -66,7 +66,7 @@ public class TheMatrix {
                             multiplyMatrixByConstant(theMatrix);
                         }
                         break;
-                    case 4:
+                    case 4://4th task of mutliplying a matrix by another matrix
                         multiplyMatrix(matrixHolder);
 
                 }
@@ -76,34 +76,34 @@ public class TheMatrix {
 
     public static void multiplyMatrix(double[][] array) {
         boolean defined = false;
-        final boolean NO_WORDS = true;
+        final boolean NO_WORDS = true;//will run the transposeMatrix method that does not print 
         
         System.out.println();
-        System.out.println("For Matrix #1...");
+        System.out.println("For Matrix #1...");//generates first matrix
         double[][] array1 = generateMatrix();
         
         System.out.println();
-        System.out.println("For Matrix #2...");
+        System.out.println("For Matrix #2...");//generates second matrix
         double[][] array2 = generateMatrix();
 
         System.out.println("Therefore, we are multiplying: ");
         displayArray(array1);
         System.out.println("by :");
         displayArray(array2);
-        double sum = 0;
+        
+        
         if (array1[0].length == array2.length){
+            double sum = 0;
             defined = true;
             System.out.println("Product is defined: number of array#1 rows = number of array#2 columns ");
             double[][]array3 = new double[array1.length][array2[0].length];
-            array2 = generateTranspose(array2, NO_WORDS); 
-            System.out.println("ARRAY 2 TEST 2");
-            displayArray(array2);
+            array2 = generateTranspose(array2, NO_WORDS); //transposes 2nd matrix so that they each have same number of rows
             
 
-        for (int matrix1Row = 0; matrix1Row < array1.length; matrix1Row ++){
-            for (int matrix2Row = 0; matrix2Row < array2.length; matrix2Row++){
+        for (int matrix1Row = 0; matrix1Row < array1.length; matrix1Row ++){//rows of first matrix
+            for (int matrix2Row = 0; matrix2Row < array2.length; matrix2Row++){//rows of second matrix
                 sum = 0;
-                for (int col = 0; col < array1[matrix1Row].length; col++){
+                for (int col = 0; col < array1[matrix1Row].length; col++){//goes through columns one by one
                 sum += array1[matrix1Row][col] * array2[matrix2Row][col];     
                 }
                 array3[matrix1Row][matrix2Row] = sum;
@@ -112,7 +112,7 @@ public class TheMatrix {
         System.out.println("And the answer is:");
         displayArray(array3);
             
-        } else {
+        } else {//if dimensions of matricies are not correct
             System.out.println("Array is not defined! Incorrect matching of rows and columns! Try again!");
             
         }
@@ -123,7 +123,7 @@ public class TheMatrix {
         double constant;
         System.out.println("------------Multiplying Matrix by Constant------------");
         System.out.print("Enter a constant (int or double) to multiply by Matrix: ");
-        constant = input.nextDouble();
+        constant = input.nextDouble();//gets value of constant from user
         System.out.println("The original array was: ");
         displayArray(array);
         for (int rowIndex = 0; rowIndex < array.length; rowIndex++) {
@@ -136,7 +136,7 @@ public class TheMatrix {
         displayArray(array);
     }
 
-    public static int displayOptions(int choice) {
+    public static int displayOptions(int choice) {//shows user options and get user input for desired task
         System.out.println();
         System.out.println("Please select one of the following options: ");
         System.out.println("1: The Random Matrix");
@@ -152,36 +152,36 @@ public class TheMatrix {
     public static double[][] generateMatrix() {
 
         double[][] matrix;
-        System.out.println("------------Generating Matrix------------");
+        System.out.println("------------Generating Matrix------------");//message to user describing method
         int rows;
         int cols;
-        System.out.print("Enter number of ROWS: ");
+        System.out.print("Enter number of ROWS: ");//gets user input of number of rows
         rows = input.nextInt();
-        System.out.print("Enter number of COLUMNS: ");
+        System.out.print("Enter number of COLUMNS: ");//gets user input of number of rows
         cols = input.nextInt();
         matrix = new double[rows][cols];
 
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
             for (int colIndex = 0; colIndex < cols; colIndex++) {
-                matrix[rowIndex][colIndex] = (int) (Math.random() * (MAX_MATRIX_VALUE + 1));
+                matrix[rowIndex][colIndex] = (int) (Math.random() * (MAX_MATRIX_VALUE + 1));//creates matrix (array) using cols and rows
             }
         }
 
         return matrix;
     }
 
-
-    public static double[][] generateTranspose(double[][]array, boolean noWords){
+    public static double[][] generateTranspose(double[][]array, boolean noWords){//transposes without printing words on screen
      double[][] transposed = new double[array[0].length][array.length];   
       for (int colIndex = 0; colIndex < array.length; colIndex++) {
-            for (int rowIndex = 0; rowIndex < array[colIndex].length; rowIndex++) {
+            for (int rowIndex = 0; rowIndex < array[colIndex].length; rowIndex++) {//transposes/flips array's columns with rows
                 transposed[rowIndex][colIndex] = array[colIndex][rowIndex];
             }
         }
     return transposed;  
     }
+    
     public static void generateTranspose(double[][] array) {
-        System.out.println("------------Transposing Matrix------------");
+        System.out.println("------------Transposing Matrix------------");//tells user about method
         System.out.println();
         double[][] transposed = new double[array[0].length][array.length];
         for (int colIndex = 0; colIndex < array.length; colIndex++) {
@@ -189,7 +189,7 @@ public class TheMatrix {
                 transposed[rowIndex][colIndex] = array[colIndex][rowIndex];
             }
         }
-        System.out.println("The original array was: ");
+        System.out.println("The original array was: ");//compares old array with new, transposed array
         displayArray(array);
         System.out.println("The NEW, transposed array is: ");
         displayArray(transposed);
@@ -199,7 +199,7 @@ public class TheMatrix {
     public static void displayArray(double[][] data) {
         for (int row = 0; row < data.length; row++) {
             for (int col = 0; col < data[row].length; col++) {
-                System.out.print(data[row][col] + "   ");
+                System.out.print(data[row][col] + "   ");//prints Matrix
             }
             System.out.println();
         }
