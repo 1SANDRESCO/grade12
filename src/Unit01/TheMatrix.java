@@ -132,7 +132,7 @@ public class TheMatrix {
         }
 
         System.out.println("The NEW array multiplied by " + constant + " is: ");
-        displayArray(array);
+        displayArray(array);//displays answer, formatted and organized
     }
 
     public static int displayOptions(int choice) {//shows user options and get user input for desired task
@@ -144,7 +144,7 @@ public class TheMatrix {
         System.out.println("4: Multiplying Two Matrices");
         System.out.println("5: EXIT");
         System.out.print("Your choice is: ");
-        choice = input.nextInt();
+        choice = input.nextInt();//gets user input
         return choice;
     }
 
