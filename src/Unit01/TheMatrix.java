@@ -5,6 +5,7 @@
  */
 package Unit01;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,7 @@ public class TheMatrix {
                 goodOptionNumber = true;
             } else {
                 System.out.println("Opps! Choice entered is not possible. Try again!");
-                optionNumber = displayOptions(optionNumber);
+                //displayOptions(optionNumber);
             }
             if (optionNumber == 5) {//exits
                 exit = true;
@@ -77,46 +78,44 @@ public class TheMatrix {
     public static void multiplyMatrix(double[][] array) {
         boolean defined = false;
         final boolean NO_WORDS = true;//will run the transposeMatrix method that does not print 
-        
+
         System.out.println();
         System.out.println("For Matrix #1...");//generates first matrix
         double[][] array1 = generateMatrix();
-        
+
         System.out.println();
         System.out.println("For Matrix #2...");//generates second matrix
         double[][] array2 = generateMatrix();
 
-        System.out.println("Therefore, we are multiplying: ");
-        displayArray(array1);
-        System.out.println("by :");
-        displayArray(array2);
-        
-        
-        if (array1[0].length == array2.length){
+        if (array1[0].length == array2.length) {
+            System.out.println("Therefore, we are multiplying: ");
+            displayArray(array1);
+            System.out.println("by :");
+            displayArray(array2);
+
             double sum = 0;
             defined = true;
             System.out.println("Product is defined: number of array#1 rows = number of array#2 columns ");
-            double[][]array3 = new double[array1.length][array2[0].length];
+            double[][] array3 = new double[array1.length][array2[0].length];
             array2 = generateTranspose(array2, NO_WORDS); //transposes 2nd matrix so that they each have same number of rows
-            
 
-        for (int matrix1Row = 0; matrix1Row < array1.length; matrix1Row ++){//rows of first matrix
-            for (int matrix2Row = 0; matrix2Row < array2.length; matrix2Row++){//rows of second matrix
-                sum = 0;
-                for (int col = 0; col < array1[matrix1Row].length; col++){//goes through columns one by one
-                sum += array1[matrix1Row][col] * array2[matrix2Row][col];     
+            for (int matrix1Row = 0; matrix1Row < array1.length; matrix1Row++) {//rows of first matrix
+                for (int matrix2Row = 0; matrix2Row < array2.length; matrix2Row++) {//rows of second matrix
+                    sum = 0;
+                    for (int col = 0; col < array1[matrix1Row].length; col++) {//goes through columns one by one
+                        sum += array1[matrix1Row][col] * array2[matrix2Row][col];
+                    }
+                    array3[matrix1Row][matrix2Row] = sum;
                 }
-                array3[matrix1Row][matrix2Row] = sum;
             }
-        }  
-        System.out.println("And the answer is:");
-        displayArray(array3);
-            
+            System.out.println("And the answer is:");
+            displayArray(array3);
+
         } else {//if dimensions of matricies are not correct
-            System.out.println("Array is not defined! Incorrect matching of rows and columns! Try again!");
-            
+            System.out.println("Array is NOT defined! Incorrect matching of rows and columns! Try again!");
+
         }
-        
+
     }
 
     public static void multiplyMatrixByConstant(double[][] array) {
@@ -149,16 +148,18 @@ public class TheMatrix {
         return choice;
     }
 
-    public static double[][] generateMatrix() {
-
+    public static double[][] generateMatrix() {//makes an array of computer doubles but mathematical integers (x.0), 
+        // for less complicated viewing
         double[][] matrix;
         System.out.println("------------Generating Matrix------------");//message to user describing method
         int rows;
         int cols;
         System.out.print("Enter number of ROWS: ");//gets user input of number of rows
-        rows = input.nextInt();
+        rows = input.nextInt();// assumes valid input from user
         System.out.print("Enter number of COLUMNS: ");//gets user input of number of rows
         cols = input.nextInt();
+        cols = Math.abs(cols);//ensures valid user input 
+        rows = Math.abs(rows);
         matrix = new double[rows][cols];
 
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
@@ -166,20 +167,19 @@ public class TheMatrix {
                 matrix[rowIndex][colIndex] = (int) (Math.random() * (MAX_MATRIX_VALUE + 1));//creates matrix (array) using cols and rows
             }
         }
-
         return matrix;
     }
 
-    public static double[][] generateTranspose(double[][]array, boolean noWords){//transposes without printing words on screen
-     double[][] transposed = new double[array[0].length][array.length];   
-      for (int colIndex = 0; colIndex < array.length; colIndex++) {
+    public static double[][] generateTranspose(double[][] array, boolean noWords) {//transposes without printing words on screen
+        double[][] transposed = new double[array[0].length][array.length];
+        for (int colIndex = 0; colIndex < array.length; colIndex++) {
             for (int rowIndex = 0; rowIndex < array[colIndex].length; rowIndex++) {//transposes/flips array's columns with rows
                 transposed[rowIndex][colIndex] = array[colIndex][rowIndex];
             }
         }
-    return transposed;  
+        return transposed;
     }
-    
+
     public static void generateTranspose(double[][] array) {
         System.out.println("------------Transposing Matrix------------");//tells user about method
         System.out.println();
@@ -189,17 +189,23 @@ public class TheMatrix {
                 transposed[rowIndex][colIndex] = array[colIndex][rowIndex];
             }
         }
-        System.out.println("The original array was: ");//compares old array with new, transposed array
+        System.out.println("The original array was: ");//compares old array with new, transposed array 
         displayArray(array);
-        System.out.println("The NEW, transposed array is: ");
+        System.out.println("\nThe NEW, transposed array is: ");
         displayArray(transposed);
 
     }
 
     public static void displayArray(double[][] data) {
+        DecimalFormat df = new DecimalFormat("#.#####");
         for (int row = 0; row < data.length; row++) {
             for (int col = 0; col < data[row].length; col++) {
-                System.out.print(data[row][col] + "   ");//prints Matrix
+                if (data[row][col] % 1 == 0) {
+                    System.out.format("%9s", (data[row][col]));   // formats for integers (doubles with decimals of .0)
+                } else {
+                    System.out.format("%9.5g", (data[row][col])); // for for doubles with decimals that are not 0 (.2342)
+                }
+
             }
             System.out.println();
         }
