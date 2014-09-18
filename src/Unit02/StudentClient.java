@@ -23,7 +23,7 @@ public class StudentClient {
         student1.setLastName ("Sandre");
         //student1.setOEN (123123123);
         student1.setAge  (17);
-        System.out.println(student1.age);
+       
         Student student2 = new Student("fred");
         Student student3 = new Student();
         
