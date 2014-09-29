@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author 1SANDRESCO
  */
 public class Director {
+
     final int NOT_VALID = -1;
     final boolean DEAD = false;
     final boolean ALIVE = true;
@@ -63,25 +64,33 @@ public class Director {
     public void setFirstName(String firstName) {
         if (firstName != null) {
             this.firstName = firstName;
+        } else {
+            System.out.println("First Name not valid.");
         }
     }
 
     public void setLastName(String lastName) {
         if (lastName != null) {
             this.lastName = lastName;
+        } else {
+            System.out.println("Last Name not valid.");
         }
     }
 
     public void setCountry(int country) {
-        if (country >= 0 && country <=2){
-         this.country = country;   
+        if (country >= 0 && country <= 2) {
+            this.country = country;
+        } else {
+            System.out.println("Country number given not valid.");
         }
-        
+
     }
 
     public void setIdentificationNumber(String identificationNumber) {
-        if (identificationNumber.length() == 9 ){       
+        if (identificationNumber.length() == 9) {
             this.identificationNumber = identificationNumber;
+        } else {
+            System.out.println("Identification Number not valid. Must be 9 digits long.");
         }
     }
 
@@ -90,19 +99,21 @@ public class Director {
     }
 
     public void setAge(int age) {
-        if (age > 5){
-         this.age = age;   
+        if (age > 5 && age < 120) {
+            this.age = age;
         } else {
-         this.age = NOT_VALID;
+            System.out.println("Age not valid. Director too young or old");
         }
-        
+
     }
 
     public void setTypeOfMoviesMade(int typeOfMoviesMade) {
-        if (typeOfMoviesMade >=0 && typeOfMoviesMade <= 5){
-            this.typeOfMoviesMade = typeOfMoviesMade;    
+        if (typeOfMoviesMade >= 0 && typeOfMoviesMade <= 5) {
+            this.typeOfMoviesMade = typeOfMoviesMade;
+        } else {
+            System.out.println("Typical genre that director directs not listed.");
         }
-        
+
     }
 
     public void setStateOfHealth(boolean stateOfHealth) {
@@ -122,7 +133,7 @@ public class Director {
     }
 
     public String getCountry() {
-        switch(this.country){
+        switch (this.country) {
             case HOME_COUNTRY_CANADA:
                 return homeCountry[0];
             case HOME_COUNTRY_USA:
@@ -132,7 +143,7 @@ public class Director {
             default:
                 return "Invalid";
         }
-       
+
     }
 
     public String getIdentificationNumber() {
@@ -144,47 +155,45 @@ public class Director {
     }
 
     public int getAge() {
-        return age;  
-      
-        
+        return age;
+
     }
 
     public String getTypeOfMoviesMade() {
-    switch (typeOfMoviesMade){
-        case PREFERRED_GENRE_ACTION:
-            return preferredGenre[0];
-        case PREFERRED_GENRE_ADVENTURE:
-            return preferredGenre[1];
-        case PREFERRED_GENRE_COMEDY:
-            return preferredGenre[2];
-        case PREFERRED_GENRE_DRAMA:
-            return preferredGenre[3];
-        case PREFERRED_GENRE_MYSTERY:
-            return preferredGenre[4];
-        case PREFERRED_GENRE_ROMANCE:
-            return preferredGenre[5];
-        default:
-            return "Not Listed";
-    }    
+        switch (typeOfMoviesMade) {
+            case PREFERRED_GENRE_ACTION:
+                return preferredGenre[0];
+            case PREFERRED_GENRE_ADVENTURE:
+                return preferredGenre[1];
+            case PREFERRED_GENRE_COMEDY:
+                return preferredGenre[2];
+            case PREFERRED_GENRE_DRAMA:
+                return preferredGenre[3];
+            case PREFERRED_GENRE_MYSTERY:
+                return preferredGenre[4];
+            case PREFERRED_GENRE_ROMANCE:
+                return preferredGenre[5];
+            default:
+                return "Not Listed";
+        }
     }
 
     public String getStateOfHealth() {
-        if (DEAD){
-            return "Dead";   
+        if (DEAD) {
+            return "Dead";
         } else {
             return "Alive";
         }
-        
+
     }
-    
-    public boolean isValid(){
-        if (stateOfHealth == DEAD || identificationNumber == null || country == NOT_VALID){
+
+    public boolean isValid() {
+        if (stateOfHealth == DEAD || identificationNumber == null || country == NOT_VALID) {
             return false;
         } else {
             return true;
         }
     }
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -209,5 +218,4 @@ public class Director {
         return "Director{" + "firstName=" + firstName + ", lastName=" + lastName + ", country=" + country + ", identificationNumber=" + identificationNumber + ", netWorth=" + netWorth + ", age=" + age + ", typeOfMoviesMade=" + typeOfMoviesMade + ", stateOfHealth=" + stateOfHealth + '}';
     }
 
-    
 }
