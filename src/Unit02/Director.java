@@ -10,7 +10,8 @@ import java.util.Objects;
 
 /**
  *
- * @author 1SANDRESCO
+ * @author 1SANDRESCO Date: Sept 29, 2014 Version: v1.00 Description: Creates an
+ * object of movie director
  */
 public class Director {
 
@@ -43,10 +44,6 @@ public class Director {
     private int typeOfMoviesMade;
     private boolean stateOfHealth;
     private ArrayList<Movie> movies;
-    
-    public void addMovie(Movie movieExample){
-        movies.add(movieExample);
-    }
 
     public Director() {//empty
         this.country = NOT_VALID;
@@ -101,7 +98,7 @@ public class Director {
     }
 
     public void setNetWorth(int netWorth) {
-        if (netWorth > 0 && netWorth < 999999999 ){//shouldn't have more than a billion dollars
+        if (netWorth > 0 && netWorth < 999999999) {//shouldn't have more than a billion dollars
             this.netWorth = netWorth;
         } else {
             System.out.println("Sorry, director's net worth is not realistic.");
@@ -141,8 +138,8 @@ public class Director {
     public String getLastName() {
         return lastName;
     }
-    
-    public String getFullName(){
+
+    public String getFullName() {
         String fullName = firstName + " " + lastName;
         return fullName;
     }
@@ -164,7 +161,6 @@ public class Director {
 //    public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
 //        return identificationNumber;
 //    }
-
     public int getNetWorth() {
         return netWorth;
     }
@@ -194,7 +190,7 @@ public class Director {
     }
 
     public String getStateOfHealth() {
-        if (DEAD) {
+        if (this.stateOfHealth == DEAD) {
             return "Dead";
         } else {
             return "Alive";
@@ -232,5 +228,23 @@ public class Director {
     public String toString() {
         return "Director{" + "firstName=" + firstName + ", lastName=" + lastName + ", country=" + country + ", identificationNumber=" + identificationNumber + ", netWorth=" + netWorth + ", age=" + age + ", typeOfMoviesMade=" + typeOfMoviesMade + ", stateOfHealth=" + stateOfHealth + '}';
     }
+
+//    public void addMovie(Movie movieExample) {
+//        boolean notCopy = true;
+//        for (int i = 0; i < movies.size() + 1; i++) {
+//            if (movieExample.equals(movies.get(i))) {
+//                notCopy = false;
+//            }
+//        }
+//        if (notCopy) {
+//            System.out.println("Movies has been ADDED");
+//            movies.add(movieExample);
+//        }
+//
+//    }
+    
+//    public Movie getMovie(int indexOfMovie){
+//        return movies.get(indexOfMovie);
+//    }
 
 }

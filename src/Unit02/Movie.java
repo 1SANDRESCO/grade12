@@ -8,8 +8,10 @@ package Unit02;
 import java.util.Objects;
 
 /**
- *
  * @author 1SANDRESCO
+ * Date: Sept 29, 2014
+ * Version: v1.00
+ * Description: Creates an object of movie 
  */
 public class Movie {
 
@@ -69,7 +71,7 @@ public class Movie {
     }
 
     public void setReleaseYear(int releaseYear) {
-        if (releaseYear < 1880 || releaseYear > 2030) {//first movie made in 1880s, can have very late release dates planned
+        if (releaseYear > 1880 || releaseYear < 2030) {//first movie made in 1880s, can have very late release dates planned
             this.releaseYear = releaseYear;
         } else {
             System.out.println("Year of release not possible.");

@@ -21,16 +21,30 @@ public class DirectorMovieClient {
         director1.setCountry(1);
         director1.setFirstName("Christopher");
         director1.setLastName("Nolan");
-        director1.setIdentificationNumber("123456789");
+        director1.setIdentificationNumber("124556789");
         director1.setNetWorth(50000000);
-        director1.setStateOfHealth(true);
-        director1.setTypeOfMoviesMade(1);
-        
+        director1.setStateOfHealth(false);
+        director1.setTypeOfMoviesMade(8);
+        System.out.println("Valid??? " + director1.isValid());
         System.out.println("Country: " + director1.getCountry());
         System.out.println("Types of Movies made: " + director1.getTypeOfMoviesMade());
         System.out.println("State of health " + director1.getStateOfHealth() );
         System.out.println("Full name: " + director1.getFullName());
         System.out.println(director1.toString());
+        
+        System.out.println();
+        
+        Movie movie1 = new Movie ();
+        movie1.setTitle("Dark Knight");
+        movie1.setReleaseYear(2008);
+        movie1.setOriginalMovie(true);
+        movie1.setGenreOfMovie(0);
+        movie1.setLeadActor("Christian Bale");
+        System.out.println(movie1);
+        
+        //director1.addMovie(movie1);
+        //System.out.println("Getting movie:" + director1.getMovie(0));
+       
     }
     
 }
