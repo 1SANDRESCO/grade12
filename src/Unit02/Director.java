@@ -5,6 +5,7 @@
  */
 package Unit02;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -41,6 +42,11 @@ public class Director {
     private int age;
     private int typeOfMoviesMade;
     private boolean stateOfHealth;
+    private ArrayList<Movie> movies;
+    
+    public void addMovie(Movie movieExample){
+        movies.add(movieExample);
+    }
 
     public Director() {//empty
         this.country = NOT_VALID;
@@ -62,7 +68,7 @@ public class Director {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName != null) {
+        if (firstName != null && firstName.length() < 30) {
             this.firstName = firstName;
         } else {
             System.out.println("First Name not valid.");
@@ -70,7 +76,7 @@ public class Director {
     }
 
     public void setLastName(String lastName) {
-        if (lastName != null) {
+        if (lastName != null && lastName.length() < 40) {
             this.lastName = lastName;
         } else {
             System.out.println("Last Name not valid.");
@@ -95,10 +101,14 @@ public class Director {
     }
 
     public void setNetWorth(int netWorth) {
-        this.netWorth = netWorth;
+        if (netWorth > 0 && netWorth < 999999999 ){//shouldn't have more than a billion dollars
+            this.netWorth = netWorth;
+        } else {
+            System.out.println("Sorry, director's net worth is not realistic.");
+        }
     }
 
-    public void setAge(int age) {
+    public void setAge(int age) {//current or at death
         if (age > 5 && age < 120) {
             this.age = age;
         } else {
@@ -131,6 +141,11 @@ public class Director {
     public String getLastName() {
         return lastName;
     }
+    
+    public String getFullName(){
+        String fullName = firstName + " " + lastName;
+        return fullName;
+    }
 
     public String getCountry() {
         switch (this.country) {
@@ -146,9 +161,9 @@ public class Director {
 
     }
 
-    public String getIdentificationNumber() {
-        return identificationNumber;
-    }
+//    public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
+//        return identificationNumber;
+//    }
 
     public int getNetWorth() {
         return netWorth;
@@ -174,7 +189,7 @@ public class Director {
             case PREFERRED_GENRE_ROMANCE:
                 return preferredGenre[5];
             default:
-                return "Not Listed";
+                return "Preferred genre to direct not Listed";
         }
     }
 
