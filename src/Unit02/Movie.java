@@ -10,19 +10,38 @@ package Unit02;
  * @author 1SANDRESCO
  */
 public class Movie {
+
     final int GENRE_ACTION = 0;
     final int GENRE_ADVENTURE = 1;
-    final int GENRE_COMEDY= 2;
-    final int GENRE_DRAMA= 3;
+    final int GENRE_COMEDY = 2;
+    final int GENRE_DRAMA = 3;
     final int GENRE_MYSTERY = 4;
-    final int GENRE_ROMANCE= 5;
-    
+    final int GENRE_ROMANCE = 5;
+
     final boolean ORIGINAL = true;
-    final boolean REMAKE = false; 
+    final boolean REMAKE = false;
     private String title;
     private String leadActor;
     private int releaseYear;
     private int genreOfMovie;
     private int totalGross;
     private boolean originalMovie;//not remake
+
+    public Movie() {
+
+    }
+
+    public Movie(String title, int releaseYear) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+    }
+    
+    public Movie (String title, int releaseYear, int totalGross, boolean originalMovie, String leadActor){
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.totalGross = totalGross;
+        this.originalMovie = originalMovie;
+        this.leadActor = leadActor;
+    }
 }
+    
