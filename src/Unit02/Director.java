@@ -235,27 +235,28 @@ public class Director {
 
     public void addMovie(Movie movieToBeAdded) {
         boolean duplicate = false;
-        for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getTitle() == movieToBeAdded.getTitle() && movies.get(i).getReleaseYear() == movieToBeAdded.getReleaseYear()) {
-                duplicate = true;
-                System.out.println("addMovie: movie has already been added to list.");
+        if (movieToBeAdded != null) {
+            for (int i = 0; i < movies.size(); i++) {
+                if (movies.get(i).getTitle() == movieToBeAdded.getTitle() && movies.get(i).getReleaseYear() == movieToBeAdded.getReleaseYear()) {
+                    duplicate = true;
+                    System.out.println("addMovie: movie has already been added to list.");
+                }
             }
-        }
-        if (duplicate != true) {
-            if (movieToBeAdded == null) {
-                System.out.println("addMovie: movie to be added equals NULL.");
-            } else if (!movieToBeAdded.isValid()) {
-                System.out.println("Movie is not valid.");
-            } else {
-                System.out.println("addMovie: " + movieToBeAdded.getTitle() + " has been added");
-                movies.add(movieToBeAdded);
+            if (duplicate != true) {
+                if (!movieToBeAdded.isValid()) {
+                    System.out.println("Movie is not valid.");
+                } else {
+                    System.out.println("addMovie: " + movieToBeAdded.getTitle() + " has been added");
+                    movies.add(movieToBeAdded);
+                }
             }
+        } else {
+            System.out.println("addMovie: cannot add null object");
         }
-
     }
 
     public void removeMovieByIndex(int index) {
-        if (index >= 0 && index <= movies.size()) {
+        if (index >= 0 && index < movies.size()) {
             System.out.println("removieMovieByIndex: " + movies.get(index).getTitle() + " has been removed");
             movies.remove(index);
         } else {
@@ -267,46 +268,54 @@ public class Director {
         boolean exists = false;
         int objectIndex = 0;
         for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getTitle() == title && movies.get(i).getReleaseYear() == year) {
+            if (movies.get(i).getTitle().equalsIgnoreCase(title) && movies.get(i).getReleaseYear() == year) {
                 exists = true;
                 objectIndex = i;
                 i = movies.size();
             }
         }
-        if (exists){
+        if (exists) {
             removeMovieByIndex(objectIndex);
+        } else {
+            System.out.println("Could not find " + title + " (" + year + ") movie, therefore could not remove.");
         }
     }
-    
-    public Movie getMovieByIndex(int index){
-        if (index >= 0 && index <= movies.size()) {
-            System.out.println("getMovieByIndex: " + movies.get(index).getTitle() + " has been found"); 
+
+    public Movie getMovieByIndex(int index) {
+        if (index >= 0 && index < movies.size()) {
+            System.out.println("getMovieByIndex: " + movies.get(index).getTitle() + " has been found");
             return movies.get(index);
         } else {
-            System.out.println("getMovieByIndex: movie index not valid.");
+            System.out.println("getMovieByIndex: movie index " + index + " not valid.");
             return null;
         }
-        
+
     }
-    
-    public Movie getMovie(String title, int year){
+
+    public Movie getMovie(String title, int year) {
         int objectIndex = 0;
         boolean exists = false;
         for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getTitle() == title && movies.get(i).getReleaseYear() == year) {
+            if (movies.get(i).getTitle().equalsIgnoreCase(title) && movies.get(i).getReleaseYear() == year) {
                 objectIndex = i;
                 exists = true;
                 i = movies.size();
             }
-        } 
-        if (exists){
-            getMovieByIndex(objectIndex);
-        } else {
-            System.out.println("getMovie: movie title or year not valid. Movie not found");
-          return null;  
         }
-        return null;
-        
+        if (exists) {
+            return getMovieByIndex(objectIndex);
+        } else {
+            System.out.println("Could not find " + title + " (" + year + ") movie, therefore could not return.");
+            return null;
+        }
+       
+    
+    }
+    
+    public void movieListToString(){
+        for (int i = 0; i < movies.size(); i++){
+            System.out.println("Index " + i + ": " + movies.get(i).toString());
+        }
     }
 
 }
