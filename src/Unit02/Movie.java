@@ -144,7 +144,7 @@ public class Movie {
     }
     
     public boolean isValid(){
-        if (releaseYear <= 2014 && title != null){
+        if (releaseYear <= 2014 && releaseYear > 1880 && title != null){
             return true;    
         } else {
             return false;

@@ -43,7 +43,7 @@ public class Director {
     private int age;
     private int typeOfMoviesMade;
     private boolean stateOfHealth;
-    private ArrayList<Movie> movies;
+    private ArrayList<Movie> movies = new ArrayList();
 
     public Director() {//empty
         this.country = NOT_VALID;
@@ -229,22 +229,33 @@ public class Director {
         return "Director{" + "firstName=" + firstName + ", lastName=" + lastName + ", country=" + country + ", identificationNumber=" + identificationNumber + ", netWorth=" + netWorth + ", age=" + age + ", typeOfMoviesMade=" + typeOfMoviesMade + ", stateOfHealth=" + stateOfHealth + '}';
     }
 
-//    public void addMovie(Movie movieExample) {
-//        boolean notCopy = true;
-//        for (int i = 0; i < movies.size() + 1; i++) {
-//            if (movieExample.equals(movies.get(i))) {
-//                notCopy = false;
-//            }
-//        }
-//        if (notCopy) {
-//            System.out.println("Movies has been ADDED");
-//            movies.add(movieExample);
-//        }
-//
-//    }
+    public int getNumberMovies() {
+        return movies.size();
+    }
+
+    public void addMovie(Movie movieToBeAdded) {
+        boolean duplicate = false;
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getTitle() == movieToBeAdded.getTitle() && movies.get(i).getReleaseYear() == movieToBeAdded.getReleaseYear()) {
+                duplicate = true;
+                System.out.println("addMovie: movie has already been added to list.");
+            }
+        }
+        if (duplicate != true) {
+            if (movieToBeAdded == null) {
+                System.out.println("addMovie: movie to be added equals NULL.");
+            } else if (!movieToBeAdded.isValid() ){
+                System.out.println("Movie is not valid.");
+            } else {
+                System.out.println("addMovie: movie has been added");
+                movies.add(movieToBeAdded);
+            }
+        }
+
+    }
     
-//    public Movie getMovie(int indexOfMovie){
-//        return movies.get(indexOfMovie);
-//    }
+    public void removeMovieByIndex(int index){
+        
+    }
 
 }
