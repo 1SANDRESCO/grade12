@@ -240,6 +240,7 @@ public class Director {
                 if (movies.get(i).getTitle() == movieToBeAdded.getTitle() && movies.get(i).getReleaseYear() == movieToBeAdded.getReleaseYear()) {
                     duplicate = true;
                     System.out.println("addMovie: movie has already been added to list.");
+                    i = movies.size();
                 }
             }
             if (duplicate != true) {
