@@ -46,17 +46,20 @@ public class Director {
     private ArrayList<Movie> movies = new ArrayList();
 
     public Director() {//empty
-        this.country = NOT_VALID;
-        this.typeOfMoviesMade = NOT_VALID;
+        System.out.println("Movie has been created.");
+       // this.country = NOT_VALID;
+       // this.typeOfMoviesMade = NOT_VALID;
     }
 
     public Director(String identificationNumber, int countryID, boolean health) {
+        this();
         this.identificationNumber = identificationNumber;
         this.country = countryID;
         this.stateOfHealth = health;
     }
 
     public Director(String identificationNumber, int countryID, boolean health, String firstName, String lastName) {
+        this();
         this.identificationNumber = identificationNumber;
         this.country = countryID;
         this.stateOfHealth = health;
@@ -256,13 +259,17 @@ public class Director {
         }
     }
 
-    public void removeMovieByIndex(int index) {
+    private void removeMovieByIndex(int index) {
         if (index >= 0 && index < movies.size()) {
             System.out.println("removieMovieByIndex: " + movies.get(index).getTitle() + " has been removed");
             movies.remove(index);
         } else {
             System.out.println("removieMovieByIndex: index given is not valid");
         }
+    }
+    
+    public void removeMovie(Movie movieToBeRemoved){
+        movies.remove(movieToBeRemoved);
     }
 
     public void removeMovie(String title, int year) {

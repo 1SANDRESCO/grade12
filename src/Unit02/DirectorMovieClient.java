@@ -93,7 +93,7 @@ public class DirectorMovieClient {
         //Remove
         //Test Case 1: properly removes a valid object from list via index
         System.out.println("REMOVE > Case 1 INDEX good object > Before length: " +director1.getNumberMovies() );
-        director1.removeMovieByIndex(0);
+       // director1.removeMovieByIndex(0);
         System.out.println("REMOVE > Case 1  > After length: " +director1.getNumberMovies() );
         System.out.println();
         
@@ -105,15 +105,20 @@ public class DirectorMovieClient {
         
         //Test Case 3: invalid index 
         System.out.println("REMOVE > Case 3 index BAD object > Before length: " +director1.getNumberMovies() );
-        director1.removeMovieByIndex(99);
+        //director1.removeMovieByIndex(99);
         System.out.println("REMOVE > Case 3  > after length: " +director1.getNumberMovies() );
         System.out.println();
         
+        //Test Case 4: remove by passing an object
+        System.out.println("REMOVE > case 4 > pass it a object.Before length: " +director1.getNumberMovies() );
+        director1.removeMovie(movie6);
+        System.out.println("REMOVE > case 4 > pass it a object.after length: " +director1.getNumberMovies() );
+        
         
         //test case 4: invalid object
-        System.out.println("Remove > case 4 incorrect tittle or year. . Before length: " +director1.getNumberMovies() );
+        System.out.println("Remove > case 5 incorrect tittle or year. . Before length: " +director1.getNumberMovies() );
         director1.removeMovie("thisDoesn'tExist", 1999);
-        System.out.println("REMOVE > Case 4 object does not exist > after length: " + director1.getNumberMovies());
+        System.out.println("REMOVE > Case 5 object does not exist > after length: " + director1.getNumberMovies());
         System.out.println();
         System.out.println("-----------------------------------------");
         //get
@@ -127,13 +132,13 @@ public class DirectorMovieClient {
 
         System.out.println();
         //test Case 3: invalid index
-        System.out.println("Get, invalid index 99 search. ");
+        System.out.println("GET, invalid index 99 search. ");
         director1.getMovieByIndex(99);
         System.out.println();
         //Test Case 4: get object that doesn't exist
-        System.out.println("Get > object that doesn't exist");
+        System.out.println("GET > object that doesn't exist");
         director1.getMovie("xxxxx123", 2003);
-        
+        System.out.println();
         director1.movieListToString();
     }
     
