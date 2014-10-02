@@ -290,7 +290,7 @@ public class Director {
         }
     }
 
-    public Movie getMovieByIndex(int index) {
+    private Movie getMovieByIndex(int index) {
         if (index >= 0 && index < movies.size()) {
             System.out.println("getMovieByIndex: " + movies.get(index).getTitle() + " has been found");
             return movies.get(index);
