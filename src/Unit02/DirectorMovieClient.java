@@ -71,12 +71,16 @@ public class DirectorMovieClient {
         director1.addMovie(movie2);
         System.out.println("Add > Case 3  > after length: " +director1.getNumberMovies() );
         System.out.println();
-        //Test Case 3: adding null object
+        //Test Case 4: adding null object
         System.out.println("Add > Case 4 NULL object > Before length: " +director1.getNumberMovies() );
         director1.addMovie(null);
         System.out.println("Add > Case 4 > After length: " +director1.getNumberMovies() );
         System.out.println();
-        
+        //Test Case 5: adding a valid movie, same title different year
+        System.out.println("Add > Case 5 > Valid movie, same title as other (KING KONG) different year. Before length:" + director1.getNumberMovies());
+        Movie movie7 = new Movie("KING KONG", 2001, 503000, true, "Martin S");
+        director1.addMovie(movie7);
+        System.out.println("After length: " + director1.getNumberMovies());
        
         
         System.out.println("Current number of movies of Director1: " + director1.getNumberMovies());
@@ -107,6 +111,12 @@ public class DirectorMovieClient {
         director1.removeMovie("thisDoesn'tExist", 1999);
         System.out.println("REMOVE > Case 3 object does not exist > after length: " + director1.getNumberMovies());
         System.out.println();
+
+        //test case 4: improper title or year
+        System.out.println("REMOVE > Case 4 > improper title and year > GODZILLAxxx (2000)> before length: " + director1.getNumberMovies());
+        director1.removeMovie("GODZILLAxxx", 2000);
+        System.out.println("REMOVE > Case 4 impropre title and year > after length: " + director1.getNumberMovies());
+        System.out.println();
         System.out.println("-----------------------------------------");
         
 
@@ -127,6 +137,8 @@ public class DirectorMovieClient {
         System.out.println("Get full name: " + director1.getFullName());
         System.out.println("Get preffered genre to direct: " + director1.getPreferredGenre());
         System.out.println("Get home country: " + director1.getCountry());
+        System.out.println("Check if valid: " + director1.isValid());
+        System.out.println("Get state of health: " + director1.getStateOfHealth());
         System.out.println();
         
         //Test Case 4: director > get encapsulated info
