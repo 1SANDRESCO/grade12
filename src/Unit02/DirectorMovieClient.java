@@ -37,19 +37,16 @@ public class DirectorMovieClient {
         movie1.setOriginalMovie(true);
         movie1.setGenreOfMovie(0);
         movie1.setLeadActor("Christian Bale");
-        
-        System.out.println(movie1.toString());
-        
         Movie movie2 = new Movie("Ben Hur", 1800, 50000, true, "Scott Sandre");
         Movie movie3 = new Movie("GODZILLA", 2000, 50000, true, "Scott Sandre");
         Movie movie4 = new Movie("KING KONG", 2000, 50000, true, "Scott Sandre");
         Movie movie5 = new Movie("SPIDERMAN", 2003, 50000, true, "Scott Sandre");
         Movie movie6 = new Movie("FIGHT CLUB", 2010, 50000, true, "Scott Sandre");
-        director1.addMovie(movie6);
+        director1.addMovie(movie2);
+        director1.addMovie(movie3);
+        director1.addMovie(movie4);
         director1.addMovie(movie5);
-        
-        
-        System.out.println();
+        director1.addMovie(movie6);
         System.out.println();
         
         System.out.println("-----------------------------------------");
@@ -80,66 +77,66 @@ public class DirectorMovieClient {
         System.out.println("Add > Case 4 > After length: " +director1.getNumberMovies() );
         System.out.println();
         
-        director1.addMovie(movie4);
-        director1.addMovie(movie3);
+       
+        
         System.out.println("Current number of movies of Director1: " + director1.getNumberMovies());
         System.out.println();
         System.out.println("-----------------------------------------");
         System.out.println();
-        System.out.println();
+        System.out.println("Printing all movies...");
         director1.movieListToString();
-        System.out.println();
-        System.out.println();
-        //Remove
-        //Test Case 1: properly removes a valid object from list via index
-        System.out.println("REMOVE > Case 1 INDEX good object > Before length: " +director1.getNumberMovies() );
-       // director1.removeMovieByIndex(0);
-        System.out.println("REMOVE > Case 1  > After length: " +director1.getNumberMovies() );
-        System.out.println();
-        
-        //Test Case 2: check if object actually exists in list
-        System.out.println("REMOVE > Case 2 object exists good tittle/year> before length: " + director1.getNumberMovies());
-        director1.removeMovie("GODZILLA", 2000);
-        System.out.println("REMOVE > Case 2 object exists > after length: " + director1.getNumberMovies());
-        System.out.println();
-        
-        //Test Case 3: invalid index 
-        System.out.println("REMOVE > Case 3 index BAD object > Before length: " +director1.getNumberMovies() );
-        //director1.removeMovieByIndex(99);
-        System.out.println("REMOVE > Case 3  > after length: " +director1.getNumberMovies() );
-        System.out.println();
-        
-        //Test Case 4: remove by passing an object
-        System.out.println("REMOVE > case 4 > pass it a object.Before length: " +director1.getNumberMovies() );
-        director1.removeMovie(movie6);
-        System.out.println("REMOVE > case 4 > pass it a object.after length: " +director1.getNumberMovies() );
-        
-        
-        //test case 4: invalid object
-        System.out.println("Remove > case 5 incorrect tittle or year. . Before length: " +director1.getNumberMovies() );
-        director1.removeMovie("thisDoesn'tExist", 1999);
-        System.out.println("REMOVE > Case 5 object does not exist > after length: " + director1.getNumberMovies());
         System.out.println();
         System.out.println("-----------------------------------------");
-        //get
-        //Test Case 1: valid index
-        System.out.println("GET by index> Case 1 valid index  > Before length: " +director1.getNumberMovies() );
-        System.out.println(director1.getMovieByIndex(0).getTitle());
+        System.out.println();   
+        
+        //Remove
+        //Test Case 1: proper title and year
+        System.out.println("REMOVE > Case 1 > proper title and year > GODZILLA (2000)> before length: " + director1.getNumberMovies());
+        director1.removeMovie("GODZILLA", 2000);
+        System.out.println("REMOVE > Case 1 propre title and year > after length: " + director1.getNumberMovies());
         System.out.println();
-        //Test Case 2: check if objects exists in list
-        System.out.println("GET by search > SPIDERMAN, 2003 > Case 2 if object exists  > " );
-        System.out.println(director1.getMovie("SPIDERMAN", 2003).getTitle());
+        
+        //Test Case 2: remove by passing an object
+        System.out.println("REMOVE > case 2 > pass it a object > movie6 object (fight club) > Before length: " +director1.getNumberMovies() );
+        director1.removeMovie(movie6);
+        System.out.println("REMOVE > case2 > pass it a object.after length: " +director1.getNumberMovies() );
+        System.out.println(); 
+        
+        //test case 3: invalid object
+        System.out.println("REMOVE > case 3 incorrect tittle or year. . Before length: " +director1.getNumberMovies() );
+        director1.removeMovie("thisDoesn'tExist", 1999);
+        System.out.println("REMOVE > Case 3 object does not exist > after length: " + director1.getNumberMovies());
+        System.out.println();
+        System.out.println("-----------------------------------------");
+        
 
+        //GET
+        //Test Case 1: mvoie > check if title and year exists in list
+        System.out.println("GET > movie > proper title and year > SPIDERMAN, 2003 > Case 2 > " );
+        System.out.println(director1.getMovie("SPIDERMAN", 2003).getTitle());
         System.out.println();
-        //test Case 3: invalid index
-        System.out.println("GET, invalid index 99 search. ");
-        director1.getMovieByIndex(99);
-        System.out.println();
-        //Test Case 4: get object that doesn't exist
-        System.out.println("GET > object that doesn't exist");
+     
+        //Test Case 2: movie > get title and year that doesn't exist
+        System.out.println("GET > movie > non-propre title and year, xxxxx123, 2003, object that doesn't exist");
         director1.getMovie("xxxxx123", 2003);
         System.out.println();
+        
+        //Test Case 3: director > get info. such as name and age
+        System.out.println("GET > director > get non-encapsulated data >");
+        System.out.println("Get age: " + director1.getAge());
+        System.out.println("Get full name: " + director1.getFullName());
+        System.out.println("Get preffered genre to direct: " + director1.getPreferredGenre());
+        System.out.println("Get home country: " + director1.getCountry());
+        System.out.println();
+        
+        //Test Case 4: director > get encapsulated info
+        System.out.println("GET > director > get encapsulated data like SIN/SSN");
+        System.out.println("Identification number: " + director1.getIdentificationNumber());
+        
+        System.out.println();
+        System.out.println("Printing all movies...");
         director1.movieListToString();
+        System.out.println();
     }
     
 }
