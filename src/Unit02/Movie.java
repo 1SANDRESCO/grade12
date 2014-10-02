@@ -87,12 +87,9 @@ public class Movie {
         
     }
 
-    
-    
-
-//    public void setTotalGross(int totalGross) {
-//        this.totalGross = totalGross;
-//    }
+    public void setTotalGross(int totalGross) {
+        this.totalGross = totalGross;
+    }
 
     public void setOriginalMovie(boolean originalMovie) {
         this.originalMovie = originalMovie;

@@ -197,8 +197,9 @@ public class Director {
 
     }
 
-    public boolean isValid() {
+    public boolean isValid() {//valid in terms of being able to direct. if dead, can still have movies attributed to him/her
         if (stateOfHealth == DEAD || identificationNumber == null || country == NOT_VALID) {
+            System.out.println(this.getFullName() + " is not a valid director, in terms of being alive and legitimate to direct a new movie.");
             return false;
         } else {
             return true;
