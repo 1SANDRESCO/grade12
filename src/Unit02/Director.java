@@ -130,8 +130,23 @@ public class Director {
         this.stateOfHealth = stateOfHealth;
     }
 
-    public String[] getPreferredGenre() {
-        return preferredGenre;
+    public String getPreferredGenre() {
+        switch (typeOfMoviesMade) {
+            case PREFERRED_GENRE_ACTION:
+                return preferredGenre[0];
+            case PREFERRED_GENRE_ADVENTURE:
+                return preferredGenre[1];
+            case PREFERRED_GENRE_COMEDY:
+                return preferredGenre[2];
+            case PREFERRED_GENRE_DRAMA:
+                return preferredGenre[3];
+            case PREFERRED_GENRE_MYSTERY:
+                return preferredGenre[4];
+            case PREFERRED_GENRE_ROMANCE:
+                return preferredGenre[5];
+            default:
+                return "Preferred genre to direct not Listed";
+        }
     }
 
     public String getFirstName() {
@@ -161,9 +176,9 @@ public class Director {
 
     }
 
-//    public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
-//        return identificationNumber;
-//    }
+    public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
+       return "This data is protected.";
+    }
     public int getNetWorth() {
         return netWorth;
     }
@@ -171,25 +186,6 @@ public class Director {
     public int getAge() {
         return age;
 
-    }
-
-    public String getTypeOfMoviesMade() {
-        switch (typeOfMoviesMade) {
-            case PREFERRED_GENRE_ACTION:
-                return preferredGenre[0];
-            case PREFERRED_GENRE_ADVENTURE:
-                return preferredGenre[1];
-            case PREFERRED_GENRE_COMEDY:
-                return preferredGenre[2];
-            case PREFERRED_GENRE_DRAMA:
-                return preferredGenre[3];
-            case PREFERRED_GENRE_MYSTERY:
-                return preferredGenre[4];
-            case PREFERRED_GENRE_ROMANCE:
-                return preferredGenre[5];
-            default:
-                return "Preferred genre to direct not Listed";
-        }
     }
 
     public String getStateOfHealth() {

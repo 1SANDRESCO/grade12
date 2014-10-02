@@ -15,19 +15,19 @@ import java.util.Objects;
  */
 public class Movie {
 
-    final int GENRE_ACTION = 0;
-    final int GENRE_ADVENTURE = 1;
-    final int GENRE_COMEDY = 2;
-    final int GENRE_DRAMA = 3;
-    final int GENRE_MYSTERY = 4;
-    final int GENRE_ROMANCE = 5;
+    public static final int GENRE_ACTION = 0;
+    public static final int GENRE_ADVENTURE = 1;
+    public static final int GENRE_COMEDY = 2;
+    public static final int GENRE_DRAMA = 3;
+    public static final int GENRE_MYSTERY = 4;
+    public static final int GENRE_ROMANCE = 5;
 
-    final String[] movieType = {
+    public static final String[] movieType = {
         "Action", "Adventure", "Comedy", "Drama", "Mystery", "Romance"
     };
 
-    final boolean ORIGINAL = true;
-    final boolean REMAKE = false;
+    public static final boolean ORIGINAL = true;
+    public static final boolean REMAKE = false;
     private String title;
     private String leadActor;
     private int releaseYear;
