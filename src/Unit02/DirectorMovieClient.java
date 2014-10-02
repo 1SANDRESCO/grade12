@@ -13,7 +13,10 @@ package Unit02;
 public class DirectorMovieClient {
 
     /**
-     * @param args the command line arguments
+        * Author: Scott Sandre
+        * Date: Sept 29, 2014
+        * Version: v1.2
+        * Description: Client manager that allows user to test methods and behaviours of movie and director classes 
      */
     public static void main(String[] args) {
         Director director1 = new Director();//("123456789", 1, true, "Christopher", "Nolan");
@@ -121,7 +124,7 @@ public class DirectorMovieClient {
         
 
         //GET
-        //Test Case 1: mvoie > check if title and year exists in list
+        //Test Case 1: movie > check if title and year exists in list
         System.out.println("GET > movie > proper title and year > SPIDERMAN, 2003 > Case 2 > " );
         System.out.println(director1.getMovie("SPIDERMAN", 2003).getTitle());
         System.out.println();
@@ -141,9 +144,10 @@ public class DirectorMovieClient {
         System.out.println("Get state of health: " + director1.getStateOfHealth());
         System.out.println();
         
-        //Test Case 4: director > get encapsulated info
-        System.out.println("GET > director > get encapsulated data like SIN/SSN");
-        System.out.println("Identification number: " + director1.getIdentificationNumber());
+        //Test Case 4: director and movie> get encapsulated info
+        System.out.println("GET > director > get encapsulated data like SIN/SSN or total gross");
+        System.out.println("Identification number of : " + director1.getFullName() + ": " + director1.getIdentificationNumber());
+        System.out.println("Total gross of " + movie5.getTitle() + ": " +  movie5.getTotalGross() );
         
         System.out.println();
         System.out.println("Printing all movies...");

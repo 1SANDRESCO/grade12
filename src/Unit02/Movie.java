@@ -11,7 +11,7 @@ import java.util.Objects;
  * @author 1SANDRESCO
  * Date: Sept 29, 2014
  * Version: v1.00
- * Description: Creates an object of movie 
+ * Description: Creates an object of a movie 
  */
 public class Movie {
 
@@ -28,6 +28,7 @@ public class Movie {
 
     public static final boolean ORIGINAL = true;
     public static final boolean REMAKE = false;
+    public static final String ENCAPSULATED = ("This data is protected");
     private String title;
     private String leadActor;
     private int releaseYear;
@@ -128,8 +129,8 @@ public class Movie {
        
     }
 
-    public int getTotalGross() {
-        return totalGross;
+    public String getTotalGross() {
+        return ENCAPSULATED;
     }
 
     public String isOriginalMovie() {

@@ -10,7 +10,10 @@ import java.util.Objects;
 
 /**
  *
- * @author 1SANDRESCO Date: Sept 29, 2014 Version: v1.00 Description: Creates an
+ * @author 1SANDRESCO 
+ * Date: Sept 29, 2014 
+ * Version: v1.00 
+ * Description: Creates an
  * object of movie director
  */
 public class Director {
@@ -27,6 +30,7 @@ public class Director {
     final int PREFERRED_GENRE_DRAMA = 3;
     final int PREFERRED_GENRE_MYSTERY = 4;
     final int PREFERRED_GENRE_ROMANCE = 5;
+    public static final String ENCAPSULATED = ("This data is protected");
 
     final String[] homeCountry = {
         "Canada", "USA", "Other"
@@ -177,7 +181,7 @@ public class Director {
     }
 
     public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
-       return "This data is protected.";
+       return ENCAPSULATED;
     }
     public int getNetWorth() {
         return netWorth;
