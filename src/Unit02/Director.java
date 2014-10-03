@@ -18,26 +18,26 @@ import java.util.Objects;
  */
 public class Director {
 
-    final int NOT_VALID = -1;
-    final boolean DEAD = false;
-    final boolean ALIVE = true;
-    final String[] preferredGenre = {
+    public static final int NOT_VALID = -1;
+    public static final boolean DEAD = false;
+    public static final boolean ALIVE = true;
+    public static final String[] preferredGenre = {
         "Action", "Adventure", "Comedy", "Drama", "Mystery", "Romance"
     };
-    final int PREFERRED_GENRE_ACTION = 0;
-    final int PREFERRED_GENRE_ADVENTURE = 1;
-    final int PREFERRED_GENRE_COMEDY = 2;
-    final int PREFERRED_GENRE_DRAMA = 3;
-    final int PREFERRED_GENRE_MYSTERY = 4;
-    final int PREFERRED_GENRE_ROMANCE = 5;
+    public static final int PREFERRED_GENRE_ACTION = 0;
+    public static final int PREFERRED_GENRE_ADVENTURE = 1;
+    public static final int PREFERRED_GENRE_COMEDY = 2;
+    public static final int PREFERRED_GENRE_DRAMA = 3;
+    public static final int PREFERRED_GENRE_MYSTERY = 4;
+    public static final int PREFERRED_GENRE_ROMANCE = 5;
     public static final String ENCAPSULATED = ("This data is protected");
 
-    final String[] homeCountry = {
+    public static  final String[] homeCountry = {
         "Canada", "USA", "Other"
     };
-    final int HOME_COUNTRY_CANADA = 0;
-    final int HOME_COUNTRY_USA = 1;
-    final int HOME_COUNTRY_OTHER = 2;
+    public static final int HOME_COUNTRY_CANADA = 0;
+    public static final int HOME_COUNTRY_USA = 1;
+    public static  final int HOME_COUNTRY_OTHER = 2;
 
     private String firstName;
     private String lastName;
@@ -181,7 +181,7 @@ public class Director {
     }
 
     public String getIdentificationNumber() {//Encapsulation, cannot get SIN or SSN of director
-       return ENCAPSULATED;
+       return ENCAPSULATED; //
     }
     public int getNetWorth() {
         return netWorth;
