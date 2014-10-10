@@ -1,6 +1,6 @@
 /* 
  */
-package Unit02;
+package unit2;
 
 /**
  * Example Book Class

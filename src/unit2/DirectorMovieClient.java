@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Unit02;
+package unit2;
 
 /**
  *

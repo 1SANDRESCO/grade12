@@ -1,6 +1,6 @@
-package Unit01;
+package unit1;
 
-import static Unit01.Palindrome2v2.startIndex;
+import static unit1.Palindrome2v2.startIndex;
 import java.util.ArrayList;
 import java.util.Scanner;
 
