@@ -69,7 +69,7 @@ public class Ghost extends PacmanCharacter {
         c.setColor(this.colour);
         c.fillArc(this.getXLoc(), this.getYLoc(), HEAD_RADIUS, HEAD_RADIUS, 0, 180);
         c.fillRect(this.getXLoc(), this.getYLoc() + (int) (HEAD_RADIUS / 2) , BODY_WIDTH, BODY_HEIGHT); 
-        c.setColor(EYE);
+         c.setColor(EYE);
         c.fillOval(this.getXLoc() + (int) (0.5 * HEAD_RADIUS) - (int) (0.5 * EYE_RADIUS), this.getYLoc() + (int) (0.25 * HEAD_RADIUS), EYE_RADIUS, EYE_RADIUS);
     }
     

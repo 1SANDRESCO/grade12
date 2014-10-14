@@ -12,22 +12,26 @@ import java.awt.Color;
  * @author Owner
  */
 public class Pacman extends PacmanCharacter {
-    public static int PAC_RADIUS = 40;
-    public static int EYE_RADIUS = 8;
+
+    public static int PAC_RADIUS = 60;
+    public static int EYE_RADIUS = (int) (PAC_RADIUS / 6);
     public static Color EYE_COLOUR = Color.black;
     public static int START_LIVES = 3;
     public static int START_KILLS = 0;
     public static int START_COINS = 0;
-    public static int START_ORIENTATION = 4;
+   
+    public static int START_ORIENTATION = 3;
     public static int MAX_PACMANS = 1;
+    public static boolean OPEN = true;
     private int numberPacmans = 0;
     private int numberKills;
     private int numberCoins;
     private int radius;
     private int numberLivesLeft;
-   // private int orientation;
+    public int closedOrOpenCounter = 0;
+    // private int orientation;
     private boolean killable;
-   
+
     public Pacman() {
 //        setNumberLives(START_LIVES);
 //        setNumberKills(START_KILLS);
@@ -36,21 +40,20 @@ public class Pacman extends PacmanCharacter {
 
     public Pacman(boolean alive, int xLoc, int yLoc, boolean killable) {
         super(alive, xLoc, yLoc, killable);
-        
-        if (numberPacmans < MAX_PACMANS){
-        setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
-        setNumberKills(START_KILLS);
-        setRadius(PAC_RADIUS);
-        this.draw(START_ORIENTATION);
-        numberPacmans++;
+
+        if (numberPacmans < MAX_PACMANS) {
+            setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
+            setNumberKills(START_KILLS);
+            setRadius(PAC_RADIUS);
+            this.draw(START_ORIENTATION, !OPEN);
+            numberPacmans++;
         } else {
             System.out.println("Can only have 1 pacman!");
         }
-        
+
     }
 
-   
-   public void setRadius(int r) {
+    public void setRadius(int r) {
         if (r > 0) {
             this.radius = r;
         } else {
@@ -86,6 +89,11 @@ public class Pacman extends PacmanCharacter {
         System.out.println("Number of kills has been increased.");
         this.numberKills++;
     }
+    
+    public void increaseNumberCoins(){
+        System.out.println("Number of coins has been increased by 1.");
+        this.numberCoins++;
+    }
 
     private void setNumberKills(int kills) {
         this.numberKills = kills;
@@ -106,43 +114,73 @@ public class Pacman extends PacmanCharacter {
     public int getNumberKills() {
         return numberKills;
     }
-    
+
     @Override
-    public void draw(){
-        draw(this.getDirection());
+    public void draw() {
+        if (closedOrOpenCounter % 2 == 0) {
+            draw(this.getDirection(), false);
+        } else {
+            draw(this.getDirection(), true);
+        }
+        if (closedOrOpenCounter == 500) {
+            closedOrOpenCounter = 1;
+        }
+        increaseNumberCoins();
+        closedOrOpenCounter++;
     }
 
-    public void draw(int direction) {
+    public void draw(int direction, boolean open) {
+        c.setColor(Color.yellow);
+        c.fillOval(this.getXLoc(), this.getYLoc(), this.radius, this.radius);
+        
         
         switch (direction) {
+
             //left
-            case 1:
-                c.setColor(Color.yellow);
-                c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 210, 300);
+            case DIRECTION_LEFT:
+
+                if (open == OPEN) {
+                    c.setColor(Color.white);
+                    c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 210, -60);
+                }
                 c.setColor(EYE_COLOUR);
-                c.fillOval(MAX_X, MAX_X, EYE_RADIUS, EYE_RADIUS);
-                
+                c.fillOval(this.getXLoc() + (int) (0.5 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), this.getYLoc() + (int) (0.9 * EYE_RADIUS), EYE_RADIUS, EYE_RADIUS);
+
                 break;
             //right
-            case 2:
-                c.setColor(Color.yellow);
-                c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 30, 300);
+            case DIRECTION_RIGHT:
+
+                if (open == OPEN) {
+                    c.setColor(Color.white);
+                    c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 30, -60);
+                }
+                c.setColor(EYE_COLOUR);
+                c.fillOval(this.getXLoc() + (int) (0.5 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), this.getYLoc() + (int) (0.9 * EYE_RADIUS), EYE_RADIUS, EYE_RADIUS);
                 break;
             //up
-            case 3:
-                c.setColor(Color.yellow);
-                c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 120, 300);
+            case DIRECTION_UP:
+
+                if (open == OPEN) {
+                    c.setColor(Color.white);
+                    c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 120, -60);
+                }
+                c.setColor(EYE_COLOUR);
+                c.fillOval(this.getXLoc() + (int) (0.75 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), this.getYLoc() + (int) (0.5 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), EYE_RADIUS, EYE_RADIUS);
                 break;
             //down
-            case 4:
-                c.setColor(Color.yellow);
-                c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 300, 300);
+            case DIRECTION_DOWN:
 
+                if (open == OPEN) {
+                    c.setColor(Color.white);
+                    c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 300, -60);
+                }
+                c.setColor(EYE_COLOUR);
+                c.fillOval(this.getXLoc() + (int) (0.25 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), this.getYLoc() + (int) (0.5 * PAC_RADIUS) - (int) (0.5 * EYE_RADIUS), EYE_RADIUS, EYE_RADIUS);
                 break;
         }
     }
-    
-    public void erase(){
+
+    public void erase() {
         c.setColor(Color.white);
         c.fillOval(this.getXLoc(), this.getYLoc(), this.radius, this.radius);
     }

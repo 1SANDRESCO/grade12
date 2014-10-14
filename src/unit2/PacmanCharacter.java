@@ -22,6 +22,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     public final int DIRECTION_LEFT = 1;
     public final int DIRECTION_RIGHT = 2;
     public final int DIRECTION_UP = 3;
+     public static int DEFAULT_XY = 300;
     public final int DIRECTION_DOWN = 4;
     public final int STEP_SIZE = 20;
     public final int DELAY = 75;
@@ -35,15 +36,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     private int width;
     private int height;
     private boolean killable;
-    private boolean valid;
-
-    public void setKillable(boolean killable) {
-        this.killable = killable;
-    }
-
-    public boolean getIsKillable() {
-        return killable;
-    }
+    //private boolean valid;
 
     public PacmanCharacter() {
         if (c == null) {
@@ -61,24 +54,43 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
 
     public PacmanCharacter(boolean alive, int xLoc, int yLoc, boolean killable) {
         this.alive = alive;
-        this.xLoc = xLoc;
-        this.yLoc = yLoc;
+        if (xLoc < 0 || xLoc > MAX_X){
+            System.out.println("PacmanCharacter: xLoc of " + xLoc + " is not valid.");
+            this.xLoc = DEFAULT_XY;
+        } else {
+            this.xLoc = xLoc;
+        }
+        
+        if (yLoc < 0 || yLoc > MAX_Y){
+            System.out.println("PacmanCharacter: yLoc of " + yLoc + " is not valid.");
+            this.yLoc = DEFAULT_XY;
+        } else {
+            this.yLoc = yLoc;
+        }
+      
         this.killable = killable;
         this.direction = 1;
     }
-    
-    public void setIsValid(){
-        if (xLoc < 0 || xLoc > MAX_X || yLoc < 0 || yLoc > MAX_Y ){
-            this.valid = false;
-        }
-        else{
-            this.valid = true;
+
+    public void setKillable(boolean killable) {
+        this.killable = killable;
     }
+
+    public boolean getIsKillable() {
+        return killable;
     }
-    
-    public boolean getIsValid(){
-        return valid;
-    }
+
+//    public void setIsValid() {
+//        if (xLoc < 0 || xLoc > MAX_X || yLoc < 0 || yLoc > MAX_Y) {
+//            this.valid = false;
+//        } else {
+//            this.valid = true;
+//        }
+//    }
+
+//    public boolean getIsValid() {
+//        return valid;
+//    }
 
     public void setDirection(int direction) {
         if (direction > 0 && direction < 5) {
@@ -135,11 +147,11 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
                 moveDown();
                 break;
         }
-        draw();
+
     }
-    
-    public void delay(){
-         try {
+
+    public void delay() {
+        try {
             Thread.sleep(DELAY);
         } catch (Exception e) {
 
@@ -169,12 +181,12 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
         this.yLoc = this.yLoc + STEP_SIZE;
         this.draw();
     }
-    
-    public void checkIfMustBounce(){
-        if (this.xLoc <= 0){//left side
+
+    public void checkIfMustBounce() {
+        if (this.xLoc <= 0) {//left side
             moveRight();
-             moveRight();
-              moveRight();
+            moveRight();
+            moveRight();
         } else if (this.xLoc >= MAX_X) {//right side
             moveLeft();
             moveLeft();
@@ -183,7 +195,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
             moveDown();
             moveDown();
             moveDown();
-        } else if (this.yLoc >= MAX_Y){//bottom
+        } else if (this.yLoc >= MAX_Y) {//bottom
             moveUp();
             moveUp();
             moveUp();

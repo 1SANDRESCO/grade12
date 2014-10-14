@@ -18,10 +18,11 @@ public class PacmanGameTester {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        int a, b, d, e, f;
         Console c = new Console();
         PacmanCharacter.setConsole(c);
 
-        Pacman pacman = new Pacman(true, 200, 200, true);
+        Pacman pacman = new Pacman(true, 1200, 6000, true);
        // Pacman pacman2 = new Pacman (true, 300, 300, true);
 //        Pacman pacman = new Pacman();
 //        pacman.setIsAlive(true);
@@ -31,6 +32,9 @@ public class PacmanGameTester {
         //pacman.erase();
       
         //pacman.erase();
+        pacman.decreaseNumberLives();
+        pacman.decreaseNumberLives();
+        pacman.decreaseNumberLives();
         pacman.decreaseNumberLives();
         pacman.increaseNumberKills();
         
@@ -47,30 +51,27 @@ public class PacmanGameTester {
         System.out.println(ghost1.MAX_X);
         System.out.println(ghost1.MAX_Y);
         
-        int a;
-        int b;
-        int d;
-        int e;
-        int f;
-        for (int i = 0; i < 10000000; i++){
-            a= (int) (Math.random() * 4 ) + 1;
-            b= (int) (Math.random() * 4 ) + 1;
-            d= (int) (Math.random() * 4 ) + 1;
-            e= (int) (Math.random() * 4 ) + 1;
-            f= (int) (Math.random() * 4 ) + 1;
-            ghost1.move(a);
-            ghost2.move(b);
-            ghost3.move(d);
-            ghost4.move(e);
-            pacman.setDirection(f);
-            pacman.move(f);
-            pacman.checkIfMustBounce();
-            ghost1.checkIfMustBounce();
-            ghost2.checkIfMustBounce();
-            ghost3.checkIfMustBounce();
-            ghost4.checkIfMustBounce();
-            ghost1.delay();
-        }
+        
+//        for (int i = 0; i < 60; i++){
+//            a= (int) (Math.random() * 4 ) + 1;
+//            b= (int) (Math.random() * 4 ) + 1;
+//            d= (int) (Math.random() * 4 ) + 1;
+//            e= (int) (Math.random() * 4 ) + 1;
+//            f= (int) (Math.random() * 4 ) + 1;
+//            ghost1.move(a);
+//            ghost2.move(b);
+//            ghost3.move(d);
+//            ghost4.move(e);
+//            pacman.setDirection(f);
+//            pacman.move(f);
+//            pacman.checkIfMustBounce();
+//            ghost1.checkIfMustBounce();
+//            ghost2.checkIfMustBounce();
+//            ghost3.checkIfMustBounce();
+//            ghost4.checkIfMustBounce();
+//            ghost1.delay();
+//        System.out.println(pacman.closedOrOpenCounter);
+//        }
         
         
 
