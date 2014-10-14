@@ -12,36 +12,55 @@ import java.awt.Color;
  * @author Owner
  */
 public class Pacman extends PacmanCharacter {
-    public static final boolean SHAPE_CIRCLE = true;
     public static int PAC_RADIUS = 40;
+    public static int EYE_RADIUS = 8;
+    public static Color EYE_COLOUR = Color.black;
     public static int START_LIVES = 3;
     public static int START_KILLS = 0;
     public static int START_COINS = 0;
     public static int START_ORIENTATION = 4;
+    public static int MAX_PACMANS = 1;
+    private int numberPacmans = 0;
     private int numberKills;
     private int numberCoins;
+    private int radius;
     private int numberLivesLeft;
    // private int orientation;
     private boolean killable;
-
+   
     public Pacman() {
-        setNumberLives(START_LIVES);
-        setNumberKills(START_KILLS);
-        setRadius(PAC_RADIUS);
-        setCircular(SHAPE_CIRCLE);
+//        setNumberLives(START_LIVES);
+//        setNumberKills(START_KILLS);
+//        setRadius(PAC_RADIUS);
     }
 
     public Pacman(boolean alive, int xLoc, int yLoc, boolean killable) {
         super(alive, xLoc, yLoc, killable);
+        
+        if (numberPacmans < MAX_PACMANS){
         setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
         setNumberKills(START_KILLS);
         setRadius(PAC_RADIUS);
-        setCircular(SHAPE_CIRCLE);
         this.draw(START_ORIENTATION);
+        numberPacmans++;
+        } else {
+            System.out.println("Can only have 1 pacman!");
+        }
+        
     }
 
-    public void setRadius() {
-        setRadius(PAC_RADIUS);
+   
+   public void setRadius(int r) {
+        if (r > 0) {
+            this.radius = r;
+        } else {
+            System.out.println("Radius entered not valid");
+        }
+
+    }
+
+    public int getRadius() {
+        return this.radius;
     }
 
     private void setNumberLives(int lives) {
@@ -72,17 +91,9 @@ public class Pacman extends PacmanCharacter {
         this.numberKills = kills;
     }
 
-//    private void setOrientation() {
-//        this.orientation = this.getDirection();
-//    }
-
     public void setNumberCoins() {
         this.numberCoins = START_COINS;
     }
-
-//    public int getOrientation() {
-//        return orientation;
-//    }
 
     public int getNumberLives() {
         return numberLivesLeft;
@@ -102,27 +113,38 @@ public class Pacman extends PacmanCharacter {
     }
 
     public void draw(int direction) {
-        c.setColor(Color.yellow);
+        
         switch (direction) {
             //left
             case 1:
+                c.setColor(Color.yellow);
                 c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 210, 300);
-
+                c.setColor(EYE_COLOUR);
+                c.fillOval(MAX_X, MAX_X, EYE_RADIUS, EYE_RADIUS);
+                
                 break;
             //right
             case 2:
+                c.setColor(Color.yellow);
                 c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 30, 300);
                 break;
             //up
             case 3:
+                c.setColor(Color.yellow);
                 c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 120, 300);
                 break;
             //down
             case 4:
+                c.setColor(Color.yellow);
                 c.fillArc(this.getXLoc(), this.getYLoc(), PAC_RADIUS, PAC_RADIUS, 300, 300);
 
                 break;
         }
+    }
+    
+    public void erase(){
+        c.setColor(Color.white);
+        c.fillOval(this.getXLoc(), this.getYLoc(), this.radius, this.radius);
     }
 
     @Override
