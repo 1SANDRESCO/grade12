@@ -12,22 +12,46 @@ import hsa.Console;
  *
  * @author Owner
  */
-public class PacmanCharacter implements PacmanCharacterMovement{//don't forget max and mins of console boundaries
+public abstract class PacmanCharacter implements PacmanCharacterMovement {//don't forget max and mins of console boundaries
 
-    private static Console c;
+    protected static Console c;
 
-    private boolean alive;
-    private final int DIRECTION_LEFT = 1;
-    private final int DIRECTION_RIGHT = 2;
-    private final int DIRECTION_UP = 3;
-    private final int DIRECTION_DOWN = 4;
-    private final int STEP_SIZE = 20;
+    public boolean alive;
+    public final int MAX_X = c.getWidth();
+    public final int MAX_Y = c.getHeight();
+    public final int DIRECTION_LEFT = 1;
+    public final int DIRECTION_RIGHT = 2;
+    public final int DIRECTION_UP = 3;
+    public final int DIRECTION_DOWN = 4;
+    public final int STEP_SIZE = 20;
+    //private int numberLives;
+    //private int numberKills;
     private int yLoc;
     private int xLoc;
     private int maxX;
     private int maxY;
     private int direction;
     private int radius;
+    private int width;
+    private int height;
+    private boolean killable;
+    private boolean circular;
+
+    public void setCircular(boolean circular) {
+        this.circular = circular;
+    }
+
+    public boolean isCircular() {
+        return circular;
+    }
+
+    public void setKillable(boolean killable) {
+        this.killable = killable;
+    }
+
+    public boolean getIsKillable() {
+        return killable;
+    }
 
     public PacmanCharacter() {
         if (c == null) {
@@ -43,42 +67,39 @@ public class PacmanCharacter implements PacmanCharacterMovement{//don't forget m
         }
     }
 
-    public PacmanCharacter(boolean alive, int xLoc, int yLoc) {
+    public PacmanCharacter(boolean alive, int xLoc, int yLoc, boolean killable) {
         this.alive = alive;
         this.xLoc = xLoc;
         this.yLoc = yLoc;
+        this.killable = killable;
     }
 
-    public void setMaxHeight() {
-        if (c != null) {
-            this.maxY = c.getHeight();
+    public void setDirection(int direction) {
+        if (direction > 0 && direction < 5) {
+            this.direction = direction;
+        } else {
+            System.out.println("Direction entered not valid.");
         }
+    }
 
+    public int getDirection() {
+        return direction;
     }
 
     public void setRadius(int r) {
-        this.radius = r;
+        if (r > 0) {
+            this.radius = r;
+        } else {
+            System.out.println("Radius entered not valid");
+        }
+
     }
 
     public int getRadius() {
         return this.radius;
     }
 
-    public int getMaxHeight() {
-        return maxY;
-    }
-
-    public int getMaxWidth() {
-        return maxX;
-    }
-
-    public void setMaxWidth() {
-        if (c != null) {
-            this.maxX = c.getWidth();
-        }
-    }
-
-    public boolean isIsAlive() {
+    public boolean isAlive() {
         return alive;
     }
 
@@ -102,9 +123,9 @@ public class PacmanCharacter implements PacmanCharacterMovement{//don't forget m
         this.yLoc = yLoc;
     }
 
-    public void move() {
+    public void move(int direction) {
         switch (direction) {
-            case DIRECTION_LEFT:
+            case DIRECTION_LEFT://pass the moveLeft and stuff methods the direction/orientation
                 moveLeft();
                 break;
             case DIRECTION_RIGHT:
@@ -117,38 +138,44 @@ public class PacmanCharacter implements PacmanCharacterMovement{//don't forget m
                 moveDown();
                 break;
         }
-
+        draw();
     }
 
     public void moveLeft() {
-        this.erase();
-        this.xLoc  = this.xLoc - STEP_SIZE;
+        this.erase(this.circular);
+        this.xLoc = this.xLoc - STEP_SIZE;
         this.draw();
     }
 
     public void moveRight() {
-        this.erase();
-        this.xLoc  = this.xLoc + STEP_SIZE;
+        this.erase(this.circular);
+        this.xLoc = this.xLoc + STEP_SIZE;
+        this.draw();
     }
 
     public void moveUp() {
-        this.erase();
-        this.xLoc  = this.yLoc + STEP_SIZE;
+        this.erase(this.circular);
+        this.xLoc = this.yLoc + STEP_SIZE;
+        this.draw();
     }
 
     public void moveDown() {
-        this.erase();
-        this.xLoc  = this.yLoc - STEP_SIZE;   
+        this.erase(this.circular);
+        this.xLoc = this.yLoc - STEP_SIZE;
+        this.draw();
     }
 
-    private void draw() {
-        
-        
+    public void draw() {
+
     }
 
-    private void erase() {
-    c.setColor(Color.white);
-    c.drawOval(getXLoc(), getYLoc(), this.radius, this.radius);
+    public void erase(boolean circle) {//add a boolean for pacman or ghost
+        c.setColor(Color.white);
+        if (circle) {
+            c.fillOval(this.xLoc, this.yLoc, this.radius, this.radius);
+        } else {
+
+        }
     }
 
     public static void setConsole(Console hsaConsole) {

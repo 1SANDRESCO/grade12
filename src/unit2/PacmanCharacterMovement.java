@@ -12,8 +12,11 @@ package unit2;
  */
 public interface PacmanCharacterMovement {
     
-//    public void MoveLeft(){
-//        
-//    }
+public void moveLeft();
+public void moveRight();
+public void moveUp();
+public void moveDown();
+public void draw();
+public void erase();
     
 }
