@@ -73,11 +73,28 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     }
 
     public void setKillable(boolean killable) {
+        if (killable){
+            System.out.println("setKillable: CAN be killed.");
+        } else {
+            System.out.println("setKillable: canNOT be killed."); 
+        }
         this.killable = killable;
     }
 
-    public boolean getIsKillable() {
-        return killable;
+    public String getIsKillable() {
+        if (this.killable){
+            return "Can be killed";
+        } else {
+            return "Cannot be killed";
+        }
+    }
+    
+    public boolean getIsKillableBoolean() {
+        if (this.killable){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 //    public void setIsValid() {
@@ -96,20 +113,27 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
         if (direction > 0 && direction < 5) {
             this.direction = direction;
         } else {
-            System.out.println("Direction entered not valid.");
+            System.out.println("Direction entered of " + direction + " is not valid.");
         }
     }
 
     public int getDirection() {
-        return direction;
+     return direction;
+                
+       
     }
 
-    public boolean isAlive() {
+    public boolean getIsAlive() {
         return alive;
     }
 
     public void setIsAlive(boolean isAlive) {
         this.alive = isAlive;
+        if (this.alive){
+            System.out.println("setIsAlive: Pacman is alive");
+        } else {
+            System.out.println("setIsAlive: Pacman is dead");
+        }
     }
 
     public int getXLoc() {
@@ -129,7 +153,11 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     }
 
     public void setyLoc(int yLoc) {
-        this.yLoc = yLoc;
+        if (yLoc > 0 && yLoc < MAX_Y) {
+            this.yLoc = yLoc;
+        } else {
+            System.out.println("Y location entered not valid");
+        }
     }
 
     public void move(int direction) {

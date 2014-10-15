@@ -20,10 +20,8 @@ public class Pacman extends PacmanCharacter {
     public static int START_KILLS = 0;
     public static int START_COINS = 0;
    
-    public static int START_ORIENTATION = 3;
-    public static int MAX_PACMANS = 1;
+    public static int START_ORIENTATION = 1;
     public static boolean OPEN = true;
-    private int numberPacmans = 0;
     private int numberKills;
     private int numberCoins;
     private int radius;
@@ -39,17 +37,15 @@ public class Pacman extends PacmanCharacter {
     }
 
     public Pacman(boolean alive, int xLoc, int yLoc, boolean killable) {
+        
         super(alive, xLoc, yLoc, killable);
-
-        if (numberPacmans < MAX_PACMANS) {
+        System.out.println("Pacman has been created");
             setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
             setNumberKills(START_KILLS);
             setRadius(PAC_RADIUS);
-            this.draw(START_ORIENTATION, !OPEN);
-            numberPacmans++;
-        } else {
-            System.out.println("Can only have 1 pacman!");
-        }
+            this.draw(START_ORIENTATION, OPEN);
+            
+        
 
     }
 
@@ -71,11 +67,11 @@ public class Pacman extends PacmanCharacter {
     }
 
     public void decreaseNumberLives() {
-        if (this.killable == false || this.isAlive() == false) {
-            if (this.killable == false) {
+        if (this.getIsKillableBoolean() == false || this.getIsAlive() == false) {
+            if (this.getIsKillableBoolean() == false) {
                 System.out.println("decreaseNumberLives: Pacman is not killable.");
             }
-            if (this.isAlive() == false) {
+            if (this.getIsAlive() == false) {
                 System.out.println("decreaseNumberLives: Pacman is dead, cannot be killed.");
             }
         } else {
@@ -114,6 +110,24 @@ public class Pacman extends PacmanCharacter {
     public int getNumberKills() {
         return numberKills;
     }
+    
+    public String getOrientation(){
+        switch (this.getDirection()){
+            case DIRECTION_LEFT://pass the moveLeft and stuff methods the direction/orientation
+                return "Left";
+              
+            case DIRECTION_RIGHT:
+                return "Right";
+              
+            case DIRECTION_UP:
+                return "Up";
+              
+            case DIRECTION_DOWN:
+                return "Down";
+        }
+        return "xx";
+    }
+    
 
     @Override
     public void draw() {
@@ -187,7 +201,9 @@ public class Pacman extends PacmanCharacter {
 
     @Override
     public String toString() {
-        return "Pacman{" + "numberKills=" + numberKills + ", numberCoins=" + numberCoins + ", numberLivesLeft=" + numberLivesLeft + ", orientation=" + this.getDirection() + ", radius= " + PAC_RADIUS + '}';
+        return "Pacman{" + "numberKills=" + numberKills + ", numberCoins=" + numberCoins + ", numberLivesLeft=" 
+        + numberLivesLeft + ", Orientation=" + this.getOrientation() + ", Y Location =" + this.getYLoc()+ ", X "
+                + "Location=" + this.getXLoc() + ", Direction=" + this.getDirection() + " alive= " + this.getIsAlive() +" killable= " + this.getIsKillable() + " radius= " + PAC_RADIUS + '}';
     }
 
 }
