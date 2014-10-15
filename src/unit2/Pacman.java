@@ -19,7 +19,7 @@ public class Pacman extends PacmanCharacter {
     public static int START_LIVES = 3;
     public static int START_KILLS = 0;
     public static int START_COINS = 0;
-   
+
     public static int START_ORIENTATION = 1;
     public static boolean OPEN = true;
     private int numberKills;
@@ -27,7 +27,6 @@ public class Pacman extends PacmanCharacter {
     private int radius;
     private int numberLivesLeft;
     public int closedOrOpenCounter = 0;
-    // private int orientation;
     private boolean killable;
 
     public Pacman() {
@@ -37,15 +36,17 @@ public class Pacman extends PacmanCharacter {
     }
 
     public Pacman(boolean alive, int xLoc, int yLoc, boolean killable) {
-        
+
         super(alive, xLoc, yLoc, killable);
         System.out.println("Pacman has been created");
-            setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
-            setNumberKills(START_KILLS);
-            setRadius(PAC_RADIUS);
+        setNumberLives(START_LIVES);//was not able to call this(); as both this() and super () must be first statement in constructor
+        setNumberKills(START_KILLS);
+        setRadius(PAC_RADIUS);
+        if (this.alive) {
             this.draw(START_ORIENTATION, OPEN);
-            
-        
+        } else {
+            System.out.println("Pacman is dead, so will not be drawn when instantiated");
+        }
 
     }
 
@@ -82,12 +83,16 @@ public class Pacman extends PacmanCharacter {
     }
 
     public void increaseNumberKills() {
-        System.out.println("Number of kills has been increased.");
+        System.out.println("increaseNumberKills(): Number of kills has been increased by 1.");
         this.numberKills++;
     }
+
+    public void increaseNumberCoins() {
+        System.out.println("inceraseNumberCoins(): Number of coins has been increased by 1.");
+        this.numberCoins++;
+    }
     
-    public void increaseNumberCoins(){
-        System.out.println("Number of coins has been increased by 1.");
+    public void increaseNumberCoinsNoAnnoyingWords() {
         this.numberCoins++;
     }
 
@@ -95,7 +100,7 @@ public class Pacman extends PacmanCharacter {
         this.numberKills = kills;
     }
 
-    public void setNumberCoins() {
+    private void setNumberCoins() {
         this.numberCoins = START_COINS;
     }
 
@@ -110,44 +115,44 @@ public class Pacman extends PacmanCharacter {
     public int getNumberKills() {
         return numberKills;
     }
-    
-    public String getOrientation(){
-        switch (this.getDirection()){
+
+    public String getOrientation() {
+        switch (this.getDirection()) {
             case DIRECTION_LEFT://pass the moveLeft and stuff methods the direction/orientation
                 return "Left";
-              
+
             case DIRECTION_RIGHT:
                 return "Right";
-              
+
             case DIRECTION_UP:
                 return "Up";
-              
+
             case DIRECTION_DOWN:
                 return "Down";
         }
         return "xx";
     }
-    
 
     @Override
     public void draw() {
-        if (closedOrOpenCounter % 2 == 0) {
-            draw(this.getDirection(), false);
-        } else {
-            draw(this.getDirection(), true);
+        if (this.getIsAlive() == true) {
+            if (closedOrOpenCounter % 2 == 0) {
+                draw(this.getDirection(), false);
+            } else {
+                draw(this.getDirection(), true);
+            }
+            if (closedOrOpenCounter == 500) {
+                closedOrOpenCounter = 1;
+            }
+            increaseNumberCoinsNoAnnoyingWords();
+            closedOrOpenCounter++;
         }
-        if (closedOrOpenCounter == 500) {
-            closedOrOpenCounter = 1;
-        }
-        increaseNumberCoins();
-        closedOrOpenCounter++;
     }
 
     public void draw(int direction, boolean open) {
         c.setColor(Color.yellow);
         c.fillOval(this.getXLoc(), this.getYLoc(), this.radius, this.radius);
-        
-        
+
         switch (direction) {
 
             //left
@@ -201,9 +206,9 @@ public class Pacman extends PacmanCharacter {
 
     @Override
     public String toString() {
-        return "Pacman{" + "numberKills=" + numberKills + ", numberCoins=" + numberCoins + ", numberLivesLeft=" 
-        + numberLivesLeft + ", Orientation=" + this.getOrientation() + ", Y Location =" + this.getYLoc()+ ", X "
-                + "Location=" + this.getXLoc() + ", Direction=" + this.getDirection() + " alive= " + this.getIsAlive() +" killable= " + this.getIsKillable() + " radius= " + PAC_RADIUS + '}';
+        return "Pacman{" + "numberKills=" + numberKills + ", numberCoins=" + numberCoins + ", numberLivesLeft="
+                + numberLivesLeft + ", Orientation=" + this.getOrientation() + ", Y Location =" + this.getYLoc() + ", X "
+                + "Location=" + this.getXLoc() + ", Direction=" + this.getDirection() + " alive= " + this.getIsAlive() + " killable= " + this.getIsKillable() + " radius= " + PAC_RADIUS + '}';
     }
 
 }

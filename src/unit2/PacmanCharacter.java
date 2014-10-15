@@ -16,7 +16,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
 
     protected static Console c;
 
-    public boolean alive;
+    
     public final int MAX_X = 620;
     public final int MAX_Y = 460;
     public final int DIRECTION_LEFT = 1;
@@ -24,7 +24,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     public final int DIRECTION_UP = 3;
      public static int DEFAULT_XY = 300;
     public final int DIRECTION_DOWN = 4;
-    public final int STEP_SIZE = 20;
+    public final int STEP_SIZE = 30;
     public final int DELAY = 75;
     //private int numberLives;
     //private int numberKills;
@@ -36,6 +36,7 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     private int width;
     private int height;
     private boolean killable;
+    public boolean alive;
     //private boolean valid;
 
     public PacmanCharacter() {
@@ -96,18 +97,6 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
             return false;
         }
     }
-
-//    public void setIsValid() {
-//        if (xLoc < 0 || xLoc > MAX_X || yLoc < 0 || yLoc > MAX_Y) {
-//            this.valid = false;
-//        } else {
-//            this.valid = true;
-//        }
-//    }
-
-//    public boolean getIsValid() {
-//        return valid;
-//    }
 
     public void setDirection(int direction) {
         if (direction > 0 && direction < 5) {
@@ -181,6 +170,14 @@ public abstract class PacmanCharacter implements PacmanCharacterMovement {//don'
     public void delay() {
         try {
             Thread.sleep(DELAY);
+        } catch (Exception e) {
+
+        }
+    }
+    
+     public void delay(int delayValue) {
+        try {
+            Thread.sleep(delayValue);
         } catch (Exception e) {
 
         }
