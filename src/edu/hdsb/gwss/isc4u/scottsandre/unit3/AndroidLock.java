@@ -148,8 +148,12 @@ public class AndroidLock {
     /*
      * Lock
      */
+    //isLocked
     public boolean lock() {
         // TODO
+//        if( this.open == false ){
+//            return true;
+//        }
         return true;
     }
 
@@ -160,7 +164,13 @@ public class AndroidLock {
      */
     public boolean unlock( int digit01, int digit02, int digit03 ) {
         // TODO
-        return true;
+//        if (invalidAttempts < 3 && digit01 == this.getDigit01() && digit02 == this.getDigit02() && digit03 == this.getDigit03()){
+//            return true;
+//        } else {
+//            invalidAttempts++;
+//            return false;
+//        }
+        return false;
     }
 
     @Override
