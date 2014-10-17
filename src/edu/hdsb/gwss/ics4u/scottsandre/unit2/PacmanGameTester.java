@@ -200,7 +200,7 @@ public class PacmanGameTester {
         pacman.setIsAlive(true);
         System.out.println("Before: Pacman number coins: " + pacman.getNumberCoins());
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 500; i++) {
             a = (int) (Math.random() * 4) + 1;
             b = (int) (Math.random() * 4) + 1;
             d = (int) (Math.random() * 4) + 1;
