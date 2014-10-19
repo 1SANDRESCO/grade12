@@ -27,7 +27,7 @@ public class GUI01  {
         // WINDOW
         JFrame guiWindow = new JFrame( "Hello World GUI" );
         guiWindow.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        guiWindow.setSize( 400, 600 );
+        guiWindow.setSize( 800, 600 );
 
         // FONT
         Font redComicSans = new Font( "Comic Sans MS", Font.ITALIC, 24 );
