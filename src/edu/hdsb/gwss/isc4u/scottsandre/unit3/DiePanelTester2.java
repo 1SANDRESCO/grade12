@@ -22,7 +22,7 @@ public class DiePanelTester2 {
      */
     public static void main(String[] args) {
         DiePanel die1 = new DiePanel();
-        die1.setSizeFactor(2);
+        die1.setSizeFactor(6);
         die1.setColour(Color.blue);
         die1.setDotColour(Color.GREEN);
         
@@ -46,7 +46,9 @@ public class DiePanelTester2 {
         
 
         guiWindow.add(die1);
-        guiWindow.add(die2);
+        //guiWindow.add(die2);
+        
+        
 //            
        
         

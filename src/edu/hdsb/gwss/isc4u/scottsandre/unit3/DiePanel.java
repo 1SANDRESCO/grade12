@@ -164,7 +164,7 @@ public class DiePanel extends JPanel {
     public void paintComponent(Graphics g){
     super.paintComponent(g);
     drawDie(g);
-    //System.out.println("TEST");
+    System.out.println("TEST");
     }
     
     private void dot (Graphics g, int row, int col){
