@@ -8,6 +8,7 @@ package edu.hdsb.gwss.isc4u.scottsandre.unit3;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -22,8 +23,8 @@ public class GUI01  {
     /**
      * @param args the command line arguments
      */
-    public static void main( String[] args ) {
-
+    public static void main( String[] args )  {
+        Graphics g;
         // WINDOW
         JFrame guiWindow = new JFrame( "Hello World GUI" );
         guiWindow.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -47,6 +48,7 @@ public class GUI01  {
         //Label 3
         JLabel text3 = new JLabel("Third component" );
         
+        
 
         // ADD LABEL 2 to FRAME
         guiWindow.add( text2 );
@@ -54,6 +56,7 @@ public class GUI01  {
 
         // MAKE VISABLE
         guiWindow.setVisible( true );
+        
 
     }
 

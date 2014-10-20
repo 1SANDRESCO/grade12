@@ -10,14 +10,14 @@ import java.awt.Color;
  *
  * @author Owner
  */
-public class DieTester {
+public class DiePanelTester1 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        Die die1 = new Die();
+        DiePanel die1 = new DiePanel();
         System.out.println(die1.getValue());
         //die1.paintComponent(a);
         System.out.println("Create die1, pass no parameters.");
@@ -27,7 +27,7 @@ public class DieTester {
         System.out.println("Die 1 : Get size Factor: " + die1.getSizeFactor());
         
         System.out.println("Create die2, pass parameters.");
-        Die die2 = new Die(6, 200, 200, 3, Color.BLACK);
+        DiePanel die2 = new DiePanel(6, 200, 200, 3, Color.BLACK, Color.white);
         System.out.println("die 2 to string");
         System.out.println(die2.toString());
         
