@@ -6,6 +6,8 @@
 
 package edu.hdsb.gwss.isc4u.scottsandre.unit3;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author Owner
@@ -16,15 +18,15 @@ public class DieGameTester {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        SwingUtilities.invokeLater( 
-//            new Runnable() {
-//                public void run() {
-//                    new DieGame().setVisible(true);
-//                }
-//            }
-//        );
+        SwingUtilities.invokeLater( 
+            new Runnable() {
+                public void run() {
+                    new DieGame().setVisible(true);
+                }
+            }
+        );
         
-        DieGame game = new DieGame();
+  
         
     }
     
