@@ -170,8 +170,8 @@ public class DiePanel extends JPanel {
     this.pixel = SIZE_CONSTANT / 10 * this.sizeFactor;
     this.circleDiameter = 2 * pixel;
     g.setColor(this.dotColour);
-    int x = this.topLeftX + (row * 3 * this.pixel) - 2* this.pixel;
-    int y = this.topLeftY + (col * 3 * this.pixel) - 2* this.pixel;
+    int y = this.topLeftY + (row * 3 * this.pixel) - 2* this.pixel;
+    int x = this.topLeftX + (col * 3 * this.pixel) - 2* this.pixel;
     g.fillOval(x, y, this.circleDiameter, this.circleDiameter);
     }
     
