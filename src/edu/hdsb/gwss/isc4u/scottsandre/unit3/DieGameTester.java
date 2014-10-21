@@ -6,8 +6,6 @@
 
 package edu.hdsb.gwss.isc4u.scottsandre.unit3;
 
-import javax.swing.SwingUtilities;
-
 /**
  *
  * @author Owner
