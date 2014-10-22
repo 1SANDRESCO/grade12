@@ -140,7 +140,7 @@ public class DieGame extends JFrame implements ActionListener {
 
         this.panel3.add(text1);
         this.panel3.add(panel2);
-
+ 
         this.gameWindow.add(this.panel3);
 
     }
