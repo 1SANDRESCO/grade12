@@ -73,7 +73,16 @@ public class DiePanel extends JPanel {
     }
 
     public void setColour(Color colour) {
+        if (colour != null){
         this.colour = colour;
+        } else {
+            System.out.println("Colour cannot be null");
+        }
+    }
+    
+    public void setPosition(int x, int y){
+        setTopLeftX(x);
+        setTopLeftY(y);
     }
 
     public void setSizeFactor(int sizeFactor) {

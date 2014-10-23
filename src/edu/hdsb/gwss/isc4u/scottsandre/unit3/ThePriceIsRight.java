@@ -24,12 +24,15 @@ import javax.swing.SwingUtilities; // will need int[] variable to hold the answe
 public class ThePriceIsRight extends JFrame implements ActionListener, MouseListener {
 
     public static final Dimension D = new Dimension(100, 100);
-    public static final int FRAME_WIDTH = 800;
+    public static final int FRAME_WIDTH = 950;
     public static final int FRAME_HEIGHT = 500;
     public static final int DIE_QUESTION_MARK = 8;
     public static final int DIE_BLANK = 7;
     public static final int CHOSEN_HIGH_OR_LOW = 9;
-    
+
+    private String carCostString;
+    private String rolledNumberString = "";
+
     private JPanel middlePanel;
     private JPanel topDicePanel;
     private JPanel midDicePanel;
@@ -37,6 +40,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel topTitlePanel;
     private JPanel spacerPanel;
     private JPanel leftSidePanel;
+    private JPanel rightSidePanel;
+    //priavet JPanel
 
     private DiePanel[][] dice;
     private DiePanel firstDigitDie;
@@ -48,10 +53,17 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JLabel topPanelChoice;
     private JLabel bottomPanelChoice;
     private JLabel rollOutcome;
+    private JLabel winnerText;
+    private JLabel costText;
+    private JLabel rolledNumbersText;
+    private JLabel carCostLabel;
+    private JLabel rolledNumberLabel;
 
     private Button rollButton;
 
-    private int carCost;
+    private int[] carCost;
+    private int[] rolledNumbers = new int[4];
+    private int[] choiceHigherLower = new int[4];
     int dieRollNumber = 0;
 
     public ThePriceIsRight() {
@@ -70,11 +82,28 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setResizable(false);
 
+        //right side label texts
+        this.winnerText = new JLabel("       WIN OR LOSE:       ", SwingConstants.CENTER);
+        this.costText = new JLabel("       CAR COST IS:       ", SwingConstants.CENTER);
+        this.rolledNumbersText = new JLabel("       You rolled:        ", SwingConstants.CENTER);
+
+        this.carCostLabel = new JLabel("xxx", SwingConstants.CENTER);
+        this.rolledNumberLabel = new JLabel("yyy", SwingConstants.CENTER);
+
         //spacer panel
         Dimension d3 = new Dimension(50, 10);
         this.spacerPanel = new JPanel();
         this.spacerPanel.setPreferredSize(d3);
         this.spacerPanel.setSize(d3);
+
+        //right side panel
+        this.rightSidePanel = new JPanel();
+        this.rightSidePanel.setLayout(new BoxLayout(rightSidePanel, BoxLayout.Y_AXIS));
+        this.rightSidePanel.add(winnerText);
+        this.rightSidePanel.add(costText);
+        this.rightSidePanel.add(carCostLabel);
+        this.rightSidePanel.add(rolledNumbersText);
+        this.rightSidePanel.add(rolledNumberLabel);
 
         //button
         this.rollButton = new Button();
@@ -146,7 +175,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.middlePanel.add(midDicePanel);
         this.middlePanel.add(botDicePanel);
 
-        //topTitlePanel
+        //topTitlePanels
         this.topTitlePanel = new JPanel();
         this.topTitlePanel.setBackground(Color.yellow);
         this.topTitlePanel.setBorder(BorderFactory.createEtchedBorder());
@@ -161,9 +190,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.add(middlePanel, BorderLayout.CENTER);
         this.add(topTitlePanel, BorderLayout.PAGE_START);
         this.add(leftSidePanel, BorderLayout.LINE_START);
+        this.add(rightSidePanel, BorderLayout.LINE_END);
 
-        //this.pack();
-        //pick car
         initCar();
 
     }
@@ -175,17 +203,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         switch (randomChoice) {
             case 0:
                 this.carName.setText("Hennessey Venom");//54321
-                this.carName.repaint();
-                firstDigitDie.setValue(5);
-                firstDigitDie.repaint();
+                carCost = new int[]{5, 4, 3, 2, 1};
+                carCostString = "54321";
                 break;
             case 1:
                 this.carName.setText("1999 Honda Accord");//54321
-                this.carName.repaint();
-                firstDigitDie.setValue(1);
-                firstDigitDie.repaint();
-                break;    
+                carCost = new int[]{1, 2, 2, 3, 4};
+                carCostString = "12234";
+                break;
         }
+        this.carName.repaint();
+        firstDigitDie.setValue(carCost[0]);
+        firstDigitDie.repaint();
     }
 
     private void initDice() {
@@ -224,16 +253,23 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //System.out.println("first die number is" + dieRollNumber);
         this.dice[1][dieRollNumber].assignRandomValue();
+        rolledNumbers[dieRollNumber] = dice[1][dieRollNumber].getValue();
         this.dice[1][dieRollNumber].repaint();
 
-        
         if (this.dice[1][dieRollNumber].getValue() == 6) {//equals 6
-            this.dice[0][dieRollNumber].setValue(6);
-            this.dice[0][dieRollNumber].repaint();
-        } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
-            this.dice[2][dieRollNumber].setValue(1);
+            // this.dice[0][dieRollNumber].setValue(6);
+            //this.dice[0][dieRollNumber].repaint();
+            this.dice[2][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
             this.dice[2][dieRollNumber].repaint();
+            choiceHigherLower[dieRollNumber] = 1;
+        } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
+            //this.dice[2][dieRollNumber].setValue(1);
+            //this.dice[2][dieRollNumber].repaint();
+            this.dice[0][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
+            this.dice[0][dieRollNumber].repaint();
+            choiceHigherLower[dieRollNumber] = 6;
         } else {
             this.dice[0][dieRollNumber].setValue(DIE_QUESTION_MARK);
             this.dice[0][dieRollNumber].repaint();
@@ -241,33 +277,61 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.dice[2][dieRollNumber].repaint();
             this.rollButton.setEnabled(false);//Must choose higher or lower
         }
-      
-        dieRollNumber++;
 
+        dieRollNumber++;
+        printArrays();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        this.rollButton.setEnabled(true);
+        if (this.dieRollNumber < 4) {
+            this.rollButton.setEnabled(true);
+        } else {
+            this.carCostLabel.setText(carCostString);
+            this.carCostLabel.repaint();
+            this.rolledNumberLabel.setText(null);
+            this.rolledNumberLabel.repaint();
+        }
         System.out.println(dieRollNumber);
         String dieRollNumberString = String.valueOf(dieRollNumber - 1);
-        if (e.getComponent().getName().equalsIgnoreCase("0-" + dieRollNumberString)){//CLICK TOP NUMBER
+        if (e.getComponent().getName().equalsIgnoreCase("0-" + dieRollNumberString)) {//CLICK TOP NUMBER
             System.out.println("TOP option CLICKED");
+            choiceHigherLower[dieRollNumber - 1] = 6;
             this.dice[0][dieRollNumber - 1].setValue(CHOSEN_HIGH_OR_LOW);
             this.dice[0][dieRollNumber - 1].repaint();
             this.dice[2][dieRollNumber - 1].setValue(DIE_BLANK);
             this.dice[2][dieRollNumber - 1].repaint();
-            
-        } else if (e.getComponent().getName().equalsIgnoreCase("2-" + dieRollNumberString)){//CLICK TOP NUMBER
+
+        } else if (e.getComponent().getName().equalsIgnoreCase("2-" + dieRollNumberString)) {//CLICK TOP NUMBER
+            choiceHigherLower[dieRollNumber - 1] = 1;
             System.out.println("BOTTOm option CLICKED");
             this.dice[2][dieRollNumber - 1].setValue(CHOSEN_HIGH_OR_LOW);
             this.dice[2][dieRollNumber - 1].repaint();
             this.dice[0][dieRollNumber - 1].setValue(DIE_BLANK);
-            this.dice[0][dieRollNumber - 1].repaint(); 
-            
+            this.dice[0][dieRollNumber - 1].repaint();
+
         }
-        
+
         System.out.println("Mouse Clicked on " + e.getComponent().getName());
+
+        printArrays();
+    }
+
+    public void printArrays() {
+        System.out.println("\nPrint car cost: ");
+        for (int i = 0; i < carCost.length; i++) {
+            System.out.print(carCost[i]);
+        }
+        System.out.println("\nPrint rolled numbers: ");
+        for (int i = 0; i < rolledNumbers.length; i++) {
+            System.out.print(rolledNumbers[i]);
+            rolledNumberString += String.valueOf(rolledNumbers[i]);
+        }
+        System.out.println("\nPrint chosen numbers: ");
+        for (int i = 0; i < choiceHigherLower.length; i++) {
+            System.out.print(choiceHigherLower[i]);
+        }
+        System.out.println("rolled Number String: " + rolledNumberString);
     }
 
     @Override
