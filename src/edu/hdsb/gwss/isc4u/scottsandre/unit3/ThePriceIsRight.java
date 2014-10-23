@@ -28,7 +28,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     public static final int FRAME_HEIGHT = 500;
     public static final int DIE_QUESTION_MARK = 8;
     public static final int DIE_BLANK = 7;
-
+    public static final int CHOSEN_HIGH_OR_LOW = 9;
+    
     private JPanel middlePanel;
     private JPanel topDicePanel;
     private JPanel midDicePanel;
@@ -169,7 +170,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     private void initCar() {
         int randomChoice;
-        randomChoice = (int) (Math.random() * 1);
+        randomChoice = (int) (Math.random() * 2);
 
         switch (randomChoice) {
             case 0:
@@ -178,6 +179,12 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 firstDigitDie.setValue(5);
                 firstDigitDie.repaint();
                 break;
+            case 1:
+                this.carName.setText("1999 Honda Accord");//54321
+                this.carName.repaint();
+                firstDigitDie.setValue(1);
+                firstDigitDie.repaint();
+                break;    
         }
     }
 
@@ -190,7 +197,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 die = new DiePanel();
                 die.setPreferredSize(D);
                 die.setSize(D);
-                die.setValue(DIE_BLANK);//make constants
+                die.setValue(DIE_BLANK);//make constantsDIE_BLANK
                 die.setName(row + "-" + col);
                 die.addMouseListener(this);
 
@@ -241,14 +248,25 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        this.rollButton.setEnabled(true);
         System.out.println(dieRollNumber);
         String dieRollNumberString = String.valueOf(dieRollNumber - 1);
         if (e.getComponent().getName().equalsIgnoreCase("0-" + dieRollNumberString)){//CLICK TOP NUMBER
             System.out.println("TOP option CLICKED");
+            this.dice[0][dieRollNumber - 1].setValue(CHOSEN_HIGH_OR_LOW);
+            this.dice[0][dieRollNumber - 1].repaint();
+            this.dice[2][dieRollNumber - 1].setValue(DIE_BLANK);
+            this.dice[2][dieRollNumber - 1].repaint();
             
         } else if (e.getComponent().getName().equalsIgnoreCase("2-" + dieRollNumberString)){//CLICK TOP NUMBER
             System.out.println("BOTTOm option CLICKED");
+            this.dice[2][dieRollNumber - 1].setValue(CHOSEN_HIGH_OR_LOW);
+            this.dice[2][dieRollNumber - 1].repaint();
+            this.dice[0][dieRollNumber - 1].setValue(DIE_BLANK);
+            this.dice[0][dieRollNumber - 1].repaint(); 
+            
         }
+        
         System.out.println("Mouse Clicked on " + e.getComponent().getName());
     }
 

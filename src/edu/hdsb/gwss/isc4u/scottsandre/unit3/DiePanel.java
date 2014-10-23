@@ -16,8 +16,6 @@ import javax.swing.JPanel;
 public class DiePanel extends JPanel {
 
     public static final int SIZE_CONSTANT = 100;
-//    public static final int PIXEL = SIZE_CONSTANT / 10;
-//    public static final int CIRCLE_DIAMETER = 2 * PIXEL;
     public static final int MIN_VALUE = 1;
     public static final int MAX_VALUE = 6;
     public static final int MAX_X = JPanel.WIDTH;
@@ -39,7 +37,7 @@ public class DiePanel extends JPanel {
     }
 
     public DiePanel(int value, int xLoc, int yLoc, int sizeFactor, Color colour, Color dotColour) {//everything
-        if (value >= MIN_VALUE && value <= MAX_VALUE + EXTRA_DIE) {//7 is blank, 8 is question mark
+        if (value >= MIN_VALUE && value <= MAX_VALUE + EXTRA_DIE) {//7 is blank, 8 is question mark, 9 is circle 
             this.value = value;
         }
         this.topLeftX = xLoc;
@@ -88,7 +86,7 @@ public class DiePanel extends JPanel {
     }
 
     public void setTopLeftX(int topLeftX) {
-        if (topLeftX >= 0) { // && topLeftX < MAX_X - (SIZE_CONSTANT * sizeFactor
+        if (topLeftX >= 0) { 
             System.out.println("setTopLeftX: xValue set to " + topLeftX);
             this.topLeftX = topLeftX;
         } else {
@@ -181,6 +179,7 @@ public class DiePanel extends JPanel {
     }
 
     private void drawValue(Graphics g) {
+         this.pixel = SIZE_CONSTANT / 10 * this.sizeFactor;
         if (this.getValue() <= 6) {
             if (this.getValue() != 1) { // 2 3 4 5 6
                 dot(g, 1, 1); //top Left
@@ -199,15 +198,15 @@ public class DiePanel extends JPanel {
             }
         }//value == 7 == BLANK
         else if (this.getValue() == 8) {//question mark     
-            this.pixel = SIZE_CONSTANT / 10 * this.sizeFactor;
-            g.setColor(Color.white);
+            g.setColor(Color.yellow);
             g.fillRect(this.topLeftX + (this.sizeFactor * SIZE_CONSTANT) / 2 - pixel / 2, this.topLeftY - pixel / 2 - pixel + (this.sizeFactor * SIZE_CONSTANT) - 5 * pixel, pixel, 4 * pixel);
             g.fillRect(this.topLeftX + (this.sizeFactor * SIZE_CONSTANT) / 2 - pixel / 2, this.topLeftY - pixel / 2 + (this.sizeFactor * SIZE_CONSTANT) - 6 * pixel, pixel * 3, pixel);
             g.fillRect(this.topLeftX + (this.sizeFactor * SIZE_CONSTANT) / 2 - 2 * pixel, this.topLeftY - pixel / 2 + pixel, pixel * 4, pixel);
             g.fillRect(this.topLeftX + (this.sizeFactor * SIZE_CONSTANT) / 2 - pixel / 2 + pixel * 2, this.topLeftY - pixel / 2 + pixel, pixel, pixel * 4);
             g.fillRect(this.topLeftX + (this.sizeFactor * SIZE_CONSTANT) / 2 - pixel / 2, this.topLeftY + 8 * pixel + pixel / 2, pixel, pixel);
         } else if (this.getValue() == 9) {
-            g.fillOval(this.topLeftX, this.topLeftY, pixel * 5, pixel * 5);
+            g.setColor(Color.white);
+            g.fillOval(this.topLeftX + (int) 2.8 * pixel, this.topLeftY + (int) 2.7  * pixel, pixel * 6 , pixel * 5);
         }
 
     }
