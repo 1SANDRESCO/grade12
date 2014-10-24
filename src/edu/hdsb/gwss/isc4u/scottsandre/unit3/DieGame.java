@@ -107,6 +107,7 @@ public class DieGame extends JFrame implements ActionListener {
         this.panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         this.panel.setAlignmentX(CENTER_ALIGNMENT);
         
+        
         this.panel6 = new JPanel();//in panel 5, to left of panel 7
         this.panel6.setLayout(new BoxLayout(panel6, BoxLayout.LINE_AXIS));
         
