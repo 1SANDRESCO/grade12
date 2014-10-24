@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,8 +25,8 @@ import javax.swing.SwingUtilities; // will need int[] variable to hold the answe
 public class ThePriceIsRight extends JFrame implements ActionListener, MouseListener {
 
     public static final Dimension D = new Dimension(100, 100);
-    public static final int FRAME_WIDTH = 950;
-    public static final int FRAME_HEIGHT = 500;
+    public static final int FRAME_WIDTH = 1150;
+    public static final int FRAME_HEIGHT = 800;
     public static final int DIE_QUESTION_MARK = 8;
     public static final int DIE_BLANK = 7;
     public static final int CHOSEN_HIGH_OR_LOW = 9;
@@ -44,6 +45,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel spacerPanel;
     private JPanel leftSidePanel;
     private JPanel rightSidePanel;
+    
+    
+    private JLabel carIcon;
     //priavet JPanel
 
     private DiePanel[][] dice;
@@ -91,6 +95,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.setResizable(false);
 
         //right side label texts
+        this.carIcon = new JLabel();
         this.guessInfo = new JLabel("L = Lower, H = Higher, C = Correctly");
         this.whatYouGuessedText = new JLabel("       YOU GUESSED:        ", SwingConstants.CENTER);
         this.endGuess = new JLabel("uuu", SwingConstants.CENTER);
@@ -123,8 +128,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         //button
         this.rollButton = new Button();
+        this.rollButton.setBackground(Color.green);  
         this.rollButton.setPreferredSize(d3);
         this.rollButton.setSize(d3);
+        this.rollButton.setFont(new Font("TimesRoman", Font.BOLD, 14));
+        this.rollButton.setForeground(Color.BLACK);
         this.rollButton.setLabel("ROLL");
         this.rollButton.setActionCommand("ROLL");
         this.rollButton.addActionListener(this);
@@ -143,13 +151,15 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         //left side panel
         this.leftSidePanel = new JPanel();
         this.leftSidePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        this.leftSidePanel.setAlignmentX(SwingConstants.CENTER);
 
-        Dimension d2 = new Dimension(150, FRAME_HEIGHT);
+        Dimension d2 = new Dimension(300, FRAME_HEIGHT);
 
         this.leftSidePanel.setPreferredSize(d2);
         this.leftSidePanel.setLayout(new BoxLayout(leftSidePanel, BoxLayout.Y_AXIS));
         this.leftSidePanel.add(carTitle);
         this.leftSidePanel.add(carName);
+        this.leftSidePanel.add(carIcon);
         this.leftSidePanel.add(spacerPanel);
         this.leftSidePanel.add(firstDigitTitle);
         this.leftSidePanel.add(firstDigitDie);
@@ -221,16 +231,23 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 this.carName.setText("Hennessey Venom");//54321
                 carCost = new int[]{5, 4, 3, 2, 1};
                 carCostString = "54321";
+                this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car2.jpg"))); 
+                
                 break;
             case 1:
                 this.carName.setText("1999 Honda Accord");//54321
                 carCost = new int[]{1, 2, 2, 3, 4};
                 carCostString = "12234";
+                this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
                 break;
         }
         this.carName.repaint();
         firstDigitDie.setValue(carCost[0]);
         firstDigitDie.repaint();
+        Dimension d4 = new Dimension(300, 200);
+        this.carIcon.setPreferredSize(d4);
+        this.carIcon.setSize(d4);
+        this.carIcon.repaint();
     }
 
     private void initDice() {
@@ -269,6 +286,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.rollButton.setBackground(Color.LIGHT_GRAY);
+         this.rollButton.setForeground(Color.LIGHT_GRAY);
         //System.out.println("first die number is" + dieRollNumber);
         this.dice[1][dieRollNumber].assignRandomValue();
         rolledNumbers[dieRollNumber] = dice[1][dieRollNumber].getValue();
@@ -280,16 +299,22 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.dice[2][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
             this.dice[2][dieRollNumber].setColour(Color.green);
             this.dice[2][dieRollNumber].repaint();
+            this.rollButton.setBackground(Color.green);
+            this.rollButton.setForeground(Color.black);
         } 
         else if (this.dice[1][dieRollNumber].getValue() == 6) {//equals 6
             this.dice[2][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
             this.dice[2][dieRollNumber].repaint();
             choiceHigherLower[dieRollNumber] = LOWER;//lower
+            this.rollButton.setBackground(Color.green);
+            this.rollButton.setForeground(Color.black);
 
         } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
             this.dice[0][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
             this.dice[0][dieRollNumber].repaint();
             choiceHigherLower[dieRollNumber] = HIGHER;//higher
+            this.rollButton.setBackground(Color.green);
+            this.rollButton.setForeground(Color.black);
 
         } else { // 2345
             this.dice[0][dieRollNumber].setValue(DIE_QUESTION_MARK);
@@ -335,6 +360,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     public void mouseClicked(MouseEvent e) {
         if (this.dieRollNumber < 4) {//user can still roll
             this.rollButton.setEnabled(true);
+            this.rollButton.setBackground(Color.green);
+            this.rollButton.setForeground(Color.black);
         } else { // user is done rolling
             // System.out.println("test04");
             this.carCostLabel.setText(carCostString);//final car cost display
