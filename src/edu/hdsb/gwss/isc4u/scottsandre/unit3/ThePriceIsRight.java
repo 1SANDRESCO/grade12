@@ -45,9 +45,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel spacerPanel;
     private JPanel leftSidePanel;
     private JPanel rightSidePanel;
-  //  private JPanel rightSideLeft;
-   // private JPanel rightSideRight;
-    
+    //  private JPanel rightSideLeft;
+    // private JPanel rightSideRight;
+
     private JPanel empty;
     private JLabel emptyText;
 
@@ -82,6 +82,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JLabel wrongGuessesAnswer;
 
     private Button rollButton;
+    private Button playAgain;
+    
+    private boolean doOnce = true;
 
     private int[] carCost;
     private int[] rolledNumbers = new int[4];
@@ -97,55 +100,79 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         // MAIN WINDOW; The Price is Righta
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("The Price is Right!");
-        this.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
+        //this.setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
 
         // WINDOW; Border Layout
         this.setLayout(new BorderLayout());
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        //this.setResizable(false);
-        
+        this.setResizable(true);
+
         //
-        this.emptyText = new JLabel ("x ");
+        this.emptyText = new JLabel("x ");
         this.empty = new JPanel();
         this.empty.add(emptyText);
-        
+
         //right side label texts
         this.carIcon = new JLabel();
-        this.guessInfo1 = new JLabel            (" L = Lower            ");
+        this.guessInfo1 = new JLabel(" L = Lower            ");
         this.guessInfo1.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo1.setForeground(Color.RED);
-        this.guessInfo2 = new JLabel            (" H = Higher            ");
+        this.guessInfo2 = new JLabel(" H = Higher            ");
         this.guessInfo2.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo2.setForeground(Color.RED);
-        this.guessInfo3 = new JLabel            (" C = Correctly        ");
+        this.guessInfo3 = new JLabel(" C = Correctly        ");
         this.guessInfo3.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo3.setForeground(Color.RED);
-        
-        this.whatYouGuessedText = new JLabel    (" You Guessed:", SwingConstants.CENTER);
+
+        this.whatYouGuessedText = new JLabel(" You Guessed:", SwingConstants.CENTER);
         this.whatYouGuessedText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.whatYouGuessedText.setAlignmentX(SwingConstants.CENTER);
-        this.endGuess = new JLabel("uuu", SwingConstants.CENTER);
+
+        this.endGuess = new JLabel(" ", SwingConstants.CENTER);
         this.endGuess.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
-        this.winnerText = new JLabel            ( " Win or Lose:", SwingConstants.CENTER);
+
+        this.winnerText = new JLabel(" Win or Lose:", SwingConstants.CENTER);
         this.winnerText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.costText = new JLabel              (" Car Cost Is:", SwingConstants.CENTER);
+
+        this.costText = new JLabel(" Car Cost Is:", SwingConstants.CENTER);
         this.costText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.rolledNumbersText = new JLabel     (" You rolled:", SwingConstants.CENTER);
+
+        this.rolledNumbersText = new JLabel(" You rolled:", SwingConstants.CENTER);
         this.rolledNumbersText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.gameWinOrLose = new JLabel("aaa", SwingConstants.CENTER);
+
+        this.gameWinOrLose = new JLabel(" ", SwingConstants.CENTER);
         this.gameWinOrLose.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
-        this.correctGuessText = new JLabel      (" Correct Answers:", SwingConstants.CENTER);
+
+        this.correctGuessText = new JLabel(" Correct Guesses:", SwingConstants.CENTER);
         this.correctGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.wrongGuessText = new JLabel        (" Wrong Answers:", SwingConstants.CENTER);
+
+        this.wrongGuessText = new JLabel(" Wrong Guesses:", SwingConstants.CENTER);
         this.wrongGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.carCostLabel = new JLabel("xxx", SwingConstants.CENTER);
+
+        this.carCostLabel = new JLabel(" ", SwingConstants.CENTER);
         this.carCostLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
-        this.rolledNumberLabel = new JLabel("yyy", SwingConstants.CENTER);
+
+        this.rolledNumberLabel = new JLabel(" ", SwingConstants.CENTER);
+        this.rolledNumberLabel.setAlignmentX(SwingConstants.CENTER);
         this.rolledNumberLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
-        this.correctGuessesAnswer = new JLabel("ddd", SwingConstants.CENTER);
+
+        this.correctGuessesAnswer = new JLabel(" ", SwingConstants.CENTER);
         this.correctGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
-        this.wrongGuessesAnswer = new JLabel("ccc", SwingConstants.CENTER);
+
+        this.wrongGuessesAnswer = new JLabel(" ", SwingConstants.CENTER);
         this.wrongGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+
+        Dimension d5 = new Dimension(40, 10);
+        this.playAgain = new Button();
+        this.playAgain.setBackground(Color.LIGHT_GRAY);
+        this.playAgain.setPreferredSize(d5);
+        this.playAgain.setSize(d5);
+        this.playAgain.setFont(new Font("TimesRoman", Font.BOLD, 14));
+        this.playAgain.setForeground(Color.LIGHT_GRAY);
+        this.playAgain.setLabel("Play again?");
+        this.playAgain.setActionCommand("PLAY AGAIN");
+        this.playAgain.addActionListener(this);
+        this.playAgain.setEnabled(false);
 
         //
         //spacer panel
@@ -153,22 +180,13 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.spacerPanel = new JPanel();
         this.spacerPanel.setPreferredSize(d3);
         this.spacerPanel.setSize(d3);
-        
-        
-      //  this.rightSideLeft = new JPanel();
-       // this.rightSideLeft.setLayout(new BoxLayout(rightSideLeft, BoxLayout.Y_AXIS));
-       // this.rightSideLeft.setAlignmentX(SwingConstants.CENTER);
-       // this.rightSideRight = new JPanel();
-       // this.rightSideRight.setLayout(new BoxLayout(rightSideRight, BoxLayout.Y_AXIS));
 
-        
+        Dimension d4 = new Dimension(380, FRAME_HEIGHT);
 
-        
-
-        //right side panel
         this.rightSidePanel = new JPanel();
+        this.rightSidePanel.setPreferredSize(d4);
         this.rightSidePanel.setLayout(new BoxLayout(rightSidePanel, BoxLayout.Y_AXIS));
-       
+
         this.rightSidePanel.add(winnerText);
         this.rightSidePanel.add(gameWinOrLose);
         this.rightSidePanel.add(rolledNumbersText);
@@ -184,6 +202,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.rightSidePanel.add(correctGuessesAnswer);
         this.rightSidePanel.add(wrongGuessText);
         this.rightSidePanel.add(wrongGuessesAnswer);
+        this.rightSidePanel.add(playAgain);
 
         //button
         this.rollButton = new Button();
@@ -205,6 +224,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         //firstDigitDie
         this.firstDigitDie = new DiePanel();
+        this.firstDigitDie.setColour(Color.ORANGE);
         this.firstDigitDie.setAlignmentX(SwingConstants.CENTER);
 
         //left side panel
@@ -363,51 +383,90 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        this.rollButton.setBackground(Color.LIGHT_GRAY);
-        this.rollButton.setForeground(Color.LIGHT_GRAY);
-        //System.out.println("first die number is" + dieRollNumber);
-        this.dice[1][dieRollNumber].assignRandomValue();
-        rolledNumbers[dieRollNumber] = dice[1][dieRollNumber].getValue();
-        this.dice[1][dieRollNumber].repaint();
-        if (this.dice[1][dieRollNumber].getValue() == carCost[dieRollNumber + 1]) {
-            this.dice[0][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
-            this.dice[0][dieRollNumber].setColour(Color.green);
-            this.dice[0][dieRollNumber].repaint();
-            this.dice[2][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
-            this.dice[2][dieRollNumber].setColour(Color.green);
-            this.dice[2][dieRollNumber].repaint();
-            this.rollButton.setBackground(Color.green);
-            this.rollButton.setForeground(Color.black);
-            
-        } else if (this.dice[1][dieRollNumber].getValue() == 6) {//equals 6
-            this.dice[2][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
-            this.dice[2][dieRollNumber].repaint();
-            choiceHigherLower[dieRollNumber] = LOWER;//lower
-            this.rollButton.setBackground(Color.green);
-            this.rollButton.setForeground(Color.black);
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getActionCommand().equals("ROLL")) {
+            this.rollButton.setBackground(Color.LIGHT_GRAY);
+            this.rollButton.setForeground(Color.LIGHT_GRAY);
+            //System.out.println("first die number is" + dieRollNumber);
+            this.dice[1][dieRollNumber].assignRandomValue();
+            rolledNumbers[dieRollNumber] = dice[1][dieRollNumber].getValue();
+            this.dice[1][dieRollNumber].repaint();
+            if (this.dice[1][dieRollNumber].getValue() == carCost[dieRollNumber + 1]) {
+                this.dice[0][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
+                this.dice[0][dieRollNumber].setColour(Color.green);
+                this.dice[0][dieRollNumber].repaint();
+                this.dice[2][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
+                this.dice[2][dieRollNumber].setColour(Color.green);
+                this.dice[2][dieRollNumber].repaint();
+                this.rollButton.setBackground(Color.green);
+                this.rollButton.setForeground(Color.black);
 
-        } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
-            this.dice[0][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
-            this.dice[0][dieRollNumber].repaint();
-            choiceHigherLower[dieRollNumber] = HIGHER;//higher
-            this.rollButton.setBackground(Color.green);
-            this.rollButton.setForeground(Color.black);
+            } else if (this.dice[1][dieRollNumber].getValue() == 6) {//equals 6
+                this.dice[2][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
+                this.dice[2][dieRollNumber].repaint();
+                choiceHigherLower[dieRollNumber] = LOWER;//lower
+                this.rollButton.setBackground(Color.green);
+                this.rollButton.setForeground(Color.black);
 
-        } else { // 2345
-            this.dice[0][dieRollNumber].setValue(DIE_QUESTION_MARK);
-            this.dice[0][dieRollNumber].repaint();
-            this.dice[2][dieRollNumber].setValue(DIE_QUESTION_MARK);
-            this.dice[2][dieRollNumber].repaint();
-            this.rollButton.setEnabled(false);//Must choose higher or lower
+            } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
+                this.dice[0][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
+                this.dice[0][dieRollNumber].repaint();
+                choiceHigherLower[dieRollNumber] = HIGHER;//higher
+                this.rollButton.setBackground(Color.green);
+                this.rollButton.setForeground(Color.black);
+
+            } else { // 2345
+                this.dice[0][dieRollNumber].setValue(DIE_QUESTION_MARK);
+                this.dice[0][dieRollNumber].repaint();
+                this.dice[2][dieRollNumber].setValue(DIE_QUESTION_MARK);
+                this.dice[2][dieRollNumber].repaint();
+                this.rollButton.setEnabled(false);//Must choose higher or lower
+            }
+
+            dieRollNumber++;
+            System.out.println("Die Roll Number ++ die roll number is now : " + dieRollNumber);
+            printArrays();
+        } else if (evt.getActionCommand().equals("PLAY AGAIN")) {
+            restartGame();
         }
+    }
 
-        dieRollNumber++;
-        System.out.println("Die Roll Number ++ die roll number is now : " + dieRollNumber);
-        printArrays();
+    public void restartGame() {
+        doOnce = true;
+        this.playAgain.setEnabled(false);
+        this.playAgain.setBackground(Color.LIGHT_GRAY);
+        this.rollButton.setEnabled(true);
+        this.rollButton.setForeground(Color.black);
+        this.rollButton.setBackground(Color.green);
+        this.correctGuessesAnswer.setText(" ");
+        this.wrongGuessesAnswer.setText(" ");
+        this.endGuess.setText(" ");
+        this.rolledNumbersText.setText(" ");
+        this.gameWinOrLose.setText(" ");
+        
+        this.carCostLabel.setText(" ");
+        initCar();//choose new car 
+        for (int row = 0; row < dice.length; row++) {//redraw dice
+            for (int col = 0; col < dice[row].length; col++) {
+                dice[row][col].setValue(DIE_BLANK);
+                rolledNumbers[col] = 0;
+                choiceHigherLower[col] = 0;
+                if (dice[row][col].getColour() == Color.GREEN) {
+                    this.dice[row][col].setColour(Color.red);
+                }
+                //dice[row][col].repaint();
+            }
+        }
+        this.update(this.getGraphics());
+        dieRollNumber = 0;
     }
 
     public void determineAnswer() {
+        this.rollButton.setEnabled(false);
+        this.rollButton.setBackground(Color.LIGHT_GRAY);
+        this.playAgain.setEnabled(true);
+        this.playAgain.setBackground(Color.green);
+        this.playAgain.setForeground(Color.black);
         System.out.println("Determine Answer");
         String correctInfo = "";
         String wrongInfo = "";
@@ -416,20 +475,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         for (int digit = 0; digit < this.choiceHigherLower.length; digit++) {
             if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] <= rolledNumbers[digit]) {//guess lower, car cost is lower than roll
                 System.out.println(digit + ": roll is lower than car cost correct");
-                correctInfo += ".... " + carCost[digit + 1] + " is lower than " + rolledNumbers[digit];
-                win ++;
-                
+                correctInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is < " + rolledNumbers[digit];
+                win++;
             } else if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] > rolledNumbers[digit]) {//guess lower, car cost is HIGHER than roll
                 System.out.println(digit + ": roll is lower than car cost FALSE");
-                wrongInfo += ".... " +carCost[digit + 1]+ " is not lower than " + rolledNumbers[digit];
+                wrongInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not < " + rolledNumbers[digit];
             } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] >= rolledNumbers[digit]) {//guess higher, correct
                 System.out.println(digit + ": roll is higher than car cost correct");
-                correctInfo += ".... " + carCost[digit + 1] + " is higher than " + rolledNumbers[digit];
+                correctInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is > " + rolledNumbers[digit];
                 win++;
             } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] < rolledNumbers[digit]) {//guess lower, wrong
                 System.out.println(digit + ": roll is higher than car cost FALSE");
-                wrongInfo += ".... " + carCost[digit + 1]+ " is not higher than " + rolledNumbers[digit];
-               
+                wrongInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not > " + rolledNumbers[digit];
 
             }
 
@@ -439,8 +496,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         } else {
             gameWinOrLose.setText("You LOSE! You did not win a " + this.carName.getText());
         }
-        
+
         correctGuessesAnswer.setText(correctInfo);
+
         wrongGuessesAnswer.setText(wrongInfo);
     }
 
@@ -451,15 +509,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.rollButton.setEnabled(true);
             this.rollButton.setBackground(Color.green);
             this.rollButton.setForeground(Color.black);
-        } else { // user is done rolling
-            // System.out.println("test04");
-//            this.carCostLabel.setText(carCostString);//final car cost display
-//            this.carCostLabel.repaint();
-//            this.rolledNumberLabel.setText(getRolledNumberString());//all numbers rolled displayed
-//            this.rolledNumberLabel.repaint();
-            //determineAnswer();
-
         }
+
         System.out.println(dieRollNumber);
         String dieRollNumberString = String.valueOf(dieRollNumber - 1);
         if (e.getComponent().getName().equalsIgnoreCase("0-" + dieRollNumberString)) {//CLICK TOP NUMBER
@@ -486,7 +537,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     }
 
     public void printArrays() {
-        boolean doOnce = true;
+        
         System.out.println("\nPrint car cost: ");
         for (int i = 0; i < carCost.length; i++) {
             System.out.print(carCost[i]);
