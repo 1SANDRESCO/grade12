@@ -45,8 +45,8 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel spacerPanel;
     private JPanel leftSidePanel;
     private JPanel rightSidePanel;
-    private JPanel rightSideLeft;
-    private JPanel rightSideRight;
+  //  private JPanel rightSideLeft;
+   // private JPanel rightSideRight;
     
     private JPanel empty;
     private JLabel emptyText;
@@ -112,29 +112,40 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         //right side label texts
         this.carIcon = new JLabel();
         this.guessInfo1 = new JLabel            (" L = Lower            ");
-        this.guessInfo1.setBorder(BorderFactory.createEtchedBorder(Color.yellow, Color.orange));
+        this.guessInfo1.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo1.setForeground(Color.RED);
         this.guessInfo2 = new JLabel            (" H = Higher            ");
         this.guessInfo2.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
+        this.guessInfo2.setForeground(Color.RED);
         this.guessInfo3 = new JLabel            (" C = Correctly        ");
-        this.guessInfo3.setBorder(BorderFactory.createEtchedBorder(Color.yellow, Color.orange));
+        this.guessInfo3.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
+        this.guessInfo3.setForeground(Color.RED);
         
-        this.whatYouGuessedText = new JLabel    (" You Guessed:-----", SwingConstants.CENTER);
+        this.whatYouGuessedText = new JLabel    (" You Guessed:", SwingConstants.CENTER);
         this.whatYouGuessedText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.whatYouGuessedText.setAlignmentX(SwingConstants.CENTER);
         this.endGuess = new JLabel("uuu", SwingConstants.CENTER);
-        this.winnerText = new JLabel            ( " Win or Lose:------", SwingConstants.CENTER);
+        this.endGuess.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.winnerText = new JLabel            ( " Win or Lose:", SwingConstants.CENTER);
         this.winnerText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
-        this.costText = new JLabel              (" Car Cost Is:--------", SwingConstants.CENTER);
-        this.rolledNumbersText = new JLabel     (" You rolled:---------", SwingConstants.CENTER);
-        this.rolledNumbersText.setBorder(BorderFactory.createEtchedBorder(Color.yellow, Color.orange));
+        this.costText = new JLabel              (" Car Cost Is:", SwingConstants.CENTER);
+        this.costText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
+        this.rolledNumbersText = new JLabel     (" You rolled:", SwingConstants.CENTER);
+        this.rolledNumbersText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.gameWinOrLose = new JLabel("aaa", SwingConstants.CENTER);
+        this.gameWinOrLose.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
         this.correctGuessText = new JLabel      (" Correct Answers:", SwingConstants.CENTER);
-        this.wrongGuessText = new JLabel        (" Wrong Answers:-", SwingConstants.CENTER);
+        this.correctGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
+        this.wrongGuessText = new JLabel        (" Wrong Answers:", SwingConstants.CENTER);
+        this.wrongGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.carCostLabel = new JLabel("xxx", SwingConstants.CENTER);
+        this.carCostLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
         this.rolledNumberLabel = new JLabel("yyy", SwingConstants.CENTER);
+        this.rolledNumberLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
         this.correctGuessesAnswer = new JLabel("ddd", SwingConstants.CENTER);
+        this.correctGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
         this.wrongGuessesAnswer = new JLabel("ccc", SwingConstants.CENTER);
+        this.wrongGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
 
         //
         //spacer panel
@@ -144,40 +155,35 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.spacerPanel.setSize(d3);
         
         
-        this.rightSideLeft = new JPanel();
-        this.rightSideLeft.setLayout(new BoxLayout(rightSideLeft, BoxLayout.Y_AXIS));
-        this.rightSideLeft.setAlignmentX(SwingConstants.CENTER);
-        this.rightSideRight = new JPanel();
-        this.rightSideRight.setLayout(new BoxLayout(rightSideRight, BoxLayout.Y_AXIS));
+      //  this.rightSideLeft = new JPanel();
+       // this.rightSideLeft.setLayout(new BoxLayout(rightSideLeft, BoxLayout.Y_AXIS));
+       // this.rightSideLeft.setAlignmentX(SwingConstants.CENTER);
+       // this.rightSideRight = new JPanel();
+       // this.rightSideRight.setLayout(new BoxLayout(rightSideRight, BoxLayout.Y_AXIS));
 
-        this.rightSideLeft.add(winnerText);
-
-        this.rightSideRight.add(gameWinOrLose);
-        this.rightSideLeft.add(rolledNumbersText);
-        this.rightSideRight.add(rolledNumberLabel);
-        this.rightSideLeft.add(whatYouGuessedText);
-        this.rightSideLeft.add(guessInfo1);
-        this.rightSideLeft.add(guessInfo2);
-        this.rightSideLeft.add(guessInfo3);
-        //this.rightSideRight.add(spacerPanel);
-        this.rightSideRight.add(endGuess);
-        //this.rightSideRight.add(empty);
-        //this.rightSideRight.add(empty);
-        //this.rightSideRight.add(empty);
-        this.rightSideLeft.add(costText);
-        this.rightSideRight.add(carCostLabel);
-        this.rightSideLeft.add(correctGuessText);
-        this.rightSideRight.add(correctGuessesAnswer);
-        this.rightSideLeft.add(wrongGuessText);
-        this.rightSideRight.add(wrongGuessesAnswer);
+        
 
         
 
         //right side panel
         this.rightSidePanel = new JPanel();
-        this.rightSidePanel.setLayout(new BoxLayout(rightSidePanel, BoxLayout.X_AXIS));
-        this.rightSidePanel.add(rightSideLeft);
-        this.rightSidePanel.add(rightSideRight);
+        this.rightSidePanel.setLayout(new BoxLayout(rightSidePanel, BoxLayout.Y_AXIS));
+       
+        this.rightSidePanel.add(winnerText);
+        this.rightSidePanel.add(gameWinOrLose);
+        this.rightSidePanel.add(rolledNumbersText);
+        this.rightSidePanel.add(rolledNumberLabel);
+        this.rightSidePanel.add(whatYouGuessedText);
+        this.rightSidePanel.add(guessInfo1);
+        this.rightSidePanel.add(guessInfo2);
+        this.rightSidePanel.add(guessInfo3);
+        this.rightSidePanel.add(endGuess);
+        this.rightSidePanel.add(costText);
+        this.rightSidePanel.add(carCostLabel);
+        this.rightSidePanel.add(correctGuessText);
+        this.rightSidePanel.add(correctGuessesAnswer);
+        this.rightSidePanel.add(wrongGuessText);
+        this.rightSidePanel.add(wrongGuessesAnswer);
 
         //button
         this.rollButton = new Button();
@@ -410,16 +416,19 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         for (int digit = 0; digit < this.choiceHigherLower.length; digit++) {
             if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] <= rolledNumbers[digit]) {//guess lower, car cost is lower than roll
                 System.out.println(digit + ": roll is lower than car cost correct");
+                correctInfo += ".... " + carCost[digit + 1] + " is lower than " + rolledNumbers[digit];
                 win ++;
                 
             } else if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] > rolledNumbers[digit]) {//guess lower, car cost is HIGHER than roll
                 System.out.println(digit + ": roll is lower than car cost FALSE");
-                
+                wrongInfo += ".... " +carCost[digit + 1]+ " is not lower than " + rolledNumbers[digit];
             } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] >= rolledNumbers[digit]) {//guess higher, correct
                 System.out.println(digit + ": roll is higher than car cost correct");
+                correctInfo += ".... " + carCost[digit + 1] + " is higher than " + rolledNumbers[digit];
                 win++;
             } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] < rolledNumbers[digit]) {//guess lower, wrong
                 System.out.println(digit + ": roll is higher than car cost FALSE");
+                wrongInfo += ".... " + carCost[digit + 1]+ " is not higher than " + rolledNumbers[digit];
                
 
             }
@@ -444,10 +453,10 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.rollButton.setForeground(Color.black);
         } else { // user is done rolling
             // System.out.println("test04");
-            this.carCostLabel.setText(carCostString);//final car cost display
-            this.carCostLabel.repaint();
-            this.rolledNumberLabel.setText(getRolledNumberString());//all numbers rolled displayed
-            this.rolledNumberLabel.repaint();
+//            this.carCostLabel.setText(carCostString);//final car cost display
+//            this.carCostLabel.repaint();
+//            this.rolledNumberLabel.setText(getRolledNumberString());//all numbers rolled displayed
+//            this.rolledNumberLabel.repaint();
             //determineAnswer();
 
         }
@@ -495,6 +504,10 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             displayGuesses();
             doOnce = false;
             determineAnswer();
+            this.carCostLabel.setText(carCostString);//final car cost display
+            this.carCostLabel.repaint();
+            this.rolledNumberLabel.setText(getRolledNumberString());//all numbers rolled displayed
+            this.rolledNumberLabel.repaint();
         }
         // System.out.println("rolled Number String: " + rolledNumberString);
     }
