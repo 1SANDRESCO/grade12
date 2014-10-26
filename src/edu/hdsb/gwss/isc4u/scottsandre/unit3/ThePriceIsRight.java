@@ -129,7 +129,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.whatYouGuessedText.setAlignmentX(SwingConstants.CENTER);
 
         this.endGuess = new JLabel(" ", SwingConstants.CENTER);
-        this.endGuess.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.endGuess.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         this.winnerText = new JLabel(" Win or Lose:", SwingConstants.CENTER);
         this.winnerText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
@@ -141,7 +141,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.rolledNumbersText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
 
         this.gameWinOrLose = new JLabel(" ", SwingConstants.CENTER);
-        this.gameWinOrLose.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.gameWinOrLose.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         this.correctGuessText = new JLabel(" Correct Guesses:", SwingConstants.CENTER);
         this.correctGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
@@ -150,17 +150,17 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.wrongGuessText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
 
         this.carCostLabel = new JLabel(" ", SwingConstants.CENTER);
-        this.carCostLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.carCostLabel.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         this.rolledNumberLabel = new JLabel(" ", SwingConstants.CENTER);
         this.rolledNumberLabel.setAlignmentX(SwingConstants.CENTER);
-        this.rolledNumberLabel.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.rolledNumberLabel.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         this.correctGuessesAnswer = new JLabel(" ", SwingConstants.CENTER);
-        this.correctGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.correctGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         this.wrongGuessesAnswer = new JLabel(" ", SwingConstants.CENTER);
-        this.wrongGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.green, Color.green));
+        this.wrongGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
 
         Dimension d5 = new Dimension(40, 10);
         this.playAgain = new Button();
@@ -360,14 +360,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 die.setValue(DIE_BLANK);//make constantsDIE_BLANK
                 die.setName(row + "-" + col);
                 die.addMouseListener(this);
-
-                if ((row + col) % 2 == 0) {
-                    die.setBorder(BorderFactory.createLineBorder(Color.RED));
-                    die.setBackground(Color.GREEN);
-                } else {
-                    die.setBorder(BorderFactory.createLineBorder(Color.GREEN));
-                    die.setBackground(Color.RED);
-                }
+                die.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
                 this.dice[row][col] = die;
                 if (row == 0) {
@@ -432,7 +425,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     }
 
     public void restartGame() {
-        doOnce = true;
+        this.doOnce = true;
+        this.rolledNumberString = "";
+        this.endGuessString = "";
         this.playAgain.setEnabled(false);
         this.playAgain.setBackground(Color.LIGHT_GRAY);
         this.rollButton.setEnabled(true);
@@ -441,7 +436,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.correctGuessesAnswer.setText(" ");
         this.wrongGuessesAnswer.setText(" ");
         this.endGuess.setText(" ");
-        this.rolledNumbersText.setText(" ");
+        this.rolledNumberLabel.setText(" ");
         this.gameWinOrLose.setText(" ");
         
         this.carCostLabel.setText(" ");
@@ -454,7 +449,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 if (dice[row][col].getColour() == Color.GREEN) {
                     this.dice[row][col].setColour(Color.red);
                 }
-                //dice[row][col].repaint();
+                
             }
         }
         this.update(this.getGraphics());
@@ -473,21 +468,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         int win = 0;
 
         for (int digit = 0; digit < this.choiceHigherLower.length; digit++) {
-            if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] <= rolledNumbers[digit]) {//guess lower, car cost is lower than roll
-                System.out.println(digit + ": roll is lower than car cost correct");
-                correctInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is < " + rolledNumbers[digit];
+            if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] < rolledNumbers[digit]) {//guess lower, car cost is lower than roll           
+                correctInfo += "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is < " + rolledNumbers[digit] + ". ";
                 win++;
             } else if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] > rolledNumbers[digit]) {//guess lower, car cost is HIGHER than roll
-                System.out.println(digit + ": roll is lower than car cost FALSE");
-                wrongInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not < " + rolledNumbers[digit];
-            } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] >= rolledNumbers[digit]) {//guess higher, correct
-                System.out.println(digit + ": roll is higher than car cost correct");
-                correctInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is > " + rolledNumbers[digit];
+                wrongInfo += "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not < " + rolledNumbers[digit]+ ". ";
+            } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] > rolledNumbers[digit]) {//guess higher, correct
+                correctInfo += "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is > " + rolledNumbers[digit]+ ". ";
                 win++;
             } else if (choiceHigherLower[digit] == HIGHER && carCost[digit + 1] < rolledNumbers[digit]) {//guess lower, wrong
-                System.out.println(digit + ": roll is higher than car cost FALSE");
-                wrongInfo += "." + "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not > " + rolledNumbers[digit];
-
+                wrongInfo += "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " not > " + rolledNumbers[digit]+ ". ";
+            } else if (rolledNumbers[digit] == carCost[digit + 1] ){
+                win++;
             }
 
         }
@@ -498,7 +490,6 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         }
 
         correctGuessesAnswer.setText(correctInfo);
-
         wrongGuessesAnswer.setText(wrongInfo);
     }
 
@@ -532,7 +523,6 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         }
 
         System.out.println("Mouse Clicked on " + e.getComponent().getName());
-
         printArrays();
     }
 
@@ -560,7 +550,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.rolledNumberLabel.setText(getRolledNumberString());//all numbers rolled displayed
             this.rolledNumberLabel.repaint();
         }
-        // System.out.println("rolled Number String: " + rolledNumberString);
+        
     }
 
     public void displayGuesses() {
@@ -576,14 +566,11 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.endGuess.setText(endGuessString);
     }
 
-    public String getRolledNumberString() {
-
+    public String getRolledNumberString() {      
         for (int i = 0; i < rolledNumbers.length; i++) {
-            //System.out.print(rolledNumbers[i]);
             rolledNumberString += String.valueOf(rolledNumbers[i]);
         }
         return " (" + String.valueOf(carCost[0]) + ") " + rolledNumberString;
-        //System.out.println("rolled Number String: " + rolledNumberString); 
     }
 
     @Override
