@@ -32,7 +32,14 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     public static final int CHOSEN_HIGH_OR_LOW = 9;
     public static final int HIGHER = 2;
     public static final int LOWER = 1;
-    public static final int NUMBER_CARS = 7;
+    public static final int NUMBER_CARS = 8;
+    public static final int CORRECT_ANSWER = 3;
+    private final Dimension d1 = new Dimension(FRAME_WIDTH, 40);
+    private final Dimension d2 = new Dimension(180, FRAME_HEIGHT);
+    private final Dimension d3 = new Dimension(50, 10);
+    private final Dimension d4 = new Dimension(380, FRAME_HEIGHT);
+    private final Dimension d5 = new Dimension(40, 10);
+    private final Dimension d6 = new Dimension(300, 200);
 
     private String carCostString;
     private String rolledNumberString = "";
@@ -46,14 +53,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     private JPanel spacerPanel;
     private JPanel leftSidePanel;
     private JPanel rightSidePanel;
-    //  private JPanel rightSideLeft;
-    // private JPanel rightSideRight;
-
-    private JPanel empty;
-    private JLabel emptyText;
 
     private JLabel carIcon;
-    //priavet JPanel
+
 
     private DiePanel[][] dice;
     private DiePanel firstDigitDie;
@@ -88,9 +90,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     
     private boolean doOnce = true;
     
-    private Dimension d3 = new Dimension(50, 10);
-    Dimension d5 = new Dimension(40, 10);
-    Dimension d4 = new Dimension(380, FRAME_HEIGHT);
+    
 
     private int[] carCost;
     private int[] rolledNumbers = new int[4];
@@ -250,7 +250,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.leftSidePanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         this.leftSidePanel.setAlignmentX(SwingConstants.CENTER);
 
-        Dimension d2 = new Dimension(180, FRAME_HEIGHT);
+        
 
         this.leftSidePanel.setPreferredSize(d2);
         this.leftSidePanel.setLayout(new BoxLayout(leftSidePanel, BoxLayout.Y_AXIS));
@@ -305,7 +305,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         //title label
         this.title = new JLabel("Welcome to The Price is Right! Hosted by Scott Sandre", SwingConstants.CENTER);
         this.title.setAlignmentX(CENTER_ALIGNMENT);
-        Dimension d1 = new Dimension(FRAME_WIDTH, 40);
+        
         this.title.setPreferredSize(d1);
         this.topTitlePanel.add(title);
 
@@ -328,60 +328,56 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 this.carName.setText("Hennessey Venom");//54321
                 carCost = new int[]{5, 4, 3, 2, 1};
                 carCostString = "54321";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car2.jpg"))); 
-
                 break;
             case 1:
                 this.carName.setText("1999 Honda Accord");//54321
                 carCost = new int[]{1, 2, 2, 3, 4};
-                carCostString = "12234";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "12234";               
                 break;
             case 2:
                 this.carName.setText("Ford GT");//35126
                 carCost = new int[]{3, 5, 1, 2, 6};
-                carCostString = "35126";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "35126";               
                 break;
             case 3:
                 this.carName.setText("Lambourghini");//35126
                 carCost = new int[]{6, 6, 6, 6, 6};
-                carCostString = "66666";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "66666";               
                 break;
             case 4:
                 this.carName.setText("Mercedes SLSAMG");//35126
                 carCost = new int[]{4, 6, 1, 2, 3};
-                carCostString = "46123";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "46123";              
                 break;
             case 5:
                 this.carName.setText("Ferrari 458 Spyder");//35126
                 carCost = new int[]{6, 6, 5, 5, 5};
-                carCostString = "66555";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "66555";                
                 break;
                 
             case 6:
                 this.carName.setText("Lexus LFA");//35126
                 carCost = new int[]{1, 6, 3, 3, 3};
-                carCostString = "16333";
-                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                carCostString = "16333";     
+                break;
+            case 7:
+                this.carName.setText("Bugatti");//35126
+                carCost = new int[]{4, 6, 4, 5, 1};
+                carCostString = "46451";     
                 break;    
 
         }
         this.carName.repaint();
         firstDigitDie.setValue(carCost[0]);
         firstDigitDie.repaint();
-        Dimension d4 = new Dimension(300, 200);
-        this.carIcon.setPreferredSize(d4);
-        this.carIcon.setSize(d4);
+        
+        this.carIcon.setPreferredSize(d6);
+        this.carIcon.setSize(d6);
         this.carIcon.repaint();
     }
 
     private void initDice() {
         DiePanel die;
-        //Dimension d = new Dimension( 100, 100 );
         for (int row = 0; row < dice.length; row++) {
             for (int col = 0; col < dice[row].length; col++) {
 
@@ -415,14 +411,14 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             this.dice[1][dieRollNumber].assignRandomValue();
             rolledNumbers[dieRollNumber] = dice[1][dieRollNumber].getValue();
             this.dice[1][dieRollNumber].repaint();
-            if (this.dice[1][dieRollNumber].getValue() == carCost[dieRollNumber + 1]) {
+            if (this.dice[1][dieRollNumber].getValue() == carCost[dieRollNumber + 1]) {//correct answer 
                 this.dice[0][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
                 this.dice[0][dieRollNumber].setColour(Color.green);
                 this.dice[0][dieRollNumber].repaint();
                 this.dice[2][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
                 this.dice[2][dieRollNumber].setColour(Color.green);
                 this.dice[2][dieRollNumber].repaint();
-                choiceHigherLower[dieRollNumber] = 3;
+                choiceHigherLower[dieRollNumber] = CORRECT_ANSWER;
                 this.rollButton.setBackground(Color.green);
                 this.rollButton.setForeground(Color.black);
 
@@ -450,7 +446,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
             dieRollNumber++;
             System.out.println("Die Roll Number ++ die roll number is now : " + dieRollNumber);
-            printArrays();
+            generateArrays();
         } else if (evt.getActionCommand().equals("PLAY AGAIN")) {
             restartGame();
         } else if (evt.getActionCommand().equals("EXIT")) {
@@ -571,10 +567,10 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         }
 
         System.out.println("Mouse Clicked on " + e.getComponent().getName());
-        printArrays();
+        generateArrays();
     }
 
-    public void printArrays() {
+    public void generateArrays() {
         
         System.out.println("\nPrint car cost: ");
         for (int i = 0; i < carCost.length; i++) {
@@ -607,7 +603,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 endGuessString += "L";
             } else if (choiceHigherLower[i] == 2) {
                 endGuessString += "H";
-            } else if (choiceHigherLower[i] == 0) {//didn't guess, got it correct by rolling
+            } else if (choiceHigherLower[i] == CORRECT_ANSWER) {//didn't guess, got it correct by rolling
                 endGuessString += "C";
             }
         }
