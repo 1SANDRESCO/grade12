@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.hdsb.gwss.isc4u.scottsandre.unit3;
+package edu.hdsb.gwss.ics4u.scottsandre.unit3;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Junk extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car2.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/ics4u/scottsandre/unit3/car2.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

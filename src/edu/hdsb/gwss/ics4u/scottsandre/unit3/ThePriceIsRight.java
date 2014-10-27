@@ -1,7 +1,7 @@
 /*
  *
  */
-package edu.hdsb.gwss.isc4u.scottsandre.unit3;
+package edu.hdsb.gwss.ics4u.scottsandre.unit3;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
@@ -84,13 +84,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     private Button rollButton;
     private Button playAgain;
+    private Button exitGame;
     
     private boolean doOnce = true;
+    
+    private Dimension d3 = new Dimension(50, 10);
+    Dimension d5 = new Dimension(40, 10);
+    Dimension d4 = new Dimension(380, FRAME_HEIGHT);
 
     private int[] carCost;
     private int[] rolledNumbers = new int[4];
     private int[] choiceHigherLower = new int[4];
-    int dieRollNumber = 0;
+    private  int dieRollNumber = 0;
 
     public ThePriceIsRight() {
         init();
@@ -108,23 +113,20 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setResizable(true);
 
-        //
-        this.emptyText = new JLabel("x ");
-        this.empty = new JPanel();
-        this.empty.add(emptyText);
-
-        //right side label texts
+       //RIGHT SIDE TEXTS--------------------------------------
         this.carIcon = new JLabel();
         this.guessInfo1 = new JLabel(" L = Lower            ");
         this.guessInfo1.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo1.setForeground(Color.RED);
+        
         this.guessInfo2 = new JLabel(" H = Higher            ");
         this.guessInfo2.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo2.setForeground(Color.RED);
+        
         this.guessInfo3 = new JLabel(" C = Correctly        ");
         this.guessInfo3.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.guessInfo3.setForeground(Color.RED);
-
+        
         this.whatYouGuessedText = new JLabel(" You Guessed:", SwingConstants.CENTER);
         this.whatYouGuessedText.setBorder(BorderFactory.createEtchedBorder(Color.blue, Color.white));
         this.whatYouGuessedText.setAlignmentX(SwingConstants.CENTER);
@@ -162,8 +164,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
         this.wrongGuessesAnswer = new JLabel(" ", SwingConstants.CENTER);
         this.wrongGuessesAnswer.setBorder(BorderFactory.createEtchedBorder(Color.ORANGE, Color.ORANGE));
-
-        Dimension d5 = new Dimension(40, 10);
+        
+        
+        //BUTTONS--------------------------------------
         this.playAgain = new Button();
         this.playAgain.setBackground(Color.LIGHT_GRAY);
         this.playAgain.setPreferredSize(d5);
@@ -174,15 +177,37 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.playAgain.setActionCommand("PLAY AGAIN");
         this.playAgain.addActionListener(this);
         this.playAgain.setEnabled(false);
+        
+        this.exitGame = new Button();
+        this.exitGame.setBackground(Color.LIGHT_GRAY);
+        this.exitGame.setPreferredSize(d5);
+        this.exitGame.setSize(d5);
+        this.exitGame.setFont(new Font("TimesRoman", Font.BOLD, 14));
+        this.exitGame.setForeground(Color.LIGHT_GRAY);
+        this.exitGame.setLabel("Exit game?");
+        this.exitGame.setActionCommand("EXIT");
+        this.exitGame.addActionListener(this);
+        this.exitGame.setEnabled(false);
+        
+        //button
+        this.rollButton = new Button();
+        this.rollButton.setBackground(Color.green);
+        this.rollButton.setPreferredSize(d3);
+        this.rollButton.setSize(d3);
+        this.rollButton.setFont(new Font("TimesRoman", Font.BOLD, 14));
+        this.rollButton.setForeground(Color.BLACK);
+        this.rollButton.setLabel("ROLL");
+        this.rollButton.setActionCommand("ROLL");
+        this.rollButton.addActionListener(this);
 
         //
         //spacer panel
-        Dimension d3 = new Dimension(50, 10);
+        
         this.spacerPanel = new JPanel();
         this.spacerPanel.setPreferredSize(d3);
         this.spacerPanel.setSize(d3);
 
-        Dimension d4 = new Dimension(380, FRAME_HEIGHT);
+        
 
         this.rightSidePanel = new JPanel();
         this.rightSidePanel.setPreferredSize(d4);
@@ -204,17 +229,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.rightSidePanel.add(wrongGuessText);
         this.rightSidePanel.add(wrongGuessesAnswer);
         this.rightSidePanel.add(playAgain);
+        this.rightSidePanel.add(exitGame);
 
-        //button
-        this.rollButton = new Button();
-        this.rollButton.setBackground(Color.green);
-        this.rollButton.setPreferredSize(d3);
-        this.rollButton.setSize(d3);
-        this.rollButton.setFont(new Font("TimesRoman", Font.BOLD, 14));
-        this.rollButton.setForeground(Color.BLACK);
-        this.rollButton.setLabel("ROLL");
-        this.rollButton.setActionCommand("ROLL");
-        this.rollButton.addActionListener(this);
+        
 
         //first digit title
         this.firstDigitTitle = new JLabel("The first digit is:", SwingConstants.CENTER);
@@ -436,6 +453,9 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
             printArrays();
         } else if (evt.getActionCommand().equals("PLAY AGAIN")) {
             restartGame();
+        } else if (evt.getActionCommand().equals("EXIT")) {
+            System.out.println("close");
+            this.dispose();
         }
     }
 
@@ -443,11 +463,18 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         this.doOnce = true;
         this.rolledNumberString = "";
         this.endGuessString = "";
+        
         this.playAgain.setEnabled(false);
         this.playAgain.setBackground(Color.LIGHT_GRAY);
+        
         this.rollButton.setEnabled(true);
         this.rollButton.setForeground(Color.black);
         this.rollButton.setBackground(Color.green);
+        
+        this.exitGame.setEnabled(false);
+        this.exitGame.setForeground(Color.LIGHT_GRAY);
+        this.exitGame.setBackground(Color.LIGHT_GRAY);
+        
         this.correctGuessesAnswer.setText(" ");
         this.wrongGuessesAnswer.setText(" ");
         this.endGuess.setText(" ");
@@ -474,9 +501,15 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     public void determineAnswer() {
         this.rollButton.setEnabled(false);
         this.rollButton.setBackground(Color.LIGHT_GRAY);
+        
         this.playAgain.setEnabled(true);
         this.playAgain.setBackground(Color.green);
         this.playAgain.setForeground(Color.black);
+        
+        this.exitGame.setEnabled(true);
+        this.exitGame.setBackground(Color.CYAN);
+        this.exitGame.setForeground(Color.black);
+        
         System.out.println("Determine Answer");
         String correctInfo = "";
         String wrongInfo = "";

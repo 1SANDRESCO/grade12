@@ -3,32 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package edu.hdsb.gwss.isc4u.scottsandre.unit3;
+package edu.hdsb.gwss.ics4u.scottsandre.unit3;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
  *
- * @author Owner
+ * @author 1SANDRESCO
  */
-/**
- */
-public class GUI01  {
+public class GUI101 {
 
     /**
      * @param args the command line arguments
      */
-    public static void main( String[] args )  {
-        Graphics g;
+    public static void main( String[] args ) {
+
         // WINDOW
         JFrame guiWindow = new JFrame( "Hello World GUI" );
         guiWindow.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-        guiWindow.setSize( 800, 600 );
+        guiWindow.setSize( 400, 600 );
 
         // FONT
         Font redComicSans = new Font( "Comic Sans MS", Font.ITALIC, 24 );
@@ -44,21 +40,14 @@ public class GUI01  {
         text2.setBackground( Color.GREEN );
         text2.setForeground( Color.PINK );
         text2.setFont( redComicSans );
-        
-        //Label 3
-        JLabel text3 = new JLabel("Third component" );
-        
-        
 
         // ADD LABEL 2 to FRAME
         guiWindow.add( text2 );
-        guiWindow.add(text3);
 
         // MAKE VISABLE
         guiWindow.setVisible( true );
-        
 
     }
 
-}  
+}
 

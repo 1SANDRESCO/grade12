@@ -5,7 +5,7 @@
  *  
  * Version: 0.3; NOT THE FINAL VERSION
  */
-package edu.hdsb.gwss.isc4u.scottsandre.unit3;
+package edu.hdsb.gwss.ics4u.scottsandre.unit3;
 
 /**
  */
