@@ -32,6 +32,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
     public static final int CHOSEN_HIGH_OR_LOW = 9;
     public static final int HIGHER = 2;
     public static final int LOWER = 1;
+    public static final int NUMBER_CARS = 7;
 
     private String carCostString;
     private String rolledNumberString = "";
@@ -303,7 +304,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
 
     private void initCar() {
         int randomChoice;
-        randomChoice = (int) (Math.random() * 5);
+        randomChoice = (int) (Math.random() * NUMBER_CARS);
 
         switch (randomChoice) {
             case 0:
@@ -337,6 +338,19 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 carCostString = "46123";
                 //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
                 break;
+            case 5:
+                this.carName.setText("Ferrari 458 Spyder");//35126
+                carCost = new int[]{6, 6, 5, 5, 5};
+                carCostString = "66555";
+                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                break;
+                
+            case 6:
+                this.carName.setText("Lexus LFA");//35126
+                carCost = new int[]{1, 6, 3, 3, 3};
+                carCostString = "16333";
+                //this.carIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/edu/hdsb/gwss/isc4u/scottsandre/unit3/car1.jpg"))); 
+                break;    
 
         }
         this.carName.repaint();
@@ -391,20 +405,21 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
                 this.dice[2][dieRollNumber].setValue(this.dice[1][dieRollNumber].getValue());
                 this.dice[2][dieRollNumber].setColour(Color.green);
                 this.dice[2][dieRollNumber].repaint();
+                choiceHigherLower[dieRollNumber] = 3;
                 this.rollButton.setBackground(Color.green);
                 this.rollButton.setForeground(Color.black);
 
             } else if (this.dice[1][dieRollNumber].getValue() == 6) {//equals 6
                 this.dice[2][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
                 this.dice[2][dieRollNumber].repaint();
-                choiceHigherLower[dieRollNumber] = LOWER;//lower
+                choiceHigherLower[dieRollNumber] = LOWER;//lower to 1
                 this.rollButton.setBackground(Color.green);
                 this.rollButton.setForeground(Color.black);
 
             } else if (this.dice[1][dieRollNumber].getValue() == 1) {//equals 1
                 this.dice[0][dieRollNumber].setValue(CHOSEN_HIGH_OR_LOW);
                 this.dice[0][dieRollNumber].repaint();
-                choiceHigherLower[dieRollNumber] = HIGHER;//higher
+                choiceHigherLower[dieRollNumber] = HIGHER;//higher to 2
                 this.rollButton.setBackground(Color.green);
                 this.rollButton.setForeground(Color.black);
 
@@ -466,7 +481,7 @@ public class ThePriceIsRight extends JFrame implements ActionListener, MouseList
         String correctInfo = "";
         String wrongInfo = "";
         int win = 0;
-
+        
         for (int digit = 0; digit < this.choiceHigherLower.length; digit++) {
             if (choiceHigherLower[digit] == LOWER && carCost[digit + 1] < rolledNumbers[digit]) {//guess lower, car cost is lower than roll           
                 correctInfo += "col[" + (digit + 1) + "]: " + carCost[digit + 1] + " is < " + rolledNumbers[digit] + ". ";
