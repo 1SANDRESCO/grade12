@@ -22,9 +22,9 @@ public class Combinations {
         Scanner input = new Scanner(System.in);
         System.out.println("Combinations:");
         System.out.print("Enter # objects to choose: ");
-        n = input.nextInt();
-        System.out.print("Enter how many objects in total there are: ");
         r = input.nextInt();
+        System.out.print("Enter how many objects in total there are: ");
+        n = input.nextInt();
         System.out.println("Total number of ways is: " + numberCombinations(n, r));
 
     }
