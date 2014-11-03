@@ -37,7 +37,7 @@ public class RecursiveFunctions {
 
     public static int functionOne(int x, int y) {//first function
         if (x < y) {
-            return functionOne(x * -1, y * -1);
+            return -1 * functionOne(y , x);
         }
         if (x == y) {
             return 30;
