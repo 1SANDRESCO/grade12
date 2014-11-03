@@ -57,11 +57,7 @@ public class Fractal1 extends JPanel{
                 break;    
         } 
         drawCircle(c,xLoc, yLoc, width, g );
-//        drawCircle(c,yLoc / 3, xLoc / 3, width, g );
-//        drawCircle(c,yLoc / 9, xLoc / 9, width, g );
-//        drawCircle(c,yLoc * 2, xLoc * 2, width, g );
-//        drawCircle(c,yLoc * 4, xLoc * 2, width, g );
-//        drawCircle(c,xLoc * 3, xLoc * 7, width, g );
+
         i++;
         xLoc += 5;
         yLoc += 5;

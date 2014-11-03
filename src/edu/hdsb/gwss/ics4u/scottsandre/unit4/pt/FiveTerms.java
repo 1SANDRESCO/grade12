@@ -18,13 +18,13 @@ public class FiveTerms {
 
     public static void main(String[] args) {
 
-        System.out.println("Sequence One: ");
+        System.out.println("Sequence One: ");//Titles
         displayTerms(true);
         System.out.println("\nSequence Two: ");
         displayTerms(false);
     }
 
-    public static void displayTerms(boolean option) {
+    public static void displayTerms(boolean option) {//prints out terms
         if (option) {
             for (int i = 1; i < SHOW_TERMS + 1; i++) {
                 System.out.print(sequenceOne(i) + " .. ");//first sequence
@@ -58,7 +58,7 @@ public class FiveTerms {
         if (n == 1){
             return 1;
         }
-        return Math.sqrt( ( 3 * sequenceTwo(n-1) + 4));
+        return Math.sqrt( ( 3 * sequenceTwo(n-1) + 4));//all other options of n
     }
 
 }

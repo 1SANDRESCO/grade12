@@ -15,11 +15,11 @@ public class RecursiveFunctions {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Recursive Functions: ");
+        System.out.println("Recursive Functions: ");//title
         
         System.out.println();
         
-        System.out.println("First Function: ");
+        System.out.println("First Function: ");//outputs for first frunction
         System.out.println("(5,3) : " + functionOne(5,3));
         System.out.println("(2,2) : " + functionOne(2,2));
         System.out.println("(1,4) : " + functionOne(1,4));
@@ -27,7 +27,7 @@ public class RecursiveFunctions {
         
         System.out.println();
         
-        System.out.println("Second Function: ");
+        System.out.println("Second Function: ");//outputs of second function
         System.out.println("(1,1) : " + functionTwo(1, 1));
         System.out.println("(2,1) : " + functionTwo(2, 1));
         System.out.println("(3,2) : " + functionTwo(3, 2));
@@ -35,7 +35,7 @@ public class RecursiveFunctions {
         
     }
 
-    public static int functionOne(int x, int y) {
+    public static int functionOne(int x, int y) {//first function
         if (x < y) {
             return functionOne(x * -1, y * -1);
         }
@@ -47,7 +47,7 @@ public class RecursiveFunctions {
         
     }
 
-    public static long functionTwo (long m, long n){      
+    public static int functionTwo (int m, int n){  //second function    
         if (m == 0){
             return n + 1;
         }
