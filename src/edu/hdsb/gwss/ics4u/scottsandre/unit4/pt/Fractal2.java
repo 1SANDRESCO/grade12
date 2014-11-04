@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.hdsb.gwss.ics4u.scottsandre.unit4;
+package edu.hdsb.gwss.ics4u.scottsandre.unit4.pt;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,17 +14,17 @@ import javax.swing.JPanel;
  *
  * @author 1SANDRESCO
  */
-public class Triangle4 extends JPanel {
+public class Fractal2 extends JPanel {
 
     public static final int FRAME_LENGTH = 800;
     public static final int START_SIDE_LENGTH = 380;
-    public static final int SMALLEST_LENGTH = 4;
+    public static final int SMALLEST_LENGTH = 10;
     //public static int length = 500;
     public static int height;
     public static int i = 0;
     public static Color c;
 
-    public Triangle4() {
+    public Fractal2() {
 
     }
 
@@ -69,6 +69,10 @@ public class Triangle4 extends JPanel {
         g.drawLine(topX, topY, topX - length / 2, topY + height);
         g.drawLine(topX, topY, topX + length / 2, topY + height);
         g.drawLine(topX + length / 2, topY + height, topX - length / 2, topY + height);
+        g.fillOval(topX, topY, length , length);
+        g.drawLine(topX, topY, topX + length * 6, topY + length);
+        g.drawLine(topX, topY, topX - 2 * length , topY +  4 *length);
+        g.drawLine(topX, topY, topX - 5 * length , topY -  4 *length);
         i++;
         if (i == 7){
             i = 0;
@@ -83,9 +87,9 @@ public class Triangle4 extends JPanel {
         window.setVisible(true);
         window.setResizable(false);
 
-        Triangle4 triangle = new Triangle4();
+        Fractal2 fractal = new Fractal2();
 
-        window.add(triangle);
+        window.add(fractal);
 
     }
 }
