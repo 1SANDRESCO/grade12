@@ -24,7 +24,9 @@ public class RecursiveFunctions {
         System.out.println("(2,2) : " + functionOne(2,2));
         System.out.println("(1,4) : " + functionOne(1,4));
         System.out.println("(-5, -2) : " + functionOne(-5,-2));
-        
+        System.out.println("the effect of the function if it has interger arguments x and y is that\n"
+                + " it prints out the difference between x and y. ex: x is 4, y is -6, out put is \n"
+                + "4 - (-6) = 10.");
         System.out.println();
         
         System.out.println("Second Function: ");//outputs of second function
@@ -40,7 +42,7 @@ public class RecursiveFunctions {
             return -1 * functionOne(y , x);
         }
         if (x == y) {
-            return 30;
+            return 0;
         } 
         
         return 1 + functionOne(x - 1, y);

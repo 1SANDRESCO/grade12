@@ -46,25 +46,7 @@ public class Triangle4 extends JPanel {
     }
 
     public void drawTriangle(Graphics g, int topX, int topY, int length) {
-        switch (i) {
-            case 0: c = Color.BLUE;
-                break;
-            case 1: c = Color.CYAN;
-                break;
-            case 2: c = Color.RED;
-                break;
-            case 3: c = Color.ORANGE;
-                break;
-            case 4: c = Color.GREEN;
-                break;
-            case 5: c = Color.pink;
-                break;
-            case 6: c = Color.LIGHT_GRAY;
-                break;
-            case 7: c = Color.BLACK;
-                break;    
-        } 
-        g.setColor(c);
+        g.setColor(Color.black);
         height = (int) (Math.sqrt(Math.pow(length, 2) - Math.pow(length / 2, 2)));
         g.drawLine(topX, topY, topX - length / 2, topY + height);
         g.drawLine(topX, topY, topX + length / 2, topY + height);

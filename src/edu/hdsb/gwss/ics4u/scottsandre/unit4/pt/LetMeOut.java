@@ -13,6 +13,8 @@ public class LetMeOut {
     private static final char OPEN = '.';
     private static final char TRIED = '-';
     private static final char GOOD_PATH = '+';
+    private static final char START = 'S';
+    private static boolean successful = false;
 
     private char[][] maze = {
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
@@ -29,16 +31,19 @@ public class LetMeOut {
     /**
      * Display the current maze. 
      */
-    public boolean findExitFrom( int row, int col ) {
-        boolean successful = false;
-                
+  public boolean findExitFrom( int row, int col ) {
+        if (maze[row][col] == EXIT){
+            successful = true;
+        } 
+        if (successful){
+            maze[row][col] = GOOD_PATH;
+        }
+        
 
         return successful;
     }
     
-    /**
-     * Display the current maze. 
-     */
+    
     public void solve( ) {
         
         // FIND RANDOM START LOCATION
@@ -48,9 +53,11 @@ public class LetMeOut {
             row = (int) ( Math.random() * maze.length );
             col = (int) ( Math.random() * maze[0].length );
         } while( maze[row][col] != OPEN );
+        maze[row][col] = START;//show start location
         
         // START!
         System.out.println( "START LOCATION: (" + row + "," + col + ")" );
+        
         findExitFrom( row, col );
         
         // SHOW EXIT
