@@ -18,7 +18,7 @@ public class Fractal2 extends JPanel {
 
     public static final int FRAME_LENGTH = 700;
     public static final int START_SIDE_LENGTH = 400;
-    public static final int SMALLEST_R =10;
+    public static final int SMALLEST_R = 10;
     public static int heightF;
     public static int widthF;
     public static int startR = 300;
@@ -48,7 +48,7 @@ public class Fractal2 extends JPanel {
     fractalize(g, topX - r, topY + r / 2, r);//double left
     fractalize(g, topX - r / 2, topY + r / 2, r);//left
     fractalize(g, topX + r * 6 / 4 , topY + r / 2, r);//right
-    //fractalize(g, topX + r * 6 / 4 , topY - r / 2, r);//up and right
+    
     fractalize(g, topX + r / 2 , topY - r / 2, r);//up
     fractalize(g, topX + r / 2 , topY - r , r);//double up
     fractalize(g, topX + r / 2 , topY + r * 6 / 4, r);//down
@@ -56,13 +56,14 @@ public class Fractal2 extends JPanel {
     }
 
     public void draw(Graphics g, int topX, int topY, int r) {
-    g.setColor(Color.blue);
+    g.setColor(Color.white);
     g.drawLine(topX + r / 2, topY - r/ 5, topX + r / 2, topY + 6 * r / 5);
-    g.setColor(Color.DARK_GRAY);
+    g.setColor(Color.blue);
     g.drawLine(topX, topY, topX + r, topY + r);
     g.drawLine(topX + r, topY, topX , topY + r );
     
     g.setColor(Color.LIGHT_GRAY);
+    
     g.drawOval(topX, topY, r, r);
     
     

@@ -15,6 +15,7 @@ public class LetMeOut {
     private static final char GOOD_PATH = '+';
     private static final char START = 'S';
     private static boolean successful = false;
+   
 
     private char[][] maze = {
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
@@ -30,13 +31,51 @@ public class LetMeOut {
 
     /**
      * Display the current maze. 
+     * check if maze at col and row is exit
+     * if not exit
+     * call right:
+     * if to the right is open or exit
+     * successful = findExitFrom
+     * if maze at row at col is successful
+     * make it GOOD PATH
      */
   public boolean findExitFrom( int row, int col ) {
-        if (maze[row][col] == EXIT){
-            successful = true;
-        } 
+//        if (maze[row][col] == EXIT){
+//            successful = true;   
+//        } 
+//        if (maze[row - 1][col] == EXIT){//EXIT IS up
+//            successful = true;   
+//        }
+//        if (maze[row + 1][col] == EXIT){//EXIT IS down
+//           successful = true;   
+//        }
+//        if (maze[row][col - 1] == EXIT){//EXIT IS left
+//            successful = true;   
+//        }
+//        if (maze[row][col + 1] == EXIT){//EXIT IS right
+//           successful = true;   
+//        }
         if (successful){
             maze[row][col] = GOOD_PATH;
+        }
+        if (maze[row - 1][col] == OPEN){//up
+            maze[row-1][col] = TRIED;
+            findExitFrom(row - 1, col);
+        }
+        if (maze[row + 1][col] == OPEN){//down
+            maze[row+1][col] = TRIED;
+           findExitFrom(row + 1, col);
+        }
+        if (maze[row][col - 1] == OPEN){//left
+            maze[row][col - 1] = TRIED;
+            findExitFrom(row, col - 1);
+        }
+        if (maze[row][col + 1] == OPEN){//right
+            maze[row][col + 1] = TRIED;
+            findExitFrom(row, col + 1);
+        }
+        if (maze[row - 1][col] == WALL){
+            
         }
         
 

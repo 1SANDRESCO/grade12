@@ -57,22 +57,6 @@ public class PascalsTriangle {
         }
     }
     
-        public static void displayArray2(int[][] data) {//display 2d array neatly
-        int tab;
-        for (int row = 0; row < data.length; row++) {
-            for (tab = TRIANGLE_SIZE - row; tab > 0; tab--) {//makes it look nice
-                System.out.print("   ");    
-            }
-            for (int col = 0; col < data[row].length; col++) {
-                if (data[row][col] % 2 == 1) {
-                    System.out.format("%-6s", "x");//format 6 apart
-                } else {
-                    System.out.format("%-6s", " ");
-                }
-            }
-            System.out.println();
-        }
-    }
 }
 
 
