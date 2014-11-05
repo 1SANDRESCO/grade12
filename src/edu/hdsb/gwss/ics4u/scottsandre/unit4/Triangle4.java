@@ -51,10 +51,7 @@ public class Triangle4 extends JPanel {
         g.drawLine(topX, topY, topX - length / 2, topY + height);
         g.drawLine(topX, topY, topX + length / 2, topY + height);
         g.drawLine(topX + length / 2, topY + height, topX - length / 2, topY + height);
-        i++;
-        if (i == 7){
-            i = 0;
-        }
+       
     }
 
     public static void main(String[] args) {

@@ -35,10 +35,9 @@ public class PascalsTriangle {
     public static int inputNumbers(int[][] data, int r, int c) {
         if (c == 0 || c == r) {
             return 1;
-        } else if (c != 0) {//add together data at row above column 1 left+ row above and same column
-            return (inputNumbers(data, r - 1, c - 1) + inputNumbers(data, r - 1, c));
         }
-        return -1;
+        return (inputNumbers(data, r - 1, c - 1) + inputNumbers(data, r - 1, c));
+
     }
 
     public static void displayArray(int[][] data) {//display 2d array neatly

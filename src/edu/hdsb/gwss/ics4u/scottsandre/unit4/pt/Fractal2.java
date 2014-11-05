@@ -16,12 +16,15 @@ import javax.swing.JPanel;
  */
 public class Fractal2 extends JPanel {
 
-    public static final int FRAME_LENGTH = 800;
-    public static final int START_SIDE_LENGTH = 380;
-    public static final int SMALLEST_LENGTH = 10;
-    //public static int length = 500;
-    public static int height;
-    public static int i = 0;
+    public static final int FRAME_LENGTH = 700;
+    public static final int START_SIDE_LENGTH = 400;
+    public static final int SMALLEST_R =10;
+    public static int heightF;
+    public static int widthF;
+    public static int startR = 300;
+    int i = 0;
+
+ 
     public static Color c;
 
     public Fractal2() {
@@ -30,62 +33,48 @@ public class Fractal2 extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        fractalize(g, FRAME_LENGTH / 2, 50, START_SIDE_LENGTH);
-
+        heightF = this.getHeight();
+        widthF = this.getWidth();
+        //drawCircle(g, widthF / 2 - startR / 2, 30, startR);
+        fractalize(g, widthF / 2 - startR / 2, heightF / 2 - startR / 2, startR);
     }
     
-    public void fractalize(Graphics g, int topX, int topY, int length){
-        if (length <= SMALLEST_LENGTH){
-            drawTriangle(g, topX, topY, length * 2);
-        } else {
-        int height = (int) (Math.sqrt(Math.pow(length, 2) - Math.pow(length / 2, 2)));
-        fractalize(g, topX , topY , length / 2);
-        fractalize(g, topX + length / 2, topY + height, length / 2);
-        fractalize(g, topX - length / 2, topY + height, length / 2);
-        }
+    public void fractalize(Graphics g, int topX, int topY, int r){
+    if (r <= SMALLEST_R)return;
+    draw(g, topX, topY, r);//center
+    
+    r = r/2;
+    fractalize(g, topX + 2 * r, topY+ r / 2, r);//double right
+    fractalize(g, topX - r, topY + r / 2, r);//double left
+    fractalize(g, topX - r / 2, topY + r / 2, r);//left
+    fractalize(g, topX + r * 6 / 4 , topY + r / 2, r);//right
+    //fractalize(g, topX + r * 6 / 4 , topY - r / 2, r);//up and right
+    fractalize(g, topX + r / 2 , topY - r / 2, r);//up
+    fractalize(g, topX + r / 2 , topY - r , r);//double up
+    fractalize(g, topX + r / 2 , topY + r * 6 / 4, r);//down
+    fractalize(g, topX + r / 2 , topY + r * 2, r);//down double
     }
 
-    public void drawTriangle(Graphics g, int topX, int topY, int length) {
-        switch (i) {
-            case 0: c = Color.BLUE;
-                break;
-            case 1: c = Color.CYAN;
-                break;
-            case 2: c = Color.RED;
-                break;
-            case 3: c = Color.ORANGE;
-                break;
-            case 4: c = Color.GREEN;
-                break;
-            case 5: c = Color.pink;
-                break;
-            case 6: c = Color.LIGHT_GRAY;
-                break;
-            case 7: c = Color.BLACK;
-                break;    
-        } 
-        g.setColor(c);
-        height = (int) (Math.sqrt(Math.pow(length, 2) - Math.pow(length / 2, 2)));
-        g.drawLine(topX, topY, topX - length / 2, topY + height);
-        g.drawLine(topX, topY, topX + length / 2, topY + height);
-        g.drawLine(topX + length / 2, topY + height, topX - length / 2, topY + height);
-        g.fillOval(topX, topY, length , length);
-        g.drawLine(topX, topY, topX + length * 6, topY + length);
-        g.drawLine(topX, topY, topX - 2 * length , topY +  4 *length);
-        g.drawLine(topX, topY, topX - 5 * length , topY -  4 *length);
-        i++;
-        if (i == 7){
-            i = 0;
-        }
+    public void draw(Graphics g, int topX, int topY, int r) {
+    g.setColor(Color.blue);
+    g.drawLine(topX + r / 2, topY - r/ 5, topX + r / 2, topY + 6 * r / 5);
+    g.setColor(Color.DARK_GRAY);
+    g.drawLine(topX, topY, topX + r, topY + r);
+    g.drawLine(topX + r, topY, topX , topY + r );
+    
+    g.setColor(Color.LIGHT_GRAY);
+    g.drawOval(topX, topY, r, r);
+    
+    
     }
 
     public static void main(String[] args) {
         JFrame window = new JFrame();
-        window.setSize(FRAME_LENGTH, FRAME_LENGTH);
+        window.setSize(FRAME_LENGTH , FRAME_LENGTH );
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setTitle("Sierpinski Triangle 4");
         window.setVisible(true);
-        window.setResizable(false);
+        window.setResizable(true);
 
         Fractal2 fractal = new Fractal2();
 

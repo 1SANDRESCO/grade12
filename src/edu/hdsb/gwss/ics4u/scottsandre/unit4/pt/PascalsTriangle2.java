@@ -15,16 +15,20 @@ public class PascalsTriangle2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        System.out.println(term(6,3));
+        row(7);
     }
     
     public static int term (int r, int c){
-        return 0;
+        if (c == 0 || c == r){
+            return 1;
+        }
+        return term (r - 1, c - 1) + term (r - 1, c);
         
     }
     
     public static int row (int r){
-        return 0;
+     return 0;   
     }
     
 }
