@@ -15,6 +15,7 @@ public class LetMeOut {
     private static final char GOOD_PATH = '+';
     private static final char START = 'S';
     private static boolean successful = false;
+  
 
     private char[][] maze = {
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
@@ -32,25 +33,30 @@ public class LetMeOut {
      * findExitFrom if maze at row at col is successful make it GOOD PATH
      */
     public boolean findExitFrom(int row, int col) {
-
+        //successful = false;
         if (maze[row][col] == EXIT) {
             successful = true;
         }
         if (successful) {
             maze[row][col] = GOOD_PATH;
+            return successful;
         }
         if (maze[row - 1][col] == OPEN || maze[row - 1][col] == EXIT) {//up
+            maze[row - 1][col] = TRIED;
             successful = findExitFrom(row - 1, col);
         }
         if (maze[row + 1][col] == OPEN || maze[row + 1][col] == EXIT) {//down
+            maze[row + 1][col] = TRIED;
             successful = findExitFrom(row + 1, col);
         }
         if (maze[row][col - 1] == OPEN || maze[row][col - 1] == EXIT) {//left
+            maze[row][col - 1] = TRIED;
             successful = findExitFrom(row, col - 1);
         }
-        if (maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT) {//right
-            successful = findExitFrom(row + 1, col + 1);
-        }
+//        if (maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT) {//right
+//            maze[row][col + 1] = TRIED;
+//            successful = findExitFrom(row , col + 1);
+//        }
         return successful;
     }
 
