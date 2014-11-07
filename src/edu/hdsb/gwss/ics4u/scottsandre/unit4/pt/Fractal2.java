@@ -33,6 +33,7 @@ public class Fractal2 extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        this.setBackground(Color.black);
         heightF = this.getHeight();
         widthF = this.getWidth();
         //drawCircle(g, widthF / 2 - startR / 2, 30, startR);
