@@ -18,7 +18,7 @@ public class Fractal2 extends JPanel {
 
     public static final int FRAME_LENGTH = 700;
     public static final int START_SIDE_LENGTH = 400;
-    public static final int SMALLEST_R = 10;
+    public static final int SMALLEST_R = 8;
     public static int heightF;
     public static int widthF;
     public static int startR = 300;
@@ -55,7 +55,7 @@ public class Fractal2 extends JPanel {
     fractalize(g, topX + r / 2 , topY + r * 2, r);//down double
     }
 
-    public void draw(Graphics g, int topX, int topY, int r) {
+    public void draw(Graphics g, int topX, int topY, int r) {//draws a circle with various lines
     g.setColor(Color.white);
     g.drawLine(topX + r / 2, topY - r/ 5, topX + r / 2, topY + 6 * r / 5);
     g.setColor(Color.blue);
@@ -73,7 +73,7 @@ public class Fractal2 extends JPanel {
         JFrame window = new JFrame();
         window.setSize(FRAME_LENGTH , FRAME_LENGTH );
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setTitle("Sierpinski Triangle 4");
+        window.setTitle("Snowflake Scott Sandre");
         window.setVisible(true);
         window.setResizable(true);
 

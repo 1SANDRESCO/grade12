@@ -11,7 +11,7 @@ package edu.hdsb.gwss.ics4u.scottsandre.unit4.pt;
  */
 public class PascalsTriangle {
 
-    public static final int TRIANGLE_SIZE = 10;
+    public static final int TRIANGLE_SIZE = 15;
 
     /**
      * @param args the command line arguments

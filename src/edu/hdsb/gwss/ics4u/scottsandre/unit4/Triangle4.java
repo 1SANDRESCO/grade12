@@ -35,23 +35,23 @@ public class Triangle4 extends JPanel {
     }
     
     public void fractalize(Graphics g, int topX, int topY, int length){
-        if (length <= SMALLEST_LENGTH){
+        if (length <= SMALLEST_LENGTH){//smallest triangle 
             drawTriangle(g, topX, topY, length * 2);
         } else {
         int height = (int) (Math.sqrt(Math.pow(length, 2) - Math.pow(length / 2, 2)));
-        fractalize(g, topX , topY , length / 2);
-        fractalize(g, topX + length / 2, topY + height, length / 2);
-        fractalize(g, topX - length / 2, topY + height, length / 2);
+        fractalize(g, topX , topY , length / 2);//top triangle
+        fractalize(g, topX + length / 2, topY + height, length / 2);//right
+        fractalize(g, topX - length / 2, topY + height, length / 2);//left
         }
     }
 
     public void drawTriangle(Graphics g, int topX, int topY, int length) {
         g.setColor(Color.black);
         height = (int) (Math.sqrt(Math.pow(length, 2) - Math.pow(length / 2, 2)));
-        g.drawLine(topX, topY, topX - length / 2, topY + height);
-        g.drawLine(topX, topY, topX + length / 2, topY + height);
+        g.drawLine(topX, topY, topX - length / 2, topY + height);//top to left
+        g.drawLine(topX, topY, topX + length / 2, topY + height);//top to right
         g.drawLine(topX + length / 2, topY + height, topX - length / 2, topY + height);
-       
+        //bottom
     }
 
     public static void main(String[] args) {

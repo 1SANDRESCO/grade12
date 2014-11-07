@@ -1,6 +1,7 @@
 /*
- * Name:            Let Me Out
- * Date:            Nov, 2014
+ * Name:  Scott Sandre          
+ * Description: Let Me Out.  Finds exit from maze.
+ * Date: Nov, 2014
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit4.pt;
 
@@ -14,8 +15,6 @@ public class LetMeOut {
     private static final char TRIED = '-';
     private static final char GOOD_PATH = '+';
     private static final char START = 'S';
-    private static boolean successful = false;
-  
 
     private char[][] maze = {
         {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'},
@@ -24,7 +23,13 @@ public class LetMeOut {
         {'W', '.', 'W', '.', '.', '.', 'W', 'W', '.', '.', '.', '.', 'W'},
         {'W', '.', 'W', '.', 'W', '.', 'W', 'W', '.', 'W', 'W', 'W', 'W'},
         {'W', '.', 'W', 'W', 'W', 'W', 'W', '.', '.', '.', '.', '.', 'W'},
-        {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'X', 'W', 'W', 'W'}
+        {'W', '.', '.', '.', 'W', '.', '.', '.', 'W', 'W', '.', '.', 'W'},
+        {'W', 'W', '.', '.', 'W', '.', '.', '.', '.', 'W', '.', '.', 'W'},
+        {'W', 'W', 'W', '.', 'W', '.', 'W', 'W', 'W', '.', '.', 'W', 'W'},
+        {'W', '.', '.', 'W', '.', 'W', 'W', 'W', 'W', '.', 'W', '.', 'W'},
+        {'W', '.', 'W', '.', 'W', '.', '.', '.', '.', '.', 'W', 'W', 'W'},
+        {'X', '.', '.', '.', '.', '.', 'W', '.', '.', '.', '.', '.', 'W'},
+        {'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W'}
     };
 
     /**
@@ -33,30 +38,30 @@ public class LetMeOut {
      * findExitFrom if maze at row at col is successful make it GOOD PATH
      */
     public boolean findExitFrom(int row, int col) {
-        //successful = false;
-        if (maze[row][col] == EXIT) {
-            successful = true;
-        }
-        if (successful) {
+        boolean successful = false;
+        if (maze[row][col] == EXIT) {//you are at the exit. make it + return true
             maze[row][col] = GOOD_PATH;
+            successful = true;
             return successful;
         }
-        if (maze[row - 1][col] == OPEN || maze[row - 1][col] == EXIT) {//up
-            maze[row - 1][col] = TRIED;
+        maze[row][col] = TRIED;//make it dash
+        //look for different directions
+        if (!successful && maze[row - 1][col] == OPEN || maze[row - 1][col] == EXIT) {//up
             successful = findExitFrom(row - 1, col);
         }
-        if (maze[row + 1][col] == OPEN || maze[row + 1][col] == EXIT) {//down
-            maze[row + 1][col] = TRIED;
+        if (!successful && maze[row + 1][col] == OPEN || maze[row + 1][col] == EXIT) {//down
             successful = findExitFrom(row + 1, col);
         }
-        if (maze[row][col - 1] == OPEN || maze[row][col - 1] == EXIT) {//left
-            maze[row][col - 1] = TRIED;
+        if (!successful && maze[row][col - 1] == OPEN || maze[row][col - 1] == EXIT) {//left
             successful = findExitFrom(row, col - 1);
         }
-//        if (maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT) {//right
-//            maze[row][col + 1] = TRIED;
-//            successful = findExitFrom(row , col + 1);
-//        }
+        if (!successful && maze[row][col + 1] == OPEN || maze[row][col + 1] == EXIT) {//right
+            successful = findExitFrom(row, col + 1);
+        }
+        if (successful) {//over write the dash and make it + to idicate correct path
+            maze[row][col] = GOOD_PATH;
+        }
+
         return successful;
     }
 
