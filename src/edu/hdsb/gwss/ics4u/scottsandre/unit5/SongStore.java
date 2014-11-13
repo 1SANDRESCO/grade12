@@ -17,14 +17,42 @@ public class SongStore {
     public static boolean exit = false;
 
     public static void main(String[] args) throws Exception {
-        long position, recordNumber;
+    openStore();    
+    closeStore();
+    }
+
+    public static void modifySong() throws IOException {
+        long x;
+        //long n;
+        int changeInfo;
+        System.out.print("Which # song would you like to change? [1 - " + numRecords + "]: ");
+        x = input.nextLong();
+        // n = sRecord.RECORD_SIZE * (x - 1);
+        
+        displaySong(sRecord.RECORD_SIZE * (x - 1), x);
+        
+        System.out.println("1 -- > Song Name");
+        System.out.println("2 -- > Band Name");
+        System.out.println("3 -- > Company Name");
+        System.out.println("4 -- > Seconds Long");
+        System.out.println("5 -- > Copies Sold");
+        System.out.println("6 -- > Digital Size (Gb)");
+        System.out.println("7 -- > Released status");
+        System.out.println("8 -- > Rating");
+        modifySongInputInfo();
+
+
+    }
+    
+    public static void openStore() throws IOException{
+    long position, recordNumber;
         int choice;
         boolean exit = false;
 
         System.out.println("Welcome to Scott Sandre's Song Store: ");
         System.out.println();
         makeFile();
-
+        //readInFile();
         while (exit == false) {
             System.out.println();
             System.out.println("Main Menu:");
@@ -41,31 +69,104 @@ public class SongStore {
                     break;
                 case 1:
 
-                    System.out.println("Which record do you want [1 - " + numRecords + "] or 0 to exit?");
+                    System.out.println("Which song do you want to see [1 - " + numRecords + "]?");
                     recordNumber = input.nextLong();
                     position = sRecord.RECORD_SIZE * (recordNumber - 1);
-                    readInFile(position);
-
-                    System.out.println("Record number " + recordNumber + ": ");
-                    System.out.println(sRecord.toString());
+                    displaySong(position, recordNumber);
                     break;
                 case 2:
                     addSong();
                     break;
+                case 3:
+                    modifySong();
+                    break;
                 case 9:
                     for (int i = 1; i <= numRecords; i++) {
                         position = sRecord.RECORD_SIZE * (i - 1);
-                        readInFile(position);
-                        System.out.println(sRecord.toString());
-                        
+                        displaySong(position, i);
                     }
-                break;
+                    break;
 
             }
-        }
+        }    
+    }
+    
+    public static void closeStore() throws IOException{
+        recordFile.close();
+    }
+    
+    public static void modifySongInputInfo(){
+        //changeInfo = input.nextInt();
+        System.out.print("Change #: ");
+        int changeInfo = input.nextInt();
+    String y;
+    
+        switch(changeInfo){
+            case 1: 
+                y = input.nextLine();
+                System.out.print("Enter new song name: ");
+                y = input.nextLine();
+                sRecord.setSongName(y);
+                break;
+            case 2: 
+                y = input.nextLine();
+                System.out.print("Enter new band name: ");
+                y = input.nextLine();
+                sRecord.setBandName(y);
+                break;
+            case 3: 
+                y = input.nextLine();
+                System.out.print("Enter new record company name: ");
+                y = input.nextLine();
+                sRecord.setRecordCompanyName(y);
+                break;    
+            case 4: 
+                //int x = input.nextInt();
+                System.out.print("Enter new song length (s): ");
+                int x = input.nextInt();
+               // x = input.nextInt();
+                sRecord.setSecondsLong(x);
+                break;    
+            case 5: 
+                //int j = input.nextInt();
+                System.out.print("Enter new copies sold: ");
+                int j = input.nextInt();
+               // j = input.nextInt();
+                sRecord.setCopiesSold(j);
+                break;  
+            case 6: 
+                //double k = input.nextDouble;
+                System.out.print("Enter new digital size (Gb): ");
+                double k = input.nextDouble();
+                sRecord.setDigitalSize(k);
+                break;  
+             case 7: 
+                
+                System.out.print("Enter new realsed status: ");
+                boolean m = input.nextBoolean();
+                sRecord.setReleased(m);
+                break; 
+            case 8: 
+                System.out.print("Enter new rating: ");
+                char r = input.next().charAt(0);
+                sRecord.setRating(r);
+                break;       
+        }   
+    System.out.print("Change another info? Y or N: ");  
+    String another = input.nextLine();
+    if ("Y".equalsIgnoreCase(another) ){
+        modifySongInputInfo(); 
+    } 
+    }
+
+    public static void displaySong(long position, long songNumber) throws IOException {
+        readInFile(position);
+        System.out.println("Record number " + songNumber + ": ");
+        System.out.println("#" + songNumber + ": " + sRecord.toString());
     }
 
     public static void addSong() throws IOException {
+        numRecords++;
         String songName, bandName, comName;
         int secondsLong, copiesSold;
         double digitalSize;//gigabytes
@@ -90,28 +191,34 @@ public class SongStore {
         rating = input.next().charAt(0);
 
         SongRecord addMe = new SongRecord(songName, bandName, comName, secondsLong, copiesSold, digitalSize, released, rating);
+        writeToFile(addMe, recordFile.length() );
 
-        recordFile.writeChars(addMe.getSongName());
-        recordFile.writeChars(addMe.getBandName());
-        recordFile.writeChars(addMe.getRecordCompanyName());
-        recordFile.writeInt(addMe.getSecondsLong());
-        recordFile.writeInt(addMe.getCopiesSold());
-        recordFile.writeDouble(addMe.getDigitalSize());
-        recordFile.writeBoolean(addMe.isReleased());
-        recordFile.writeChar(addMe.getRating());
 
         System.out.println("'" + addMe.getSongName() + "' has been added.");
         System.out.println(addMe.toString());
         //int x = input.nextInt();
         System.out.print("Add another song? 1 -> Yes, 2 ->Menu: ");
-        if (input.nextInt() == 1){
+        if (input.nextInt() == 1) {
             addSong();
-        } else if (input.nextInt() == 2){
-            
+        } else if (input.nextInt() == 2) {
+
         } else {
             System.out.println(".........You are silly......");
         }
 
+    }
+    
+    public static void writeToFile(SongRecord song, long fileID) throws IOException{
+        recordFile.seek(fileID);
+        recordFile.writeChars(song.getSongName());
+        recordFile.writeChars(song.getBandName());
+        recordFile.writeChars(song.getRecordCompanyName());
+        recordFile.writeInt(song.getSecondsLong());
+        recordFile.writeInt(song.getCopiesSold());
+        recordFile.writeDouble(song.getDigitalSize());
+        recordFile.writeBoolean(song.isReleased());
+        recordFile.writeChar(song.getRating());    
+        
     }
 
     public static void makeFile() throws IOException {

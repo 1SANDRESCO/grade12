@@ -22,7 +22,7 @@ public class SongRecordFileMaker {
         SongRecord s1 = new SongRecord("Stairway to Heaven", "Led Zeppplin", "Rockstar Music", 453, 100000, 4.51, true, 'A');
         SongRecord s2 = new SongRecord("Rebellion (Lies) ", "Arcade Fire", "LaLaLa Productions Inc.", 285, 70000, 3.22, true, 'B');
         SongRecord s3 = new SongRecord("Somebody Told Me", "The Killers", "CheckThisOut LTD", 249, 65200, 9.45, true, 'C');
-        SongRecord s4 = new SongRecord("Hey Jude", "The Beatles", "Abbey Roadside Music", 366, 350000, 9.45, true, 'A');
+        SongRecord s4 = new SongRecord("Hey Jude", "The Beatles", "Abbey Roadside Music123123", 366, 350000, 9.45, true, 'A');
         SongRecord s5 = new SongRecord("Disarm", "The Smashing Pumpkins", "Super Hundo Swag", 200, 36000, 4.493, false, 'A');
 
         recordFile = new RandomAccessFile(name, otherInfo);
