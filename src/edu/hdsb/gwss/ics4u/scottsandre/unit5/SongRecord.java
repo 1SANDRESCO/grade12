@@ -12,8 +12,8 @@ package edu.hdsb.gwss.ics4u.scottsandre.unit5;
 public class SongRecord {
 
     //CLASS CONSTANTS
-    public static final int SONG_NAME_LENGTH = 20;
-    public static final int BAND_NAME_LENGTH = 20;
+    public static final int SONG_NAME_LENGTH = 22;
+    public static final int BAND_NAME_LENGTH = 22;
     public static final int RECORD_COMPANY_NAME_LENGTH = 20;
     public static final int RECORD_SIZE = (SONG_NAME_LENGTH + BAND_NAME_LENGTH + RECORD_COMPANY_NAME_LENGTH) * 2 + 8 + 8 + 2 + 1; // 2 ints, 1 double, 
     
