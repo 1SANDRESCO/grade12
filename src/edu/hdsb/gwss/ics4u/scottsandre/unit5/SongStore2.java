@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.*;
 import static edu.hdsb.gwss.ics4u.scottsandre.unit5.SongRecordFileMaker.recordFile;
 
-public class SongStore {
+public class SongStore2 {
 
     public static SongRecord sRecord;
     public static long numRecords;
@@ -21,6 +21,7 @@ public class SongStore {
     public static void main(String[] args) throws Exception {
         openStore();
         closeStore();
+
     }
 
     public static void modifySong() throws IOException {
@@ -48,71 +49,135 @@ public class SongStore {
             System.out.println("8 -- > Rating");
             modifySongInputInfo(x);
         } else if (option == 1) {
-                
-            String s; 
+
+            String s;
             System.out.print("Enter [new song name] or [k]eep current subject name: ");//song name
             s = input.nextLine();
             if (!"k".equals(s)) {
                 sRecord.setSongName(s);
             }
-            
-            
-            s = input.nextLine();        
+
+            s = input.nextLine();
             System.out.print("Enter [new band name] or [k]eep current subject name: ");//band name
             s = input.nextLine();
             if (!"k".equals(s)) {
                 sRecord.setBandName(s);
             }
-            
+
             System.out.print("Enter [new record company name] or [k]eep current subject name: ");//company name
             s = input.nextLine();
             if (!"k".equals(s)) {
                 sRecord.setRecordCompanyName(s);
             }
-            
+
             System.out.print("Enter [new song length] or -1 to keep it the same");//length
             int p = input.nextInt();
-            if (p!= -1) {
+            if (p != -1) {
                 sRecord.setSecondsLong(p);
             }
             System.out.print("Enter [new # sold] or -1 to keep it the same");//sold
             p = input.nextInt();
-            if (p!= -1) {
+            if (p != -1) {
                 sRecord.setCopiesSold(p);
             }
             System.out.print("Enter [new song size] or -1 to keep it the same");//size
             double vv = input.nextDouble();
-            if (vv!= -1) {
+            if (vv != -1) {
                 sRecord.setDigitalSize(vv);
             }
-            
+
             System.out.print("Enter released status (true or false): ");//released
             boolean b = input.nextBoolean();
-                sRecord.setReleased(b);
-            
+            sRecord.setReleased(b);
+
             System.out.print("Enter [new song rating] or S to keep it the same");//rating
             char vvv = input.next().charAt(0);
-            if (vvv!= 'S') {
+            if (vvv != 'S') {
                 sRecord.setRating(vvv);
             }
             //sRecord.setRating(input.next().charAt(0));
-            
+
             position = sRecord.getSongRecordSize() * (x - 1);
             writeToFile(sRecord, position);
-            
+
         } else {
             System.out.println("You are silly...");
         }
 
     }
-    
-  
+
+    public static int exceptionHandlerInt(String question, int low, int high) {
+        boolean noError = true;
+        int answer = -1;
+        while (noError) {
+            System.out.print(question);
+
+            try {
+                answer = Integer.parseInt((input.next()));
+                if (answer >= low && answer <= high) {
+                    noError = false;
+                } else {
+                    System.out.println("Integer not within range.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter an integer, not letters or decimals. please");
+            }
+
+        }
+        return answer;
+    }
+
+    public static long exceptionHandlerLong(String question, int low, long high) {
+        boolean noError = true;
+        long answer = -1;
+        while (noError) {
+            System.out.print(question);
+
+            try {
+                
+                if (answer >= low && answer <= high) {
+                    answer = Integer.parseInt((input.next()));
+                    noError = false;
+                } else {
+                    System.out.println("Long # not within range.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter an integer (long), not letters or decimals. please");
+            }
+
+        }
+        return answer;
+    }
+
+    public static String exceptionHandlerString(String question, int length) {
+        String answer = "";
+        String myInput = "g";
+        boolean error = true;
+        System.out.println(question);
+        while (error) {
+            
+            try{
+                myInput = input.nextLine();
+                if (myInput.length() <= length && myInput.length() > 0 ){
+                    answer = myInput;
+                    error = false;
+                } else {
+                    System.out.print("try again: ");
+                }
+            } catch (InputMismatchException | NullPointerException e){
+                
+            }
+            
+
+        }
+        return answer;
+    }
 
     public static void modifySongInputInfo(long songIndex) throws IOException {
         //changeInfo = input.nextInt();
         System.out.print("Change #: ");
         int changeInfo;
-        changeInfo = Integer.parseInt(input.next() );
+        changeInfo = Integer.parseInt(input.next());
         String newS, newB, newC;
 
         switch (changeInfo) {
@@ -190,18 +255,16 @@ public class SongStore {
             System.out.println("2 -> to add new song.");
             System.out.println("3 -> to update a song.");
             System.out.println("4 -> Delete a song.");
-            System.out.println("9 -> to see all songs");
+            System.out.println("5 -> to see all songs");
             System.out.println("0 -> EXIT");
-            System.out.print("Your choice is: ");
-            choice = input.nextInt();
+            //System.out.print("Your choice is: ");
+            choice = exceptionHandlerInt("Your choice is: ", 0, 5);
             switch (choice) {
                 case 0:
                     exit = true;
                     break;
                 case 1:
-
-                    System.out.println("Which song do you want to see [1 - " + numRecords + "]?");
-                    recordNumber = input.nextLong();
+                    recordNumber = exceptionHandlerLong("Which song do you want to see [1 - " + numRecords + "]? ", 1, numRecords);
                     position = sRecord.RECORD_SIZE * (recordNumber - 1);
                     displaySong(position, recordNumber);
                     break;
@@ -214,7 +277,7 @@ public class SongStore {
                 case 4:
                     deleteSong();
                     break;
-                case 9:
+                case 5:
                     for (int i = 1; i <= numRecords; i++) {
                         position = sRecord.RECORD_SIZE * (i - 1);
                         displaySong(position, i);
@@ -259,24 +322,28 @@ public class SongStore {
         double digitalSize;//gigabytes
         boolean released;
         char rating;
-        songName = input.nextLine();
-        System.out.print("Enter song name: ");
-        songName = input.nextLine();
-                
-        System.out.print("Enter band name: ");
-        bandName = input.nextLine();
-        System.out.print("Enter record Company name: ");
-        comName = input.nextLine();
-        System.out.print("Enter length (s) of song: ");
-        secondsLong = input.nextInt();
-        System.out.print("Enter number copies sold: ");
-        copiesSold = input.nextInt();
-        System.out.print("Enter digital Size (Gb): ");
-        digitalSize = input.nextDouble();
-        System.out.print("Released? 'true' or 'false': ");
-        released = input.nextBoolean();
-        System.out.print("Letter rating 'A' ... 'Z' : ");
-        rating = input.next().charAt(0);
+      
+        songName = exceptionHandlerString("Enter song name: ", sRecord.SONG_NAME_LENGTH);
+        bandName = exceptionHandlerString("Enter band name: ", sRecord.BAND_NAME_LENGTH);
+        comName = exceptionHandlerString("Enter Company name: ", sRecord.RECORD_COMPANY_NAME_LENGTH);
+//        songName = input.nextLine();
+//        System.out.print("Enter song name: ");
+//        songName = input.nextLine();
+//
+//        System.out.print("Enter band name: ");
+//        bandName = input.nextLine();
+//        System.out.print("Enter record Company name: ");
+//        comName = input.nextLine();
+//        System.out.print("Enter length (s) of song: ");
+//        secondsLong = input.nextInt();
+//        System.out.print("Enter number copies sold: ");
+//        copiesSold = input.nextInt();
+//        System.out.print("Enter digital Size (Gb): ");
+//        digitalSize = input.nextDouble();
+//        System.out.print("Released? 'true' or 'false': ");
+//        released = input.nextBoolean();
+//        System.out.print("Letter rating 'A' ... 'Z' : ");
+//        rating = input.next().charAt(0);
 
         SongRecord addMe = new SongRecord(songName, bandName, comName, secondsLong, copiesSold, digitalSize, released, rating);
         writeToFile(addMe, recordFile.length());
