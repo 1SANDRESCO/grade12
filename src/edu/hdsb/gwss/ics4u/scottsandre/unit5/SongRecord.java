@@ -52,7 +52,7 @@ public class SongRecord {
             temp.setLength(SONG_NAME_LENGTH);
             // trucates or pads the string
             this.songName = temp.toString();
-            System.out.println("S set to: " + this.songName);
+           // System.out.println("S set to: " + this.songName);
         } else {
             // TODO
             this.songName = "TBD";
@@ -70,7 +70,7 @@ public class SongRecord {
             temp.setLength(BAND_NAME_LENGTH);
             // trucates or pads the string
             this.bandName = temp.toString();
-            System.out.println("B set to: " + this.bandName);
+            //System.out.println("B set to: " + this.bandName);
         } else {
             // TODO
             this.bandName = "TBD";
@@ -88,7 +88,7 @@ public class SongRecord {
             temp.setLength(RECORD_COMPANY_NAME_LENGTH);
             // trucates or pads the string
             this.recordCompanyName = temp.toString();
-            System.out.println("C set to: " + this.recordCompanyName);
+           // System.out.println("C set to: " + this.recordCompanyName);
         } else {
             // TODO
             this.recordCompanyName = "TBD";
