@@ -19,60 +19,14 @@ public class SongRecordFileMaker {
     public static RandomAccessFile recordFile;
 
     public SongRecordFileMaker(String name, String otherInfo) throws FileNotFoundException, IOException {
-        SongRecord s1 = new SongRecord("Stairway to Heaven", "Led Zeppplin", "Rockstar Music", 453, 100000, 4.51, true, 'A');
-        SongRecord s2 = new SongRecord("Rebellion (Lies) ", "Arcade Fire", "LaLaLa Productions Inc.", 285, 70000, 3.22, true, 'B');
-        SongRecord s3 = new SongRecord("Somebody Told Me", "The Killers", "CheckThisOut LTD", 249, 65200, 9.45, true, 'C');
-        SongRecord s4 = new SongRecord("Hey Jude", "The Beatles", "Abbey Roadside Music123123", 366, 350000, 9.45, true, 'A');
-        SongRecord s5 = new SongRecord("Disarm", "The Smashing Pumpkins", "Super Hundo Swag", 200, 36000, 4.493, false, 'A');
+//        SongRecord s1 = new SongRecord("Stairway to Heaven", "Led Zeppplin", "Rockstar Music", 453, 100000, 4.51, true, 'A');
+//        SongRecord s2 = new SongRecord("Rebellion (Lies) ", "Arcade Fire", "LaLaLa Productions Inc.", 285, 70000, 3.22, true, 'B');
+//        SongRecord s3 = new SongRecord("Somebody Told Me", "The Killers", "CheckThisOut LTD", 249, 65200, 9.45, true, 'C');
+//        SongRecord s4 = new SongRecord("Hey Jude", "The Beatles", "Abbey Roadside Music123123", 366, 350000, 9.45, true, 'A');
+//        SongRecord s5 = new SongRecord("Disarm", "The Smashing Pumpkins", "Super Hundo Swag", 200, 36000, 4.493, false, 'A');
 
         recordFile = new RandomAccessFile(name, otherInfo);
-        //recordFile.seek( recordFile.length() );
-//        recordFile.seek(0);
-//
-//        recordFile.writeChars(s1.getSongName());
-//        recordFile.writeChars(s1.getBandName());
-//        recordFile.writeChars(s1.getRecordCompanyName());
-//        recordFile.writeInt(s1.getSecondsLong());
-//        recordFile.writeInt(s1.getCopiesSold());
-//        recordFile.writeDouble(s1.getDigitalSize());
-//        recordFile.writeBoolean(s1.isReleased());
-//        recordFile.writeChar(s1.getRating());
-//
-//        recordFile.writeChars(s2.getSongName());
-//        recordFile.writeChars(s2.getBandName());
-//        recordFile.writeChars(s2.getRecordCompanyName());
-//        recordFile.writeInt(s2.getSecondsLong());
-//        recordFile.writeInt(s2.getCopiesSold());
-//        recordFile.writeDouble(s2.getDigitalSize());
-//        recordFile.writeBoolean(s2.isReleased());
-//        recordFile.writeChar(s2.getRating());
-//
-//        recordFile.writeChars(s3.getSongName());
-//        recordFile.writeChars(s3.getBandName());
-//        recordFile.writeChars(s3.getRecordCompanyName());
-//        recordFile.writeInt(s3.getSecondsLong());
-//        recordFile.writeInt(s3.getCopiesSold());
-//        recordFile.writeDouble(s3.getDigitalSize());
-//        recordFile.writeBoolean(s3.isReleased());
-//        recordFile.writeChar(s3.getRating());
-//
-//        recordFile.writeChars(s4.getSongName());
-//        recordFile.writeChars(s4.getBandName());
-//        recordFile.writeChars(s4.getRecordCompanyName());
-//        recordFile.writeInt(s4.getSecondsLong());
-//        recordFile.writeInt(s4.getCopiesSold());
-//        recordFile.writeDouble(s4.getDigitalSize());
-//        recordFile.writeBoolean(s4.isReleased());
-//        recordFile.writeChar(s4.getRating());
-//
-//        recordFile.writeChars(s5.getSongName());
-//        recordFile.writeChars(s5.getBandName());
-//        recordFile.writeChars(s5.getRecordCompanyName());
-//        recordFile.writeInt(s5.getSecondsLong());
-//        recordFile.writeInt(s5.getCopiesSold());
-//        recordFile.writeDouble(s5.getDigitalSize());
-//        recordFile.writeBoolean(s5.isReleased());
-//        recordFile.writeChar(s5.getRating());
+
 
     }
 }

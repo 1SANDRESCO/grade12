@@ -15,15 +15,15 @@ public class SongRecord {
     public static final int SONG_NAME_LENGTH = 22;
     public static final int BAND_NAME_LENGTH = 22;
     public static final int RECORD_COMPANY_NAME_LENGTH = 20;
-    public static final int RECORD_SIZE = (SONG_NAME_LENGTH + BAND_NAME_LENGTH + RECORD_COMPANY_NAME_LENGTH) * 2 + 8 + 8 + 2 + 1; // 2 ints, 1 double, 
-    
-    
+    public static final int RECORD_SIZE = (SONG_NAME_LENGTH + BAND_NAME_LENGTH + RECORD_COMPANY_NAME_LENGTH) * 2 + 8 + 8 + 2 + 1; // 2 ints, 1 double, 2 boolean 
+
     public static final int MAX_SECONDS = 1200;
     //OBJECT VARIABLES
     private String songName, bandName, recordCompanyName;
     private int secondsLong, copiesSold;
     private double digitalSize;//gigabytes
-    private boolean released;
+    private boolean released, deleted;
+
     private char rating;
 
     public SongRecord() {
@@ -38,9 +38,16 @@ public class SongRecord {
         this.setDigitalSize(digitalSize);
         this.setReleased(released);
         this.setRating(rating);
-
+        //this.setDeleted(deleted);
     }
 
+//    public boolean getIfDeleted() {
+//        return deleted;
+//    }
+//
+//    public void setDeleted(boolean deleted) {
+//        this.deleted = deleted;
+//    }
     public String getSongName() {
         return songName;
     }
@@ -52,7 +59,7 @@ public class SongRecord {
             temp.setLength(SONG_NAME_LENGTH);
             // trucates or pads the string
             this.songName = temp.toString();
-           // System.out.println("S set to: " + this.songName);
+            // System.out.println("S set to: " + this.songName);
         } else {
             // TODO
             this.songName = "TBD";
@@ -88,7 +95,7 @@ public class SongRecord {
             temp.setLength(RECORD_COMPANY_NAME_LENGTH);
             // trucates or pads the string
             this.recordCompanyName = temp.toString();
-           // System.out.println("C set to: " + this.recordCompanyName);
+            // System.out.println("C set to: " + this.recordCompanyName);
         } else {
             // TODO
             this.recordCompanyName = "TBD";
@@ -124,8 +131,8 @@ public class SongRecord {
     }
 
     public void setDigitalSize(double digitalSize) {
-        if (this.digitalSize > 0){
-        this.digitalSize = digitalSize;
+        if (digitalSize > 0) {
+            this.digitalSize = digitalSize;     
         } else {
             this.digitalSize = -1.1;
         }
@@ -146,20 +153,14 @@ public class SongRecord {
     public void setRating(char rating) {
         this.rating = rating;
     }
-    
-    public int getSongRecordSize(){
+
+    public int getSongRecordSize() {
         return RECORD_SIZE;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return "SongRecord{" + "songName=" + songName + ", bandName=" + bandName + ", recordCompanyName=" + recordCompanyName + ", secondsLong=" + secondsLong + ", copiesSold=" + copiesSold + ", digitalSize=" + digitalSize + ", released=" + released + ", rating=" + rating + '}';
     }
-    
-    
 
 }

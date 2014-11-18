@@ -18,6 +18,8 @@ public class SongStore2 {
     public static Scanner input = new Scanner(System.in);
     public static boolean exit = false;
     public static long position;
+    public static final int MAX_RECORDS = 1000000000;
+    public static final int MAX_SIZE = 100;
 
     public static void main(String[] args) throws Exception {
         openStore();
@@ -151,12 +153,12 @@ public class SongStore2 {
             if (p != -1) {//LENGTH
                 sRecord.setSecondsLong(p);
             }
-            p = exceptionHandlerInt("Enter number copies sold or -1 current subject name: : ", -1, 1000000000);
+            p = exceptionHandlerInt("Enter number copies sold or -1 current subject name: ", -1, MAX_RECORDS);
             if (p != -1) {//COPES 
                 sRecord.setCopiesSold(p);
             }
 
-            double vv = exceptionHandlerDouble("Enter [new song size] or -1 to keep it the same", -1, 1000000000);
+            double vv = exceptionHandlerDouble("Enter [new song size] or -1 to keep it the same: ", -1, MAX_SIZE);
             if (vv != -1) {
                 sRecord.setDigitalSize(vv);
             }
@@ -175,7 +177,7 @@ public class SongStore2 {
             }
             sRecord.setReleased(b);
 
-            s = exceptionHandlerString("Enter [new song rating] or [S] to keep it the same", 1);
+            s = exceptionHandlerString("Enter [new song rating] or [S] to keep it the same: ", 1);
             char ch = s.charAt(0);
             if (ch != 'S') {
                 sRecord.setRating(ch);
@@ -214,11 +216,11 @@ public class SongStore2 {
                 sRecord.setSecondsLong(x);
                 break;
             case 5:
-                int j = exceptionHandlerInt("Enter new copes sold: ", 0, 100000000);
+                int j = exceptionHandlerInt("Enter new copes sold: ", 0, MAX_RECORDS);
                 sRecord.setCopiesSold(j);
                 break;
             case 6:
-                double k = exceptionHandlerDouble("Enter new digital size (Gb): ", 0, 100000000);
+                double k = exceptionHandlerDouble("Enter new digital size (Gb): ", 0, MAX_SIZE);
                 sRecord.setDigitalSize(k);
                 break;
             case 7:
@@ -250,6 +252,8 @@ public class SongStore2 {
             writeToFile(sRecord, position);
         } else {
             System.out.println("Incorrect entry. Printing and going to menu.");
+            position = sRecord.getSongRecordSize() * (songIndex - 1);
+            writeToFile(sRecord, position);
         }
     }
 
@@ -298,17 +302,17 @@ public class SongStore2 {
     }
 
     public static void deleteSong() throws IOException {
-        recordNumber = exceptionHandlerLong("Which song do you want to delete [1 - " + numRecords + "]?: ", 1, numRecords);
-       
-        for (long i = recordNumber; i < numRecords; i++){
-            position = SongRecord.RECORD_SIZE * (recordNumber);//record after
-            sRecord = readInFile(position);
-            position = SongRecord.RECORD_SIZE * (recordNumber - 1);//current record
-            writeToFile(sRecord, position );//write over that record
-        }
-        numRecords --;
-        System.out.println("Song deleted. " + numRecords + " remaining.");
-        
+        System.out.println("To be worked on...");
+//        recordNumber = exceptionHandlerLong("Which song do you want to delete [1 - " + numRecords + "]?: ", 1, numRecords);
+//
+//        for (long i = recordNumber; i < numRecords; i++) {
+//            position = SongRecord.RECORD_SIZE * (recordNumber);//record after
+//            sRecord = readInFile(position);
+//            position = SongRecord.RECORD_SIZE * (recordNumber - 1);//current record
+//            writeToFile(sRecord, position);//write over that record
+//        }
+//        numRecords--;
+//        System.out.println("Song deleted. " + numRecords + " remaining.");
 
     }
 
@@ -342,20 +346,20 @@ public class SongStore2 {
         bandName = exceptionHandlerString("Enter band name: ", SongRecord.BAND_NAME_LENGTH);
         comName = exceptionHandlerString("Enter Company name: ", SongRecord.RECORD_COMPANY_NAME_LENGTH);
         secondsLong = exceptionHandlerInt("Enter length (s) long: ", 0, SongRecord.MAX_SECONDS);
-        copiesSold = exceptionHandlerInt("Enter number copies sold: ", 0, 1000000000);
-        digitalSize = exceptionHandlerDouble("Enter digital size (Gb): ", 0, 100000000);
-       
-                boolean good = false;
-                while (good == false) {
-                    s = exceptionHandlerString("Released? 'true' or 'false': ", 5);
-                    if (s.equalsIgnoreCase("true")) {
-                        released = true;
-                        good = true;
-                    } else if (s.equalsIgnoreCase("false")) {
-                        released = false;
-                        good = true;
-                    }
-                }
+        copiesSold = exceptionHandlerInt("Enter number copies sold: ", 0, MAX_RECORDS);
+        digitalSize = exceptionHandlerDouble("Enter digital size (Gb): ", 0, MAX_SIZE);
+
+        boolean good = false;
+        while (good == false) {
+            s = exceptionHandlerString("Released? 'true' or 'false': ", 5);
+            if (s.equalsIgnoreCase("true")) {
+                released = true;
+                good = true;
+            } else if (s.equalsIgnoreCase("false")) {
+                released = false;
+                good = true;
+            }
+        }
         s = exceptionHandlerString("Enter new song rating: ", 1);//rating
         rating = s.charAt(0);
         ;
@@ -421,7 +425,7 @@ public class SongStore2 {
         sRecord.setDigitalSize(recordFile.readDouble());
         sRecord.setReleased(recordFile.readBoolean());
         sRecord.setRating(recordFile.readChar());
-        
+
         return sRecord;
     }
 
