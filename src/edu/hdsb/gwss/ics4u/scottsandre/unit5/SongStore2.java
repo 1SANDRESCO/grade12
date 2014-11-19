@@ -394,8 +394,13 @@ public class SongStore2 {
 
     public static void makeFile() throws IOException {
         sRecord = new SongRecord("", "", "", 0, 0, 0.0, false, 'Z');
-        SongRecordFileMaker makeSong = new SongRecordFileMaker("store1.txt", "rw");//print the files
+        try {
+            SongRecordFileMaker makeSong = new SongRecordFileMaker("store1.txt", "rw");//print the files
+        } catch (FileNotFoundException e) {
 
+        } catch (Exception e) {
+
+        };
         numRecords = recordFile.length() / sRecord.RECORD_SIZE;
         System.out.println("\nThere are " + numRecords + " records currently in the file.");
     }
