@@ -397,9 +397,16 @@ public class SongStore2 {
         try {
             SongRecordFileMaker makeSong = new SongRecordFileMaker("store1.txt", "rw");//print the files
         } catch (FileNotFoundException e) {
-
-        } catch (Exception e) {
-
+            recordFile  = new RandomAccessFile("storeExceptionFile.txt", "rw");
+          
+        } catch (NullPointerException e) {
+            recordFile = new RandomAccessFile("storeExceptionFile.txt", "rw");
+         
+        } finally {
+            if (recordFile == null){
+                System.out.println("The file 'store1.txt' could not be found so a new one was created named 'storeExceptionFile.txt' .");
+            recordFile = new RandomAccessFile("storeExceptionFile.txt", "rw");    
+            }
         };
         numRecords = recordFile.length() / sRecord.RECORD_SIZE;
         System.out.println("\nThere are " + numRecords + " records currently in the file.");

@@ -38,16 +38,10 @@ public class SongRecord {
         this.setDigitalSize(digitalSize);
         this.setReleased(released);
         this.setRating(rating);
-        //this.setDeleted(deleted);
+    
     }
 
-//    public boolean getIfDeleted() {
-//        return deleted;
-//    }
-//
-//    public void setDeleted(boolean deleted) {
-//        this.deleted = deleted;
-//    }
+
     public String getSongName() {
         return songName;
     }

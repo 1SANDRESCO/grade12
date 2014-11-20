@@ -25,7 +25,7 @@ public class SongRecordFileMaker {
 //        SongRecord s4 = new SongRecord("Hey Jude", "The Beatles", "Abbey Roadside Music123123", 366, 350000, 9.45, true, 'A');
 //        SongRecord s5 = new SongRecord("Disarm", "The Smashing Pumpkins", "Super Hundo Swag", 200, 36000, 4.493, false, 'A');
 
-        recordFile = new RandomAccessFile(name, otherInfo);
+        //recordFile = new RandomAccessFile(name, otherInfo);
 
 
     }
