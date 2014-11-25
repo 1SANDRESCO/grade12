@@ -73,7 +73,7 @@ public class SongRecord {
             this.bandName = temp.toString();
             //System.out.println("B set to: " + this.bandName);
         } else {
-            // TODO
+            // TODO // cannot be null, as exceptionhandler methods ensure that
             this.bandName = "TBD";
         };
 
