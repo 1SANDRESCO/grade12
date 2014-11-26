@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
-
-
 /**
- * Lesson: 6.01 - Stacks
+ *
+ * @author 1SANDRESCO
  */
 public interface StackInterface {
 
