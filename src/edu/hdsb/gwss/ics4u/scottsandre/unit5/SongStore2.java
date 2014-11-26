@@ -405,11 +405,15 @@ public class SongStore2 {
         } finally {
             if (recordFile == null){
                 System.out.println("The file 'store1.txt' could not be found so a new one was created named 'storeExceptionFile.txt' .");
-            recordFile = new RandomAccessFile("storeExceptionFile.txt", "rw");    
+                recordFile = new RandomAccessFile("storeExceptionFile.txt", "rw");    
             }
         };
         numRecords = recordFile.length() / sRecord.RECORD_SIZE;
         System.out.println("\nThere are " + numRecords + " records currently in the file.");
+        if (numRecords == 0){
+            System.out.println("There are ZERO songs in record. You must add songs.");
+            addSong();
+        }
     }
 
     public static SongRecord readInFile(long position) throws IOException {
@@ -440,5 +444,6 @@ public class SongStore2 {
 
         return sRecord;
     }
-
+    
+    // S t a i r w a y                             L e d   Z e p p l i n g                     R o c k s t a r   p r o d u c t i o n s     ?B@K«…¸Qì  A A m i g o                                   t h e   G l o r i o u s   S o n s           u n d o                                ÿÿÿÿ  M?¿|í‘hr° F
 }
