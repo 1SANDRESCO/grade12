@@ -41,6 +41,6 @@ public interface LinkedListInterface {
      *
      * @param str
      */
-    public void toString( String str );
+    public String toString( );
 
 }
