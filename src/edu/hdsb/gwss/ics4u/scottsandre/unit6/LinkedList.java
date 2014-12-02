@@ -11,22 +11,23 @@ package edu.hdsb.gwss.ics4u.scottsandre.unit6;
  */
 public class LinkedList implements LinkedListInterface {
 
-    public static Node head = new Node(null);
-    public static Node tail = new Node(null);
+    public static Node head ;
+    public static Node tail ;
 
     public LinkedList() {
-        this.head.setNext(tail);
+        this.head = null;
+        this.tail = null;
     }
 
     @Override
     public int size() {
-        int size = -1;
-        Node n = head;
+        int size = 0;
+        Node n = this.head;
         if (n != null) {
             do {
                 size++;
                 n = n.getNext();
-            } while (n.getNext() != null);
+            } while (n != null);
         }
         return size;
     }
@@ -40,13 +41,15 @@ public class LinkedList implements LinkedListInterface {
     @Override
     public void addAtFront(String str) {
         Node newNode = new Node(str);
+        if (size() == 0) {
+            this.tail = newNode;
+        }
+        
         newNode.setNext(this.head);
         
         this.head = newNode;
         
-        if (size() == 0) {
-            this.head.setNext(tail);
-        }
+        
         
 
     }
@@ -61,37 +64,52 @@ public class LinkedList implements LinkedListInterface {
     @Override
     public void remove(String str) {
         Node n = head;
-        Node previousN = new Node(null);
+        //Node previousN = new Node(null);
         if (head.getData().equalsIgnoreCase(str)) {
             head = head.getNext();
         } else {
-            while (!n.getData().equalsIgnoreCase(str)) {//does not equal string
-                if (n.getData().equalsIgnoreCase(str)) {
-                    previousN.setNext(n.getNext().getNext());
-                    n.setNext(null);
-                } else {
-                    previousN = n;
+            
+           // while (n.get)
+            
+            do   {//does not equal string
+                if (n.getNext().getData().equalsIgnoreCase(str)){   
+                    n.setNext(n.getNext().getNext());
+                    n.getNext().setNext(null);
+                    System.out.println(str + " removed.");
                     n = n.getNext();
+                } else {
+                   n = n.getNext(); 
+                   System.out.println("x");
                 }
+            } while (!n.getNext().getData().equalsIgnoreCase(str));
 
-            }
+            
         }
     }
+//    n = n.getNext();
+//            do   {//does not equal string
+//                if (n.getData().equalsIgnoreCase(str)) {
+//                    previousN.setNext(n.getNext().getNext());
+//                    n.setNext(null);
+//                } else {
+//                    previousN = n;
+//                    n = n.getNext();
+//                }
+//            } while (!n.getData().equalsIgnoreCase(str));
 
     @Override
     public String toString() {
+        String s = "";
         if (this.head != null) {
-            
             Node n = this.head;
             do {
-                System.out.println(n.getData());
+                s = s + n.getData() + "\n";
+                //System.out.println(n.getData());
                 n = n.getNext();
-            } while (n.getData() != null);
-//            if (tail.getData() != null){
-//                System.out.println(tail.getData());
-//            }
+            } while (n != null);
+
         }
-        return "A";
+        return s;
     }
 
     public static void main(String[] args) {
@@ -100,13 +118,13 @@ public class LinkedList implements LinkedListInterface {
         System.out.println();
         System.out.println("Test Case 1: create new LinkedList");
         LinkedList l = new LinkedList();
-        l.toString();
+        System.out.println(l.toString());
         System.out.println("List size: " + l.size());
         
         System.out.println();
         System.out.println("Test Case 2: add node 'Scott' at FRONT");
         l.addAtFront("Scott");
-        l.toString();
+        System.out.println(l.toString());
         System.out.println("List size: " + l.size());
         
         System.out.println();
@@ -114,26 +132,48 @@ public class LinkedList implements LinkedListInterface {
         l.addAtFront("Thomas");
         l.addAtFront("Alex");
         l.addAtFront("Tyler");
-        l.toString();
+        System.out.println(l.toString());
         System.out.println("List size: " + l.size());
         
         System.out.println();
         System.out.println("Test Case 4: add 'Nick' to back");
         l.addAtEnd("Nick");
-        l.toString();
+        System.out.println(l.toString());
         System.out.println("List size: " + l.size());
         
         System.out.println();
-        System.out.println("Test Case 4: add 'Ricky' to back");
+        System.out.println("Test Case 5: add 'Ricky' to back");
         l.addAtEnd("Ricky");
-        l.toString();
+        System.out.println(l.toString());
         System.out.println("List size: " + l.size());
         
-        System.out.println("New test case: add 'scotty' to back or new linked list");
+        System.out.println();
+        System.out.println("Test Case 6: remove 'Tyler' (front)");
+        l.remove("Tyler");
+        System.out.println(l.toString());
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 7: make empty ");
         LinkedList l2 = new LinkedList();
-        //l2.toString();
-        //l2.addAtEnd("scotty");
-       // l2.toString();
+        l2.addAtFront("One");
+        l2.addAtFront("Two");
+        l2.addAtFront("Three");
+        l2.addAtFront("Four");
+        l2.addAtFront("Five");
+        System.out.println("Before: size is " + l2.size() + "\n" + l2.toString());
+        l2.makeEmpty();
+        System.out.println("After: size is " + l2.size() + "\n" + l2.toString());
+        
+        
+//        System.out.println();
+//        System.out.println("Test Case 7: remove 'Scott' (middle)");
+//        l.remove("Scott");
+//        System.out.println(l.toString());
+//        System.out.println("List size: " + l.size());
+        
+        
+        
     }
 
 }
