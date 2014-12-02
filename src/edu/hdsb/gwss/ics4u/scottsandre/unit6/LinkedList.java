@@ -15,12 +15,20 @@ public class LinkedList implements LinkedListInterface {
     public static Node tail = new Node(null);
 
     public LinkedList() {
-
+        this.head.setNext(tail);
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int size = -1;
+        Node n = head;
+        if (n != null) {
+            do {
+                size++;
+                n = n.getNext();
+            } while (n.getNext() != null);
+        }
+        return size;
     }
 
     @Override
@@ -32,14 +40,22 @@ public class LinkedList implements LinkedListInterface {
     @Override
     public void addAtFront(String str) {
         Node newNode = new Node(str);
-        newNode.setNext(head);
-        head = newNode;
+        newNode.setNext(this.head);
+        
+        this.head = newNode;
+        
+        if (size() == 0) {
+            this.head.setNext(tail);
+        }
+        
+
     }
 
     @Override
     public void addAtEnd(String str) {
-
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Node newNode = new Node(str);
+        this.tail.setNext(newNode);
+        this.tail = newNode;
     }
 
     @Override
@@ -64,14 +80,60 @@ public class LinkedList implements LinkedListInterface {
 
     @Override
     public String toString() {
-        if (head != null) {
-            Node n = head;
+        if (this.head != null) {
+            
+            Node n = this.head;
             do {
                 System.out.println(n.getData());
                 n = n.getNext();
-            } while (n != null);
+            } while (n.getData() != null);
+//            if (tail.getData() != null){
+//                System.out.println(tail.getData());
+//            }
         }
-        return null;
+        return "A";
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Linked Lists: ");
+
+        System.out.println();
+        System.out.println("Test Case 1: create new LinkedList");
+        LinkedList l = new LinkedList();
+        l.toString();
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 2: add node 'Scott' at FRONT");
+        l.addAtFront("Scott");
+        l.toString();
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 3: add 3 other names to front");
+        l.addAtFront("Thomas");
+        l.addAtFront("Alex");
+        l.addAtFront("Tyler");
+        l.toString();
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 4: add 'Nick' to back");
+        l.addAtEnd("Nick");
+        l.toString();
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 4: add 'Ricky' to back");
+        l.addAtEnd("Ricky");
+        l.toString();
+        System.out.println("List size: " + l.size());
+        
+        System.out.println("New test case: add 'scotty' to back or new linked list");
+        LinkedList l2 = new LinkedList();
+        //l2.toString();
+        //l2.addAtEnd("scotty");
+       // l2.toString();
     }
 
 }
