@@ -11,8 +11,8 @@ package edu.hdsb.gwss.ics4u.scottsandre.unit6;
  */
 public class LinkedList implements LinkedListInterface {
 
-    public static Node head ;
-    public static Node tail ;
+    public Node head;
+    public Node tail;
 
     public LinkedList() {
         this.head = null;
@@ -44,58 +44,74 @@ public class LinkedList implements LinkedListInterface {
         if (size() == 0) {
             this.tail = newNode;
         }
-        
+
         newNode.setNext(this.head);
-        
+
         this.head = newNode;
-        
-        
-        
 
     }
 
     @Override
     public void addAtEnd(String str) {
-        Node newNode = new Node(str);
-        this.tail.setNext(newNode);
-        this.tail = newNode;
+
+        if (size() == 0) {
+            addAtFront(str);
+        } else {
+            Node newNode = new Node(str);
+            this.tail.setNext(newNode);
+            this.tail = newNode;
+        }
     }
 
     @Override
     public void remove(String str) {
         Node n = head;
+        int x = 1;
+        boolean found = false;
         //Node previousN = new Node(null);
         if (head.getData().equalsIgnoreCase(str)) {
             head = head.getNext();
         } else {
-            
-           // while (n.get)
-            
-            do   {//does not equal string
-                if (n.getNext().getData().equalsIgnoreCase(str)){   
+            //try {
+            while (found == false) {
+                if (n.getNext().getData().equalsIgnoreCase(str)) {//next one is string
                     n.setNext(n.getNext().getNext());
-                    n.getNext().setNext(null);
-                    System.out.println(str + " removed.");
+                    if (x == size()) {
+                        this.tail = n;
+                    }
+                    
                     n = n.getNext();
+                    n = null;
+                    
+                    found = true; //what if it is at the end. must set tail
                 } else {
-                   n = n.getNext(); 
-                   System.out.println("x");
+                    x++;
+                    System.out.println(x);
+                    if (x == size()){
+                        System.out.println("that string does not exist");
+                        found = true;//exit, not found tho as it does not exist
+                    } else {
+                    n = n.getNext();
+                    }
                 }
-            } while (!n.getNext().getData().equalsIgnoreCase(str));
+            }
+            //}
+            // catch (NullPointerException e){
 
-            
+            //}
         }
     }
-//    n = n.getNext();
-//            do   {//does not equal string
-//                if (n.getData().equalsIgnoreCase(str)) {
-//                    previousN.setNext(n.getNext().getNext());
-//                    n.setNext(null);
-//                } else {
-//                    previousN = n;
+//do   {//does not equal string
+//                if (n.getNext().getData().equalsIgnoreCase(str)){   
+//                    n.setNext(n.getNext().getNext());
+//                    n.getNext().setNext(null);
+//                    System.out.println(str + " removed.");
 //                    n = n.getNext();
+//                } else {
+//                   n = n.getNext(); 
+//                   System.out.println("x");
 //                }
-//            } while (!n.getData().equalsIgnoreCase(str));
+//            } while (!n.getNext().getData().equalsIgnoreCase(str));
 
     @Override
     public String toString() {
@@ -120,13 +136,13 @@ public class LinkedList implements LinkedListInterface {
         LinkedList l = new LinkedList();
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
         System.out.println("Test Case 2: add node 'Scott' at FRONT");
         l.addAtFront("Scott");
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
         System.out.println("Test Case 3: add 3 other names to front");
         l.addAtFront("Thomas");
@@ -134,25 +150,25 @@ public class LinkedList implements LinkedListInterface {
         l.addAtFront("Tyler");
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
         System.out.println("Test Case 4: add 'Nick' to back");
         l.addAtEnd("Nick");
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
         System.out.println("Test Case 5: add 'Ricky' to back");
         l.addAtEnd("Ricky");
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
-        System.out.println("Test Case 6: remove 'Tyler' (front)");
+        System.out.println("Test Case 6: remove 'Tyler' (front) exists");
         l.remove("Tyler");
         System.out.println(l.toString());
         System.out.println("List size: " + l.size());
-        
+
         System.out.println();
         System.out.println("Test Case 7: make empty ");
         LinkedList l2 = new LinkedList();
@@ -165,15 +181,62 @@ public class LinkedList implements LinkedListInterface {
         l2.makeEmpty();
         System.out.println("After: size is " + l2.size() + "\n" + l2.toString());
         
+        System.out.println();
+        System.out.println("Test Case 8: remove 'Scott' (middle) exists");
+        l.remove("Scott");
+        System.out.println(l.toString());
+        System.out.println("List size: " + l.size());
         
-//        System.out.println();
-//        System.out.println("Test Case 7: remove 'Scott' (middle)");
-//        l.remove("Scott");
-//        System.out.println(l.toString());
-//        System.out.println("List size: " + l.size());
+        System.out.println();
+        System.out.println("Test Case 9: remove 'Ricky' (last) exists");
+        l.remove("Ricky");
+        System.out.println(l.toString());
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 10: add 'Jared' at end after end has been removed");
+        l.addAtEnd("Swagboi Jared");
+        System.out.println(l.toString());
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 11: add another name at end after end was removed");
+        l.addAtEnd("T Law");
+        l.addAtFront("Brad");
+        System.out.println(l.toString());
+        System.out.println("List size: " + l.size());
+        
+        System.out.println();
+        System.out.println("Test Case 12: remove name, does not exist");
+        l.remove("asdf");
+        System.out.println("List size: " + l.size());
+
+        LinkedList l3 = new LinkedList();
+        System.out.println("Linked list 3: ");
+        l3.addAtEnd("Batman");
+        l3.addAtFront("Joker");
+        l3.addAtEnd("Superman");
+        System.out.println(l3.toString());
+        
+        LinkedList l4 = new LinkedList();
+        System.out.println("Linked list 4: ");
+        l4.addAtEnd("Happy");
+        l4.addAtFront("Mad");
+        l4.addAtEnd("Sad");
+        System.out.println(l4.toString());
+        
+        System.out.println("Make linked list 3 empty: ");
+        l3.makeEmpty();
+        System.out.println("Linked list 3 should be empty: ");
+        System.out.println(l3.toString());
+        System.out.println("Linked list 4 should be fine: ");
+        System.out.println(l4.toString());
+        System.out.println(l4.size());
         
         
         
+        
+
     }
 
 }
