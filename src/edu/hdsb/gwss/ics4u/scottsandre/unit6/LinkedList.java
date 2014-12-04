@@ -101,17 +101,6 @@ public class LinkedList implements LinkedListInterface {
             //}
         }
     }
-//do   {//does not equal string
-//                if (n.getNext().getData().equalsIgnoreCase(str)){   
-//                    n.setNext(n.getNext().getNext());
-//                    n.getNext().setNext(null);
-//                    System.out.println(str + " removed.");
-//                    n = n.getNext();
-//                } else {
-//                   n = n.getNext(); 
-//                   System.out.println("x");
-//                }
-//            } while (!n.getNext().getData().equalsIgnoreCase(str));
 
     @Override
     public String toString() {
