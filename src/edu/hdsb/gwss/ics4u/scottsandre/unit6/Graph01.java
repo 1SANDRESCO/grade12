@@ -21,7 +21,7 @@ public class Graph01 extends JPanel {
     public static final int SPACING = 20;
     public static final int CENTRE_XY = SIZE / 2;
     public static final double DOT_SPACING = 0.01;
-    public static final int PIXELS_PER_UNIT = 50;
+    public static final int PIXELS_PER_UNIT = 10;
     public static final int DOT_SIZE = 4;
     public static boolean doOnce = true;
     public static final Scanner input = new Scanner(System.in);
