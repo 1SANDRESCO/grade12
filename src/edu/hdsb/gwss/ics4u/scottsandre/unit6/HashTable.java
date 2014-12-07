@@ -92,8 +92,8 @@ public class HashTable implements HashTableInterface {
         }
 
         put(valueCausingResize);
+        //size--;
     }
-
 
     @Override
     public int capacity() {
@@ -110,33 +110,50 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public void makeEmpty() {
+        this.size = 0;
         for (int i = 0; i < this.array.length; i++) {
-            array[i] = -1;
+            this.array[i] = -1;
         }
     }
 
     @Override
-    public void isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean isEmpty() {
+    if (size == 0){
+        return true;
+    } else {
+        return false;
     }
+            }
 
     @Override
     public int get(int key) {
+        try {
         return this.array[key];
+        } 
+        catch (IndexOutOfBoundsException e){
+            return -1;
+        }
     }
 
     @Override
     public void put(int value) {//calsl hash then places it
+        
+        value = Math.abs(value);
+        
+        System.out.println("...." + value);
         int y = hash(value);
         if (y == (array.length - 1) && containsKey((array.length - 1))) {//last one is already full
             System.out.println("Last index is full and u want to add another one. therefore, resize");
             valueCausingResize = value;
             resize();
         } else {
+            
             this.array[y] = value;
-            this.size++;
+            
             if (loadFactor() > MAX_FACTOR) {
                 resize();
+            } else {
+                this.size++;
             }
         }
     }
@@ -157,8 +174,9 @@ public class HashTable implements HashTableInterface {
             collisions++;
             if (indexLocation != array.length - 1) {
                 do {
+                    collisions++;
                     indexLocation++;
-                } while (containsKey(indexLocation));
+                } while (containsKey(indexLocation) && indexLocation != array.length -1);
             } else {
                 System.out.println("At end of int and you want me to put on where it is already filled");
             }
@@ -167,64 +185,36 @@ public class HashTable implements HashTableInterface {
     }
 
     public static void main(String[] args) {
-        HashTable h = new HashTable(100);
+        HashTable h = new HashTable(20);
         System.out.println("Empty array: ");
-        System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
+        System.out.println("IsEmpty: " + h.isEmpty());
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
         h.displayArray();
-        System.out.println();
-        
-        for (int i = 0; i < 50; i++){
-            h.put( (int) (Math.random() * MAX) );
-        }
-        System.out.println("added only 50 numbers. halfway there");
-         h.displayArray();
-         System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
-        System.out.println();  
-        for (int i = 0; i < 50; i++){
-            h.put( (int) (Math.random() * MAX) );
-        }
-        
-        h.displayArray();
-        System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
-        
-       
         System.out.println();
 
-//        System.out.println("Some numbers in it : ");
-//        h.put(0);
-//        h.put(1);
-//        h.put(25);
-//        h.put(6);
-//        h.put(8);
-//        h.put(5);
-//        h.put(14);
-//        System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
-//        h.displayArray();
-//        System.out.println();
-//
-//        System.out.println("Just under load factor: ");
-//        h.put(53);
-//        h.put(3423);
-//        System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
-//        h.displayArray();
-//        System.out.println();
-//
-//        System.out.println("Passed load factor, new array, load factor should be about 25% or 0.25 putting 56");
-//        h.put(56);
-//
-//        System.out.println("Size: " + h.size() + " capacity: " + h.capacity() + " Collisions: " + h.collisions + " Load Factor: " + h.loadFactor());
-//        h.displayArray();
-//        System.out.println();
-//        System.out.println("New hash table: ");
-//        HashTable h2 = new HashTable(5);
-//        h2.displayArray();
-//        h2.put(6);
-//
-//        h2.displayArray();
-//        System.out.println("just put 6. 6 is on the end. going to put another 6 now...");
-//        h2.put(6);
-//
-//        h2.displayArray();
+        for (int i = 0; i < 10; i++) {
+            h.put((int) (Math.random() * 2 * MAX) - MAX);
+        }
+        System.out.println("added only 10 numbers. halfway there");
+        h.displayArray();
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+        System.out.println();
+        for (int i = 0; i < 10; i++) {
+            h.put((int) (Math.random() * MAX));
+        }
+
+        h.displayArray();
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+
+        System.out.println();
+        System.out.println(h.get(55));
+        
+        System.out.println("Making empty....");
+        h.makeEmpty();
+        System.out.println("Displaying array: ");
+        h.displayArray();
+        System.out.println("IsEmpty: " + h.isEmpty());
+
 
     }
 
