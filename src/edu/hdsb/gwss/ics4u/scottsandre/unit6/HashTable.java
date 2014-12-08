@@ -24,10 +24,11 @@ public class HashTable implements HashTableInterface {
 
     public HashTable(int x) {
         this.expectedNumberInputs = x;
-        this.array = new int[capacity()];
-        for (int i = 0; i < this.array.length; i++) {
-            this.array[i] = EMPTY;
-        }
+        this.array = new int[primeNumberInRange(this.expectedNumberInputs)];
+        System.out.println("New hastable made. Expect: " + x + ". Size: " + capacity());
+        
+        
+        makeEmpty();
         System.out.println("length: " + this.array.length);
     }
 
@@ -97,8 +98,8 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public int capacity() {
-
-        return primeNumberInRange(this.expectedNumberInputs);
+        return this.array.length;
+        //return primeNumberInRange(this.expectedNumberInputs);
     }
 
     @Override
@@ -142,19 +143,19 @@ public class HashTable implements HashTableInterface {
         
         System.out.println("...." + value);
         int y = hash(value);
-        if (y == (array.length - 1) && containsKey((array.length - 1))) {//last one is already full
-            System.out.println("Last index is full and u want to add another one. therefore, resize");
-            valueCausingResize = value;
-            resize();
-        } else {
-            
+//        if (y == (array.length - 1) && containsKey((array.length - 1))) {//last one is already full
+//            System.out.println("Last index is full and u want to add another one. therefore, resize");
+//            valueCausingResize = value;
+//            resize();
+//        } else {
+//            
             this.array[y] = value;
             
             if (loadFactor() > MAX_FACTOR) {
                 resize();
             } else {
                 this.size++;
-            }
+          //  }
         }
     }
 
@@ -178,42 +179,52 @@ public class HashTable implements HashTableInterface {
                     indexLocation++;
                 } while (containsKey(indexLocation) && indexLocation != array.length -1);
             } else {
-                System.out.println("At end of int and you want me to put on where it is already filled");
-            }
+                System.out.println("Index at end is full. Going to front.");
+                indexLocation = -1;
+                do {
+                    collisions++;
+                    indexLocation++;
+                } while (containsKey(indexLocation) && indexLocation != array.length -1);}
         }
         return indexLocation;
     }
 
     public static void main(String[] args) {
-        HashTable h = new HashTable(20);
+        HashTable h = new HashTable(10);
         System.out.println("Empty array: ");
         System.out.println("IsEmpty: " + h.isEmpty());
         System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
         h.displayArray();
         System.out.println();
-
-        for (int i = 0; i < 10; i++) {
-            h.put((int) (Math.random() * 2 * MAX) - MAX);
-        }
-        System.out.println("added only 10 numbers. halfway there");
+        h.put(0);
+        h.put(12);
+        h.put(12);
+        h.put(2);
+        h.put(13);
         h.displayArray();
-        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-        System.out.println();
-        for (int i = 0; i < 10; i++) {
-            h.put((int) (Math.random() * MAX));
-        }
-
-        h.displayArray();
-        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-
-        System.out.println();
-        System.out.println(h.get(55));
-        
-        System.out.println("Making empty....");
-        h.makeEmpty();
-        System.out.println("Displaying array: ");
-        h.displayArray();
-        System.out.println("IsEmpty: " + h.isEmpty());
+//
+//        for (int i = 0; i < 25; i++) {
+//            h.put((int) (Math.random() * 2 * MAX) - MAX);
+//        }
+//        System.out.println("added only 25 numbers. halfway there");
+//        h.displayArray();
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+//        System.out.println();
+//        for (int i = 0; i < 25; i++) {
+//            h.put((int) (Math.random() * MAX));
+//        }
+//
+//        h.displayArray();
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+//
+//        System.out.println();
+//        System.out.println(h.get(55));
+//        
+//        System.out.println("Making empty....");
+//        h.makeEmpty();
+//        System.out.println("Displaying array: ");
+//        h.displayArray();
+//        System.out.println("IsEmpty: " + h.isEmpty());
 
 
     }
