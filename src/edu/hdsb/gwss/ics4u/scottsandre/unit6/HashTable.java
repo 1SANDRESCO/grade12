@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -32,11 +32,11 @@ public class HashTable implements HashTableInterface {
         System.out.println("length: " + this.array.length);
     }
 
-    public static boolean isPrime(int number) {
+    public static boolean isPrime(int number) {//not my code I do not take credit for this
         int sqrt = (int) Math.sqrt(number) + 1;
         for (int i = 2; i < sqrt; i++) {
             if (number % i == 0) {
-                // number is perfectly divisible - no prime
+                // number is even - no prime
                 return false;
             }
         }
@@ -93,6 +93,7 @@ public class HashTable implements HashTableInterface {
         }
 
         put(valueCausingResize);
+        System.out.println("After resizing, the new load factor is: " + loadFactor());
         //size--;
     }
 
@@ -201,30 +202,13 @@ public class HashTable implements HashTableInterface {
         h.put(12);
         h.put(2);
         h.put(13);
+        for (int i = 0; i < 100; i++){
+            h.put((int) (Math.random() * 10000));
+        }
         h.displayArray();
-//
-//        for (int i = 0; i < 25; i++) {
-//            h.put((int) (Math.random() * 2 * MAX) - MAX);
-//        }
-//        System.out.println("added only 25 numbers. halfway there");
-//        h.displayArray();
-//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-//        System.out.println();
-//        for (int i = 0; i < 25; i++) {
-//            h.put((int) (Math.random() * MAX));
-//        }
-//
-//        h.displayArray();
-//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-//
-//        System.out.println();
-//        System.out.println(h.get(55));
-//        
-//        System.out.println("Making empty....");
-//        h.makeEmpty();
-//        System.out.println("Displaying array: ");
-//        h.displayArray();
-//        System.out.println("IsEmpty: " + h.isEmpty());
+         System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+        
+
 
 
     }
