@@ -24,6 +24,9 @@ public class Stack implements StackInterface {
         data = new int[size];
         top = -1;
         System.out.println("Array of length " + size + " has been created.");
+        for (int i = 0; i < size; i++){
+            data[i] = -1;
+        }
     }
 
     public int getLength() {
@@ -43,6 +46,7 @@ public class Stack implements StackInterface {
     public int pop() {
         if (!isEmpty()) {
             x = data[top];
+            data[top] = -1;
             System.out.println("Data at top (index " + top + ") is " + x);
             top--;
             System.out.println("Top is now at index " + top + " with value " + data[top]);
@@ -58,7 +62,8 @@ public class Stack implements StackInterface {
     public void push(int num) {
         if (!isFull()) {
             top++;
-            data[top] = num;
+            
+            data[top] = Math.abs(num);
             
         } else {
             System.out.println("Cannot push " + num + " as array is full.");
@@ -86,7 +91,7 @@ public class Stack implements StackInterface {
     @Override
     public void makeEmpty() {
         for (int i = 0; i < data.length; i++){
-            data[i] = 0;
+            data[i] = -1;
         }
         top = -1;
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

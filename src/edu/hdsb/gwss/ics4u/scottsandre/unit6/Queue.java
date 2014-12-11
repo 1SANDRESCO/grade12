@@ -5,6 +5,8 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
+import java.util.Arrays;
+
 /**
  *
  * @author 1SANDRESCO
@@ -12,8 +14,8 @@ package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 public class Queue {
     
     public static final int DEFAULT_SIZE = 6;
-    public static int front = 0;
-    public static int back = -1;
+    public int front = -1;
+    public int back = -1;
     int data[];
     
     public Queue() {
@@ -28,8 +30,12 @@ public class Queue {
     }
     
     public void EnQueue(int x) {
-        back++;        
-        if (!isFull()) {            
+               
+        if (isEmpty() ){
+          front = 0;
+          back = 0;
+          data[back] = x;  
+        } else   if (!isFull()) {            
             if (back >= data.length) {
                 back = data.length - back;
             }
@@ -37,22 +43,24 @@ public class Queue {
         } else {
             System.out.println("is full..cannot add more numbers");
         }
-        
+        back++; 
     }
     
-    public void deQueue() {//take out front
+    public int deQueue() {//take out front
+        int x = -1;
         if (!isEmpty()) {
-            
+            x = data[front];
             data[front] = 0;
             front++;
             
         } else {
             System.out.println("IS empty cannot deQueue");
         }
+        return x;
     }
     
     public boolean isFull() {
-        if (back == (front)) {
+        if (front == back ) {
             System.out.println("isFull: FULL");
             return true;
         } else {
@@ -71,6 +79,11 @@ public class Queue {
         }
     }
     
+    public void makeEmpty(){
+        front = -1;
+        back = -1;
+    }
+    
     public void displayArray() {
         //System.out.print("\n");
         for (int i = data.length - 1; i >= 0; i--) {
@@ -79,16 +92,17 @@ public class Queue {
         System.out.print("\n");
     }
     
-    public static int getFront() {
+    public  int getFront() {
         return front;
     }
     
-    public static int getBack() {
-        return back;
+    public  int getBack() {
+        return back - 1;
     }
     
     public static void main(String[] args) {
         System.out.println("Queue Tester: ");
+        //Arrays.toString(data);
         System.out.println();
         System.out.println("Test Case 1: create object (empty)");
         Queue q = new Queue();
@@ -98,7 +112,7 @@ public class Queue {
         Queue q2 = new Queue(4);
         
         System.out.println();
-        System.out.println("Test Case 3: display array");
+        System.out.println("Test Case 3: display array (first one, default length 6)");
         q.displayArray();
         
         System.out.println();
@@ -110,18 +124,21 @@ public class Queue {
         
         System.out.println();
         System.out.println("Test Case 5: DEQUEUE");
-        System.out.println("Before: front = " + q.getFront() + "..back = " + q.getBack());
+        System.out.println("Before: front (index)= " + q.getFront() + "..back = " + q.getBack());
         q.displayArray();
         q.deQueue();
         System.out.println("After: ");
         q.displayArray();
+         System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
+       
         
         System.out.println("adding numbers again...");
         q.EnQueue(11);
         q.EnQueue(5);
         q.EnQueue(777);
         q.displayArray();
-        
+         System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
+       
         System.out.println();
         
         System.out.println("De queueing again...");
@@ -143,14 +160,16 @@ public class Queue {
         q.EnQueue(999);
         q.EnQueue(777);
         q.displayArray();
-        
-        System.out.println("\nTest case 8: add number when array is full");
-        System.out.println("Before: ");
-        q.displayArray();
-        q.EnQueue(2342);
-        System.out.println("After: ");
-        q.displayArray();
-        
+        System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
+       
+//        
+//        System.out.println("\nTest case 8: add number when array is full");
+//        System.out.println("Before: ");
+//        q.displayArray();
+//        q.EnQueue(2342);
+//        System.out.println("After: ");
+//        q.displayArray();
+//        
     }
     
 }

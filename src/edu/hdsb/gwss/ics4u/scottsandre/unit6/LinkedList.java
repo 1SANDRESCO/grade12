@@ -86,7 +86,7 @@ public class LinkedList implements LinkedListInterface {
                     found = true; //what if it is at the end. must set tail
                 } else {
                     x++;
-                    System.out.println(x);
+                    
                     if (x == size()){
                         System.out.println("that string does not exist");
                         found = true;//exit, not found tho as it does not exist
@@ -95,10 +95,7 @@ public class LinkedList implements LinkedListInterface {
                     }
                 }
             }
-            //}
-            // catch (NullPointerException e){
-
-            //}
+           
         }
     }
 
