@@ -5,6 +5,8 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
+import edu.hdsb.gwss.muir.ics4u.u6.HashTableInterface;
+
 /**
  *
  * @author 1SANDRESCO
@@ -26,8 +28,7 @@ public class HashTable implements HashTableInterface {
         this.expectedNumberInputs = x;
         this.array = new int[primeNumberInRange(this.expectedNumberInputs)];
         System.out.println("New hastable made. Expect: " + x + ". Size: " + capacity());
-        
-        
+
         makeEmpty();
         System.out.println("length: " + this.array.length);
     }
@@ -120,52 +121,51 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public boolean isEmpty() {
-    if (size == 0){
-        return true;
-    } else {
-        return false;
+        if (size == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
-            }
 
     @Override
     public int get(int key) {
         try {
-        return this.array[key];
-        } 
-        catch (IndexOutOfBoundsException e){
+            return this.array[key];
+        } catch (IndexOutOfBoundsException e) {
             return -1;
         }
     }
 
     @Override
     public void put(int value) {//calsl hash then places it
-        
+
         value = Math.abs(value);
-        
+
         System.out.println("...." + value);
         int y = hash(value);
-//        if (y == (array.length - 1) && containsKey((array.length - 1))) {//last one is already full
-//            System.out.println("Last index is full and u want to add another one. therefore, resize");
-//            valueCausingResize = value;
-//            resize();
-//        } else {
-//            
-            this.array[y] = value;
-            
-            if (loadFactor() > MAX_FACTOR) {
-                resize();
-            } else {
-                this.size++;
-          //  }
+
+        this.array[y] = value;
+
+        if (loadFactor() > MAX_FACTOR) {
+            resize();
+        } else {
+            this.size++;
+
         }
     }
 
     @Override
     public boolean containsKey(int key) {//see if key has a value
-        if (this.array[key] == -1) {
-            return false;
+        if (key <= capacity() && key >= 0) {
+            if (this.array[key] == -1) {
+                return false;
+            } else {
+                return true;
+            }
         } else {
-            return true;
+            System.out.println("Key is to large or negative and does not exist in array. ");
+            return false;
         }
     }
 
@@ -178,19 +178,21 @@ public class HashTable implements HashTableInterface {
                 do {
                     collisions++;
                     indexLocation++;
-                } while (containsKey(indexLocation) && indexLocation != array.length -1);
+                } while (containsKey(indexLocation) && indexLocation != array.length - 1);
             } else {
                 System.out.println("Index at end is full. Going to front.");
                 indexLocation = -1;
                 do {
                     collisions++;
                     indexLocation++;
-                } while (containsKey(indexLocation) && indexLocation != array.length -1);}
+                } while (containsKey(indexLocation) && indexLocation != array.length - 1);
+            }
         }
         return indexLocation;
     }
 
     public static void main(String[] args) {
+
         HashTable h = new HashTable(10);
         System.out.println("Empty array: ");
         System.out.println("IsEmpty: " + h.isEmpty());
@@ -202,14 +204,15 @@ public class HashTable implements HashTableInterface {
         h.put(12);
         h.put(2);
         h.put(13);
-        for (int i = 0; i < 100; i++){
-            h.put((int) (Math.random() * 10000));
-        }
-        h.displayArray();
-         System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
         
-
-
+//        for (int i = 0; i < 100; i++) {
+//            h.put((int) (Math.random() * 10000));
+//        }
+        h.displayArray();
+        System.out.println("contains key (1): " + h.containsKey(1));
+        System.out.println("contains key (100): " + h.containsKey(100));
+        System.out.println("contains key (-2): " + h.containsKey(-2));
+        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
 
     }
 

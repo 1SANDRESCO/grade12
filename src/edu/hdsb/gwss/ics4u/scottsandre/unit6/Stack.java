@@ -5,6 +5,8 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
+import edu.hdsb.gwss.muir.ics4u.u6.StackInterface;
+
 /**
  *
  * @author Owner
@@ -48,6 +50,7 @@ public class Stack implements StackInterface {
             x = data[top];
             data[top] = -1;
             System.out.println("Data at top (index " + top + ") is " + x);
+            System.out.println("TOP: " + top);
             top--;
             System.out.println("Top is now at index " + top + " with value " + data[top]);
             return x;
@@ -72,9 +75,13 @@ public class Stack implements StackInterface {
 
     @Override
     public int size() {
-        return top;
+        return top + 1;
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
+    }
+    
+    public int capacity(){
+    return 0;    
     }
 
     @Override
@@ -117,6 +124,31 @@ public class Stack implements StackInterface {
     
     public static void main(String[] args) {
         System.out.println("Stack tester");
+        
+        System.out.println("New stack (s4) 5 long, make full, try to push");
+        Stack s4 = new Stack(5);
+        s4.push(1);
+        s4.push(2);
+        s4.push(3);
+        s4.push(4);
+        s4.push(5);
+        s4.displayArray();
+        s4.push(6);
+        s4.displayArray();
+        
+        System.out.println("pop..");
+        s4.pop();
+        s4.displayArray();
+        
+        System.out.println("pop once more than until empty");
+        s4.pop();
+        s4.pop();
+        s4.pop();
+        //s4.pop();
+        //s4.pop();
+        s4.displayArray();
+        
+        
 
         System.out.println("Test Case 1: Empty constructor");
         Stack s = new Stack();
@@ -127,6 +159,7 @@ public class Stack implements StackInterface {
         System.out.println("\nTest case 2: push 5");
         s.push(5);
         s.displayArray();
+        System.out.println("Size: " + s.size());
 
         System.out.println("\nTest case 3: push 7 (should be beside 5)");
         s.push(7);
@@ -143,11 +176,13 @@ public class Stack implements StackInterface {
         s2.displayArray();
         System.out.println("Pushing one more number... (99)");
         s2.push(99);
+        System.out.println("Size: " + s2.size());
         
         System.out.println("\nTest Case 6: is array empty/full (array is not empty or full)");
         s.displayArray();
         System.out.println("\nIs it empty: " + s.isEmpty());
         System.out.println("Is it full: " + s.isFull());
+        System.out.println("Size: " + s.size());
         
         System.out.println("\nTest Case 7: is array empty/full (array is full)");
         s2.displayArray();

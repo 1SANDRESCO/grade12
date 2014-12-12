@@ -5,7 +5,9 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
-public class Node extends Person implements NodeInterface {
+
+
+public class Node  {
     
     private String data;
     private Node next;
@@ -15,18 +17,22 @@ public class Node extends Person implements NodeInterface {
         this.next = null;
     }
 
-    @Override
-    public Node getNext() {
-         return next;   }
 
-    @Override
+    public Node getNext() {
+         return next;   
+    }
+
+    
     public void setNext( Node newNode ) {
         this.next = newNode;
     }
 
-    @Override
     public String getData() {
         return data;
      }       
+
+   
+   
+   
 
 }

@@ -5,11 +5,13 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
+import edu.hdsb.gwss.muir.ics4u.u6.LinkListInterface;
+
 /**
  *
  * @author Owner
  */
-public class LinkedList implements LinkedListInterface {
+public class LinkedList implements LinkListInterface {
 
     public Node head;
     public Node tail;
