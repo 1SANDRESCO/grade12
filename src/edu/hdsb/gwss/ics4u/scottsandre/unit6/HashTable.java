@@ -138,7 +138,7 @@ public class HashTable implements HashTableInterface {
     }
 
     @Override
-    public void put(int value) {//calsl hash then places it
+    public void put(int value) {//calls hash then places it
 
         value = Math.abs(value);
 

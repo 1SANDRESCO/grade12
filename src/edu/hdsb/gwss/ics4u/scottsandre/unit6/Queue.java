@@ -5,15 +5,16 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
-import java.util.Arrays;
+import edu.hdsb.gwss.muir.ics4u.u6.QueueInterface;
 
 /**
  *
- * @author 1SANDRESCO
+ * @author Scott
  */
-public class Queue {
+public class Queue implements QueueInterface {
 
     public static final int DEFAULT_SIZE = 6;
+    public static final int EMPTY = -1;
     public int front = -1;
     public int back = -1;
     int data[];
@@ -25,6 +26,7 @@ public class Queue {
 
     public Queue(int size) {
         data = new int[DEFAULT_SIZE];
+        makeEmpty();
         System.out.println("Array of length " + size + " made");
 
     }
@@ -43,145 +45,166 @@ public class Queue {
         }
         System.out.println();
         for (int i = 0; i < this.data.length; i++) {
-            System.out.format("%4s", this.data[i] + "-");
+            System.out.format("%4s", this.data[i] + ",");
         }
         System.out.println();
     }
 
-    public void enqueue(int x) {
+    @Override
+    public int front() {
+        return front;
+    }
 
+    @Override
+    public int back() {
+        return back;
+    }
+
+    @Override
+    public void enqueue(int x) {
+        if (x < 0){
+            x = Math.abs(x);
+            System.out.println("Number was negative, is now positive");
+        }
+        back++;
         if (isEmpty()) {
             front = 0;
-            back = 0;
-            data[back] = x;
+            //back = 0;
+            data[front] = x;
         } else if (!isFull()) {
             if (back >= data.length) {
                 back = data.length - back;
             }
             data[back] = x;
         } else {
-            System.out.println("is full..cannot add more numbers");
+            System.out.println("is full, cannot add number " + x);
+            back--;
         }
-        back++;
+        
     }
 
-    public int dequeue() {//take out front
-        int x = -1;
+    @Override
+    public int dequeue() {
+    int x = -1;
         if (!isEmpty()) {
             x = data[front];
-            data[front] = 0;
+            data[front] = EMPTY;
             front++;
-
+            if (front >= data.length) {
+                front = data.length - front;
+            }
         } else {
             System.out.println("IS empty cannot deQueue");
+        }
+        if (size() == 0){
+            front = -1;
+            back = -1;
+        }
+        return x;}
+
+    @Override
+    public int size() {
+        int x = 0;
+        for (int i = 0; i < capacity(); i++) {
+            if (data[i] != -1) {
+                x++;
+            }
         }
         return x;
     }
 
-    public boolean isFull() {
-        if (front == back) {
-            System.out.println("isFull: FULL");
-            return true;
-        } else {
-            System.out.println("isFull: not full");
-            return false;
-        }
+    @Override
+    public int capacity() {
+        return data.length;
     }
 
+    @Override
     public boolean isEmpty() {
-        if (front == -1 && back == -1) {
-            System.out.println("isEmpty: EMPTY");
+        if (size() == 0) {
             return true;
         } else {
-            System.out.println("isEmpty: not empty");
             return false;
         }
     }
 
+    @Override
+    public boolean isFull() {
+        if (size() == capacity() ){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public void makeEmpty() {
-        front = -1;
-        back = -1;
-    }
-
-
-
-    public int getFront() {
-        return front;
-    }
-
-    public int getBack() {
-        return back ;
+        for (int i = 0; i < capacity(); i++) {
+            data[i] = -1;
+        }
     }
 
     public static void main(String[] args) {
-        System.out.println("Queue Tester: ");
-        //Arrays.toString(data);
-        System.out.println();
-        System.out.println("Test Case 1: create object (empty)");
         Queue q = new Queue();
-
-        System.out.println();
-        System.out.println("Test Case 2: create object (size)");
-        Queue q2 = new Queue(4);
-
-        System.out.println();
-        System.out.println("Test Case 3: display array (first one, default length 6)");
+        System.out.println("Empty: " + q.isEmpty());
+        System.out.println("Full: " + q.isFull());
+        System.out.println("Size: " + q.size());
+        System.out.println("Capacity: " + q.capacity());
+        System.out.println("Front: " + q.front() + ", Back: " + q.back());
         q.displayArray();
-
+        
         System.out.println();
-        System.out.println("Test Case 4: Enter queue (55) then (77) then (88)");
-        q.enqueue(55);
-        q.enqueue(77);
-        q.enqueue(88);
+        System.out.println("queuing 1");
+        q.enqueue(1);
         q.displayArray();
-
+        System.out.println("Front: " + q.front() + ", Back: " + q.back());
+        
         System.out.println();
-        System.out.println("Test Case 5: DEQUEUE");
-        System.out.println("Before: front (index)= " + q.getFront() + "..back = " + q.getBack());
-        q.displayArray();
-        q.dequeue();
-        System.out.println("After: ");
-        q.displayArray();
-        System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
-
-        System.out.println("adding numbers again...");
-        q.enqueue(11);
+        System.out.println("queuing 2 then 3 then 4 then 5 then 6");
+        q.enqueue(2);
+        q.enqueue(3);
+        q.enqueue(4);
         q.enqueue(5);
-        q.enqueue(777);
+        q.enqueue(6);
+        q.enqueue(7);
         q.displayArray();
-        System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
-
+        System.out.println("Front: " + q.front() + ", Back: " + q.back());
+        System.out.println("Empty: " + q.isEmpty());
+        System.out.println("Full: " + q.isFull());
+        System.out.println("Size: " + q.size());
+        
         System.out.println();
-
-        System.out.println("De queueing again...");
+        System.out.println("Deque twice");
+        System.out.println("Deque: " + q.dequeue());
+        System.out.println("Deque: " + q.dequeue());
+        q.displayArray();
+        
+        q.enqueue(7);
+        q.displayArray();
+        
+        System.out.println("Deque: " + q.dequeue());
+        System.out.println("Empty: " + q.isEmpty());
+        System.out.println("Full: " + q.isFull());
+        System.out.println("Size: " + q.size());
+        q.displayArray();
+        
+        q.dequeue();
+        q.dequeue();
         q.dequeue();
         q.displayArray();
-
-        System.out.println("\nTest Case 6: QUEUE when back is full. Adding another number...should go to FRONT of array (index 0)");
-        q.enqueue(444);
-        q.displayArray();
-
-        System.out.println("\nTest case 7: deQue when back is towards front of array");
-        System.out.println("Before: ");
-        q.displayArray();
+        
+        System.out.println();
+        System.out.println("Empty: " + q.isEmpty());
+        System.out.println("Full: " + q.isFull());
+        System.out.println("Size: " + q.size());
+        System.out.println("Dequing so that it is empty: ");
         q.dequeue();
-        System.out.println("After: ");
         q.displayArray();
-
-        System.out.println("\nAdding 2 more numbers 999 then 777...");
-        q.enqueue(999);
-        q.enqueue(777);
+        
+        q.enqueue(-33);
         q.displayArray();
-        System.out.println("After: front (index)= " + q.getFront() + "..back = " + q.getBack());
+        
+                
 
-//        
-//        System.out.println("\nTest case 8: add number when array is full");
-//        System.out.println("Before: ");
-//        q.displayArray();
-//        q.EnQueue(2342);
-//        System.out.println("After: ");
-//        q.displayArray();
-//        
     }
 
 }

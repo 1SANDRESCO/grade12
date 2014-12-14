@@ -100,6 +100,16 @@ public class LinkedList implements LinkListInterface {
            
         }
     }
+    
+    @Override
+    public boolean isEmpty() {
+    if (size() == 0){
+        return true;
+    } else {
+        return false;
+    }
+   
+    }
 
     @Override
     public String toString() {
@@ -217,6 +227,7 @@ public class LinkedList implements LinkListInterface {
         l3.makeEmpty();
         System.out.println("Linked list 3 should be empty: ");
         System.out.println(l3.toString());
+        System.out.println("empty? " + l3.isEmpty());
         System.out.println("Linked list 4 should be fine: ");
         System.out.println(l4.toString());
         System.out.println(l4.size());
@@ -224,7 +235,10 @@ public class LinkedList implements LinkListInterface {
         
         
         
+        
 
     }
+
+    
 
 }

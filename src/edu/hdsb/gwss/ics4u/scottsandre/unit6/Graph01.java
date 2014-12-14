@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  */
 public class Graph01 extends JPanel {
 
-    public static final int SIZE = 800;
+    public static final int SIZE = 550;
     public static final int SPACING = 20;
     public static final int CENTRE_XY = SIZE / 2;
     public static final double DOT_SPACING = 0.01;
