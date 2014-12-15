@@ -75,7 +75,7 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public void resize() {//at 0.75 load factor. make to 0.5 load factor, or 1.5 x
-        System.out.println("loadFactor of " + this.loadFactor() + "is too large. resizing... (or there was a number at end of array twice)");
+        System.out.println("loadFactor of " + this.loadFactor() + "is too large. resizing..");
         int[] copyArray = this.array;
         int[] largerArray = new int[primeNumberInRange(this.expectedNumberInputs * 3)];
 
@@ -146,12 +146,14 @@ public class HashTable implements HashTableInterface {
         int y = hash(value);
 
         this.array[y] = value;
+        this.size++;
 
         if (loadFactor() > MAX_FACTOR) {
+            System.out.println("put >> resize");
             resize();
-        } else {
-            this.size++;
-
+//        } else {
+//            this.size++;
+//
         }
     }
 
@@ -192,28 +194,56 @@ public class HashTable implements HashTableInterface {
     }
 
     public static void main(String[] args) {
+        // 50 is the expected size, inputed in the contstructor of the hash table
+        HashTable Table1 = new HashTable(50);
 
-        HashTable h = new HashTable(10);
-        System.out.println("Empty array: ");
-        System.out.println("IsEmpty: " + h.isEmpty());
-        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-        h.displayArray();
-        System.out.println();
-        h.put(0);
-        h.put(12);
-        h.put(12);
-        h.put(2);
-        h.put(13);
-        
-//        for (int i = 0; i < 100; i++) {
-//            h.put((int) (Math.random() * 10000));
-//        }
-        h.displayArray();
-        System.out.println("contains key (1): " + h.containsKey(1));
-        System.out.println("contains key (100): " + h.containsKey(100));
-        System.out.println("contains key (-2): " + h.containsKey(-2));
-        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+        for (int i = 0; i < 100; i++) {
+            // The array resizes when the laod factor hits 75% and causes it to drop to 25% (multiply current cap. by 3
+            Table1.put((int) (Math.random() * 10000));
 
+        }
+        System.out.println("Is  the table is empty: " + Table1.isEmpty());
+
+        int randValue = (int) (Math.random() * 1000);
+        System.out.println("Getting value at index " + Table1.get(randValue));
+
+        System.out.println("Checking to see if a value exists in the hash table.");
+        System.out.println("Does the value " + randValue + " exist in the hash table " + Table1.containsKey(randValue));
+
+        System.out.println("Current hash table size");
+        System.out.println(Table1.size());
+        System.out.println("Current hash table capacity");
+        System.out.println(Table1.capacity());
+
+        System.out.println(" Make the table empty then check to see if is Empty works");
+        Table1.makeEmpty();
+        System.out.println("Is  the table  empty: " + Table1.isEmpty());
     }
+
+//        HashTable h = new HashTable(10);
+//        System.out.println("Empty array: ");
+//        System.out.println("IsEmpty: " + h.isEmpty());
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+//        h.displayArray();
+//        System.out.println();
+//        h.put(0);
+//        h.put(12);
+//        h.put(12);
+//        //h.put(12);
+//        h.put(2);
+//        h.put(13);
+//        h.put(55);
+//        h.put(34);
+//        h.put(4);
+//        h.put(123);
+//        h.put(234);
+//        
+////        for (int i = 0; i < 100; i++) {
+////            h.put((int) (Math.random() * 10000));
+////        }
+//        h.displayArray();
+//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
+//
+//    }
 
 }

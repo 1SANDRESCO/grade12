@@ -67,16 +67,16 @@ public class Queue implements QueueInterface {
             System.out.println("Number was negative, is now positive");
         }
         back++;
-        if (isEmpty()) {
+        if (isEmpty()) {//empty
             front = 0;
             //back = 0;
             data[front] = x;
-        } else if (!isFull()) {
+        } else if (!isFull()) {//not full
             if (back >= data.length) {
                 back = data.length - back;
             }
             data[back] = x;
-        } else {
+        } else {//full
             System.out.println("is full, cannot add number " + x);
             back--;
         }
@@ -96,7 +96,7 @@ public class Queue implements QueueInterface {
         } else {
             System.out.println("IS empty cannot deQueue");
         }
-        if (size() == 0){
+        if (size() == 0){//resets to how it was at start
             front = -1;
             back = -1;
         }
