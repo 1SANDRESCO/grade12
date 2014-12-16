@@ -195,7 +195,7 @@ public class HashTable implements HashTableInterface {
 
     @Override
     public int hash(int value){
-        return 0;
+        return value % capacity();
     }
     public int hash2(int value) { // pass it the value, it returns where to put it
         int indexLocation = value % this.capacity();
