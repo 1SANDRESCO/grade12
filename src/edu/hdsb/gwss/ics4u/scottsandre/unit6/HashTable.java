@@ -143,7 +143,7 @@ public class HashTable implements HashTableInterface {
         value = Math.abs(value);
 
         System.out.println("...." + value);
-        int y = hash(value);
+        int y = hash2(value);
 
         this.array[y] = value;
         this.size++;
@@ -156,9 +156,31 @@ public class HashTable implements HashTableInterface {
 //
         }
     }
-
+    
     @Override
-    public boolean containsKey(int key) {//see if key has a value
+    public boolean containsKey(int key) {
+        boolean found = false;
+        int x = hash(key);
+        while (found == false) {
+            for (int i = x; i < array.length; i++) {
+                
+                if (array[i] == EMPTY) {//does not equist
+                    found = false;
+                    return found;
+                }
+                if (array[i] == key) {
+                    found = true;
+                    return found;
+                }
+            }
+            x = 0;
+       
+    }
+         return false;
+    }
+
+   // @Override
+    public boolean containsKey2(int key) {//see if key has a value
         if (key <= capacity() && key >= 0) {
             if (this.array[key] == -1) {
                 return false;
@@ -172,22 +194,25 @@ public class HashTable implements HashTableInterface {
     }
 
     @Override
-    public int hash(int value) { // pass it the value, it returns where to put it
+    public int hash(int value){
+        return 0;
+    }
+    public int hash2(int value) { // pass it the value, it returns where to put it
         int indexLocation = value % this.capacity();
-        if (containsKey(indexLocation)) {//number already in that spot
+        if (containsKey2(indexLocation)) {//number already in that spot
             collisions++;
             if (indexLocation != array.length - 1) {
                 do {
                     collisions++;
                     indexLocation++;
-                } while (containsKey(indexLocation) && indexLocation != array.length - 1);
+                } while (containsKey2(indexLocation) && indexLocation != array.length - 1);
             } else {
                 System.out.println("Index at end is full. Going to front.");
                 indexLocation = -1;
                 do {
                     collisions++;
                     indexLocation++;
-                } while (containsKey(indexLocation) && indexLocation != array.length - 1);
+                } while (containsKey2(indexLocation) && indexLocation != array.length - 1);
             }
         }
         return indexLocation;
@@ -208,7 +233,7 @@ public class HashTable implements HashTableInterface {
         System.out.println("Getting value at index " + Table1.get(randValue));
 
         System.out.println("Checking to see if a value exists in the hash table.");
-        System.out.println("Does the value " + randValue + " exist in the hash table " + Table1.containsKey(randValue));
+        System.out.println("Does the value " + randValue + " exist in the hash table " + Table1.containsKey2(randValue));
 
         System.out.println("Current hash table size");
         System.out.println(Table1.size());
