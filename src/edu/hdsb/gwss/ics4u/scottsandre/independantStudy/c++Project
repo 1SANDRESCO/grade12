@@ -1,0 +1,413 @@
+
+// function example
+#include <cstdlib>
+#include <iostream>
+#include <stdio.h>  
+#include <cmath>
+#include <math.h>
+#include <string>
+#include <stdlib.h>//random
+
+
+using namespace std;
+
+
+void displayMenu() {
+    std::cout << "\nEnter your desired number    \n";
+    std::cout << "0: Exit\n";
+    std::cout << "1: If statement program\n";
+    std::cout << "2: Loop program\n";
+    std::cout << "3: Method program\n";
+    std::cout << "4: Array program\n";
+    std::cout << "5: OOP task\n";
+}
+
+void ensureNumberisPositive(int &x) {
+    scanf("%d", &x);
+    
+    if (x < 0) {
+        //cout << "\n" << x << " is negative. ";
+        x = abs(x);
+        //cout << " It is now " << x;
+    }
+    // return x;
+}
+
+void swap(int &x, int &y) {
+    int holder = x;
+    x = y;
+    y = holder;
+}
+
+void ifProgram() {
+    cout << "ifProgram: BMI\n";
+	double weight;
+	double height;
+	double bmi;
+        
+	cout << "Enter Weight (lbs):  ";
+	cin >> weight;
+
+	cout << "Enter height (in):  ";
+	cin >> height;
+
+	bmi = (weight * 703) / (height * height);
+
+	if (bmi > 40) { // outputs word describing physical fitness of user
+            cout << "Morbidly Obese";
+        } else if (bmi > 30) { // you ask for it to be "from over 31", and from "over 24 to 30" so technically no value for 31 in your scenario.
+            cout << "Obese";
+        } else if (bmi > 24) {
+            cout << "Overweight";
+        } else if (bmi > 19) {
+            cout << "Ideal";
+        } else if (bmi > 14) {
+            cout << "Underweight";
+        } else {
+            cout << "Starving";
+        }
+	
+
+
+
+//    int s1, s2, s3;
+//    cout << "\nIF STATEMENT PROGRAM\n";
+//    cout << "Triangle Checker: \n";
+//    cout << "Enter first side length:  ";
+//    ensureNumberisPositive(s1); // passed by reference
+//    cout << "\nEnter second side length:  ";
+//    ensureNumberisPositive(s2);
+//    cout << "\nEnter third side length:  ";
+//    ensureNumberisPositive(s3);
+//
+//    //sort the 3 numbers. make s3 the biggest and s1 the smallest
+//    if (s1 > s2) {
+//        swap(s1, s2);
+//    }
+//    if (s2 > s3) {
+//        swap(s2, s3);
+//    }
+//    if (s1 > s2) {
+//        swap(s1, s2);
+//    }
+//    cout << "Smallest:  " << s1 << "  " << s2 << "  " << s3 << "  Largest";
+//    if (s1 + s2 >= s3) {
+//        cout << "\n The side lengths can create a triangle!";
+//        //(pow(s1, 2) + pow(s2, 2) == pow(s3, 2)
+//        if (s1 * s1 + s2 * s2 == s3 * s3) {
+//            cout << "\n The side lengths form a right-angled triangle.";
+//        } else if (s1 == s2 && s2 == s3) {
+//            cout << "\n It is an equilateral triangle.";
+//        }
+//    } else {
+//        cout << "\n The side lengths canNOT create a triangle!";
+//    }
+
+
+}
+
+void loopProgram() {
+    cout << "\nLOOP PROGRAM\n";
+    cout << "Fibonacci Sequence\n";
+    int a = 1;
+    int b = 1;
+    int c;
+
+    // cout << a << ", " << b << ", ";
+    int j = 1, k = 1, sum;
+
+    for (int i = 0; i < 20; i++) {
+        cout << a << ", ";
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    cout << "\n";
+}
+
+int getRangeNumber(string s) {
+    int x;
+    cout << "Enter " << s << " number for range: ";
+    scanf("%i", &x);
+    return x;
+}
+
+int determineCompPick(int l, int h) {
+    int difference = h - 1;
+    int x = rand() % difference + l;
+    return x;
+}
+
+int getUserGuess(int l, int h) {
+    int x;
+    cout << "\nEnter guess between " << l << " and " << h << ": ";
+    scanf("%i", &x);
+    if (x < l || x > h) {
+        x = getUserGuess(l, h);
+    }
+    return x;
+
+}
+
+bool compareToAnswer(int u, int c) {
+    if (u > c) {
+        cout << "You guessed too high.\n";
+        return false;
+    } else if (u < c) {
+        cout << "You guessed too low.\n";
+        return false;
+    } else if (u == c) {//correct guess
+        return true;
+    }
+}
+
+void methodPogram() {
+    bool win = false;
+    int low, high, cPick, guess;
+    int numberGuesses = 6;
+    cout << "\n METHOD PORGRAM \n";
+    cout << "\n Number Guessing Game: \n";
+    low = getRangeNumber("lowest");
+    high = getRangeNumber("highest");
+    if (low > high) {
+        swap(low, high);
+        cout << "\n low was greater than high. they have been switched. Now " << low << " and " << high;
+    }
+    cPick = determineCompPick(low, high);
+
+    while (numberGuesses > 0 && win == false) {
+        cout << "\nYou have " << numberGuesses << " guesses left.";
+        numberGuesses--;
+        guess = getUserGuess(low, high);
+        win = compareToAnswer(guess, cPick);
+    }
+
+    if (win) {
+        cout << "You have won the game! It took you " << (6 - numberGuesses) << " guesses to get the answer of " << cPick;
+    } else {
+        cout << "You lost and ran out of guesses! The answer was " << cPick;
+    }
+
+
+}
+
+void swap(int* data, int i, int j) {
+    int holder;
+    holder = data[i];
+    data[i] = data[j];
+    data[j] = holder;
+}
+
+void selectionSort(int* data, int size) {
+    int maxIndex;
+    for (int pass = 0; pass < size - 1; pass++) {
+        maxIndex = 0;
+
+        for (int i = 1; i < size - pass; i++) {
+
+            if (data[i] > data[maxIndex]) {
+                maxIndex = i;
+
+            }
+        }
+        swap(data, maxIndex, size - pass - 1);
+    }
+}
+
+int binarySearch(int* data, int value, int size) {
+    int loc = -1;
+    int left = 0;
+    int right = size - 1;
+    int mid;
+
+    while (left <= right) {
+        mid = ((right - left) / 2) + left;
+        if (value == data[mid]) {
+            loc = mid;
+            return loc;
+        } else if (value > data[mid]) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return loc;
+}
+
+void arrayProgram() {
+    const int SIZE = 50;
+    int data[SIZE];
+    int number, indexOfNumber;
+    cout << "\nARRAY PROGRAM\n";
+    cout << "Selection Sort and Binary Search: \n";
+    //sizeof[data] / sizeof[int]
+    cout << "\n";
+    for (int i = 0; i < SIZE; i++) {
+        data[i] = rand() % 1000;
+    }
+    cout << "UNSORTED: \n";
+    for (int i = 0; i < SIZE; i++) {
+        cout << data[i] << ", ";
+    }
+    selectionSort(data, SIZE);
+    cout << "\nSORTED: \n";
+    for (int i = 0; i < SIZE; i++) {
+        cout << data[i] << ", ";
+    }
+    cout << "\nEnter a number to search for: ";
+    scanf("%i", &number);
+    cout << "\nSearching for number " << number;
+    indexOfNumber = binarySearch(data, number, SIZE);
+    cout << "\nThat number is located at index: " << indexOfNumber;
+
+
+}
+class Whiskey {
+    #include <iostream> 
+    #include <string> 
+private:
+    string name, distillery;
+    double cost;
+    int yearMade;
+    int size;
+    bool canadian;
+
+public:
+
+    Whiskey(string name, string distillery, double cost, int yearMade, int size, bool canadian) {
+        setName(name);
+        setDistillery(distillery);
+        setCost(cost);
+        setYearMade(yearMade);
+        setSize(size);
+        setIsCanadian(canadian);
+    }
+
+    void setName(string name){
+        this->name = name;
+    }
+    
+    string getName(){
+      return this->name;  
+    }
+    
+    void setDistillery(string distillery){
+        this->distillery = distillery;
+    }
+    
+    string getDistillery(){
+        return this->distillery;
+    }
+    
+    void setCost(double cost){
+        this->cost = cost;
+    }
+    
+    double getCost(){
+        return this->cost;
+    }
+    
+    void setYearMade(int yearMade){
+        if (yearMade < 2015){
+        this->yearMade = yearMade;
+        } else {
+            cout << "Impossible year entered";
+            this->yearMade = -1;
+        }
+    }
+    
+    int getYearMade(){
+        return this->yearMade;
+    }
+    
+    void setSize(int size){
+        if (size == 12 || size == 26 || size == 40 || size == 60){
+            this->size = size;
+        } else {
+            cout <<"Non-realistic volume in ounces of whiskey";
+            this->size = -1;
+        }
+        
+    }
+    
+    int getSize(){
+        return this->size;
+    }
+    
+    void setIsCanadian(bool canadian){
+        this->canadian = canadian;
+    }
+    
+    bool getIsCanadian(){
+        return this->canadian;
+    }
+    
+    string toString(){
+        #include <iostream>
+#include <string>
+
+        return "Whiskey: { Name: " + name + ", Distillery: " + distillery;// + ", Year Made: " + yearMade;// + ", Cost: " + this->cost; + ", Size: " + this->size + ", Canadian?" + this->canadian;
+    
+    }
+    
+};
+
+
+void objectProgram(){
+    Whiskey w("Canadian Club", "Beam Suntory", 25.99, 1858, 26, true);
+    cout << w.toString();
+    cout << "\nCost: " << w.getCost();
+    cout << "\nDistillery: " <<w.getDistillery();
+    cout << "\nCanadian?: " <<w.getIsCanadian();
+    cout << "\nName: " <<w.getName();
+    cout << "\nYear Made: " << w.getYearMade();
+    cout << "\nSize (oz): " << w.getSize();
+}
+
+int main() {
+    int choice;
+    bool exit = false;
+    std::cout << "Scott and Alex Programming with C++\n";
+    //try {
+    while (exit == false) {
+        displayMenu();
+        //cin >> choice;
+        scanf("%i", &choice);
+        cout << choice + "\n";
+        switch (choice) {
+            case 0:
+                exit = true;
+                break;
+            case 1:// If statement
+                ifProgram();
+                break;
+            case 2:// loops
+                loopProgram();
+                break;
+            case 3:// method
+               
+                methodPogram();
+                break;
+            case 4:// array
+                
+                arrayProgram();
+                break;
+            case 5://OOP
+                objectProgram();
+                break;
+                
+            default:
+                cout << "Enter a number from 0 to 5 please";
+                break;
+
+        }
+    }
+//    } catch (exception e){
+//        cout << "You did not enter an int";
+//    }
+
+
+}
+
+
+

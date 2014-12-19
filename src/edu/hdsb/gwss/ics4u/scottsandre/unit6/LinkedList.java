@@ -38,6 +38,7 @@ public class LinkedList implements LinkListInterface {
     public void makeEmpty() {
         this.head = null;
         this.tail = null;
+        
     }
 
     @Override
