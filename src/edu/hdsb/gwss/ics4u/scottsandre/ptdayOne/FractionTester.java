@@ -128,6 +128,12 @@ public class FractionTester {
         MixedFraction m5 = new MixedFraction (-2, -3, -6);
         System.out.println("to string: " + m5.toString());
         
+        System.out.println("mixed fraction invert");
+        System.out.println("m5 before: " + m5.toString());
+        m5.invert();
+        System.out.println("m5 after: " + m5.toString());
+        System.out.println("nothing happned.");
+        
         
         
         

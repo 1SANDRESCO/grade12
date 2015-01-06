@@ -51,6 +51,10 @@ public class MixedFraction extends Fraction {
         return impf;
         
     }
+    @Override
+    public void invert(){
+     System.out.println("this ovverides the Fraction class (super) invert. so nothing happens");   
+    }
 
     public void setWholeNumber(int wholeNumber) {
         if (wholeNumber != 0){
