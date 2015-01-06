@@ -43,10 +43,13 @@ public class MixedFraction extends Fraction {
         return wholeNumber;
     }
     
-    public void toImproper(){
+    public ImproperFraction toImproper(){
         int x = this.getWholeNumber() * this.getDenominator();
         int y = this.getNumerator() + x;
         System.out.println(this.toString() + " becomes " + y + "/" + this.getDenominator());
+        ImproperFraction impf = new ImproperFraction(y, this.getDenominator());
+        return impf;
+        
     }
 
     public void setWholeNumber(int wholeNumber) {

@@ -25,13 +25,14 @@ public class ImproperFraction extends Fraction {
 
     }
     
-    public void toMixed(){
+    public MixedFraction toMixed(){
         MixedFraction newOne;
         int x = this.getNumerator() / this.getDenominator();//whole number
         int y = this.getNumerator() - ( x * this.getDenominator());//new numerator
         newOne = new MixedFraction(y, this.getDenominator(), x);
         System.out.println("Improper converted to mixed.");
         System.out.println("Num: " + y + " Denom: " + this.getDenominator() + " whole: " + x);
+        return newOne;
         
         
     }

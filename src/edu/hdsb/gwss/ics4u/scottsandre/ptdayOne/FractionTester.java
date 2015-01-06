@@ -100,6 +100,7 @@ public class FractionTester {
         
         System.out.println("to mixed: ");
         ipf2.toMixed();
+        System.out.println("returns object. object to string: " + ipf2.toMixed().toString());
         
          System.out.println("-------------------------------------------------------");
         System.out.println("MIXED FRACTION:");
@@ -109,6 +110,7 @@ public class FractionTester {
         
         System.out.println("to improper: ");
         m.toImproper();
+        System.out.println("returns an object. object to string: " + m.toImproper().toString() );
         
         System.out.println("bad mixed fraction #1: ");
         MixedFraction m2 = new MixedFraction (4, 3, 2);

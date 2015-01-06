@@ -9,7 +9,7 @@ package edu.hdsb.gwss.ics4u.scottsandre.ptdayOne;
  *
  * @author Scott
  */
-public class Fraction {
+public class Fraction implements FractionInterface{
 
     private int numerator = 0, denominator = 0;
     private static int smallNumber, largeNumber, divisorNumber;
@@ -45,6 +45,7 @@ public class Fraction {
         return ((double) numerator) / ((double) denominator);
     }
 
+    @Override
     public Fraction larger(Fraction f) {
         if (this.size() >= f.size()) {
             return this;//this fraction is larger or both same
@@ -52,7 +53,7 @@ public class Fraction {
             return f;//other fraction is larger
         }
     }
-
+    @Override
     public Fraction larger(Fraction f, Fraction g) {
         if (f.size() >= g.size()) {
             return f; //either the same or f is bigger
@@ -60,7 +61,7 @@ public class Fraction {
             return g;
         }
     }
-
+    @Override
     public Fraction times(Fraction f) {
         Fraction newFraction = new Fraction();
         newFraction.setNumerator(this.getNumerator() * f.getNumerator());
@@ -68,14 +69,14 @@ public class Fraction {
         newFraction.reduce();
         return newFraction;
     }
-
+    @Override
     public Fraction times(Fraction f, Fraction g) {
         Fraction newFraction = new Fraction();
         newFraction.setNumerator(g.getNumerator() * f.getNumerator());
         newFraction.setDenominator(g.getDenominator() * f.getDenominator());
         return newFraction;
     }
-
+    @Override
     public void reduce() {
         if (this.getNumerator() < 0 && this.getDenominator() < 0) {
             this.setNumerator(this.getNumerator() * -1);//absolute value, both positive if both negative
@@ -86,7 +87,7 @@ public class Fraction {
         this.setNumerator(numerator / divisorNumber);
         this.setDenominator(denominator / divisorNumber);
     }
-
+    @Override
     public String toString() {//string representation of fraction that's all
         return this.getNumerator() + " / " + this.getDenominator();
     }
@@ -98,7 +99,7 @@ public class Fraction {
             return false;
         }
     }
-
+    @Override
     public int hashValue() {
         int hash = 7;
         hash = 37 * hash + this.numerator;
@@ -126,7 +127,7 @@ public class Fraction {
         } 
         
     }
-
+    @Override
     public void invert() {
         int holder;
         holder = this.getNumerator();
@@ -167,6 +168,11 @@ public class Fraction {
         }
 
         return largeInt;//this is the GCD
+    }
+
+    @Override
+    public boolean equals() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
