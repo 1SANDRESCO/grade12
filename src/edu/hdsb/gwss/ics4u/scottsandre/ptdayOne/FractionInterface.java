@@ -12,7 +12,7 @@ package edu.hdsb.gwss.ics4u.scottsandre.ptdayOne;
 public interface FractionInterface {
     
     public Fraction larger(Fraction f);
-    public Fraction larger(Fraction f, Fraction g);
+    //public static Fraction larger(Fraction f, Fraction g);
     public Fraction times (Fraction f);
     public Fraction times (Fraction f, Fraction g);
     public void reduce();

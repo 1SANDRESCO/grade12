@@ -11,7 +11,7 @@ package edu.hdsb.gwss.ics4u.scottsandre.ptdayOne;
  */
 public class Fraction implements FractionInterface{
 
-    private int numerator = 0, denominator = 0;
+    private int numerator = 0, denominator = 1;
     private static int smallNumber, largeNumber, divisorNumber;
 
     public Fraction(int numerator, int denominator) {
@@ -21,6 +21,7 @@ public class Fraction implements FractionInterface{
     }
 
     public Fraction() {
+        this(0,1);
 
     }
 
@@ -53,8 +54,8 @@ public class Fraction implements FractionInterface{
             return f;//other fraction is larger
         }
     }
-    @Override
-    public Fraction larger(Fraction f, Fraction g) {
+    
+    public static Fraction larger(Fraction f, Fraction g) {
         if (f.size() >= g.size()) {
             return f; //either the same or f is bigger
         } else {
@@ -107,6 +108,7 @@ public class Fraction implements FractionInterface{
         return hash;
     }
 
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

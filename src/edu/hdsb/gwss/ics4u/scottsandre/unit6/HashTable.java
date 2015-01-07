@@ -129,7 +129,7 @@ public class HashTable implements HashTableInterface {
     }
 
     @Override
-    public int get(int key) {
+    public int get(int key) {//not an index location
         try {
             return this.array[key];
         } catch (IndexOutOfBoundsException e) {
@@ -219,56 +219,90 @@ public class HashTable implements HashTableInterface {
     }
 
     public static void main(String[] args) {
-        // 50 is the expected size, inputed in the contstructor of the hash table
-        HashTable Table1 = new HashTable(50);
-
-        for (int i = 0; i < 100; i++) {
-            // The array resizes when the laod factor hits 75% and causes it to drop to 25% (multiply current cap. by 3
-            Table1.put((int) (Math.random() * 10000));
-
+        int[] valuesAdded = new int[100];
+        int nextSpot = 0;
+        for ( int i = 0; i < valuesAdded.length; i++ ) {
+            valuesAdded[i] = -1;
         }
-        System.out.println("Is  the table is empty: " + Table1.isEmpty());
 
-        int randValue = (int) (Math.random() * 1000);
-        System.out.println("Getting value at index " + Table1.get(randValue));
+        HashTable ht = new HashTable( 20 );
 
-        System.out.println("Checking to see if a value exists in the hash table.");
-        System.out.println("Does the value " + randValue + " exist in the hash table " + Table1.containsKey2(randValue));
+        // EMPTY
+        assert ( ht.size() == 0 );
+        assert ( ht.isEmpty() );
+        assert ( ht.capacity() == 23 );
+        assert ( ht.loadFactor() == 0.0 );
 
-        System.out.println("Current hash table size");
-        System.out.println(Table1.size());
-        System.out.println("Current hash table capacity");
-        System.out.println(Table1.capacity());
+        // HASH
+        assert ( ht.hash( 0 ) == 0 );
+        assert ( ht.hash( 1 ) == 1 );
+        assert ( ht.hash( ht.capacity() ) == 0 );
+        assert ( ht.hash( ht.capacity() - 1 ) == ht.capacity() - 1 );
 
-        System.out.println(" Make the table empty then check to see if is Empty works");
-        Table1.makeEmpty();
-        System.out.println("Is  the table  empty: " + Table1.isEmpty());
-    }
+        // PUT
+        ht.put( 0 );
+        valuesAdded[nextSpot] = 0;
+        nextSpot++;
+        assert ( !ht.isEmpty() );
+        assert ( ht.size() == 1 );
+        assert ( ht.containsKey( 0 ) );
+        assert ( ht.get( 0 ) == 0 );
+        assert ( ht.loadFactor() == ( 1.0 / (double) ht.capacity() ) );
 
-//        HashTable h = new HashTable(10);
-//        System.out.println("Empty array: ");
-//        System.out.println("IsEmpty: " + h.isEmpty());
-//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-//        h.displayArray();
-//        System.out.println();
-//        h.put(0);
-//        h.put(12);
-//        h.put(12);
-//        //h.put(12);
-//        h.put(2);
-//        h.put(13);
-//        h.put(55);
-//        h.put(34);
-//        h.put(4);
-//        h.put(123);
-//        h.put(234);
-//        
-////        for (int i = 0; i < 100; i++) {
-////            h.put((int) (Math.random() * 10000));
-////        }
-//        h.displayArray();
-//        System.out.println("Size: " + h.size() + "  capacity: " + h.capacity() + "  Collisions: " + h.collisions + "  Load Factor: " + h.loadFactor());
-//
-//    }
+        // PUT; SAME HASH VALUE
+        ht.put( ht.capacity() );
+        valuesAdded[nextSpot] = ht.capacity();
+        nextSpot++;
+        assert ( !ht.isEmpty() );
+        assert ( ht.size() == 2 );
+        assert ( ht.containsKey( ht.capacity() ) );
+        assert ( ht.get( ht.capacity() ) == ht.capacity() );
+        assert ( ht.loadFactor() == ( 2.0 / (double) ht.capacity() ) );
 
+        // FILL WITH RANDOM NUMBERS TILL LOAD FACTOR REACHED
+        int size = 2;
+        for ( ; size < 17; size++ ) {
+            int value = (int) ( Math.random() * 100 );
+            ht.put( value );
+            valuesAdded[nextSpot] = value;
+            nextSpot++;
+            assert ( ht.size() == size + 1 );
+            assert ( ht.containsKey( value ) );
+            assert ( ht.get( value ) == value );
+            System.out.println( "Load Factor: " + ht.loadFactor() );
+        }
+
+        // BEFORE RESIZE: 17/23 == Load Factor > 0.74
+        assert ( ht.size() == 17 );
+        assert ( ht.loadFactor() < 0.75 );
+        assert ( ht.capacity() == 23 );
+
+        // BEFORE RESIZE: 18/23 --> New Size: 18 / 0.25
+        System.out.println( "RESIZED" );
+        ht.put( 666 );
+        valuesAdded[nextSpot] = 666;
+        nextSpot++;
+        assert ( ht.capacity() == 73 );
+        assert ( ht.loadFactor() < 0.25 );
+        
+        // MAKE SURE RESIZE WORKED; ALL VALUES ADDED CORRECTLY
+        nextSpot = 0;
+        int value;
+        while( valuesAdded[nextSpot] > -1 ) {
+            value = valuesAdded[nextSpot];
+            assert ( ht.containsKey( value ) );
+            assert ( ht.get( value ) == value );
+            nextSpot++;
+        }
+        
+        // MAKE EMPTY
+        ht.makeEmpty();
+        // EMPTY
+        assert ( ht.size() == 0 );
+        assert ( ht.isEmpty() );
+        assert ( ht.capacity() == 73 );
+        assert ( ht.loadFactor() == 0.0 );
+
+
+}
 }

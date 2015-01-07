@@ -51,7 +51,7 @@ public class Queue implements QueueInterface {
     }
 
     @Override
-    public int front() {
+    public int front() {//should return value at that index, just make getFrontValue
         return front;
     }
 
