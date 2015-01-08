@@ -5,12 +5,16 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
+import java.util.Objects;
+
 /**
  *
  * @author Scott
  */
 public class Chair {
     private int weight;
+    private static int numberCreated = 0;
+    private int serialNumber;
     private double cost;
     private String wood;
     
@@ -22,16 +26,34 @@ public class Chair {
         this.setWeight(weight);
         this.setCost(cost);
         this.setWood(wood);
+        this.setSerialNumber(numberCreated);
+        numberCreated++;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 71 * hash + this.weight;
-        hash = 71 * hash + (int) (Double.doubleToLongBits(this.cost) ^ (Double.doubleToLongBits(this.cost) >>> 32));
+        hash = 53 * hash + this.serialNumber;
         return hash;
     }
 
+
+    @Override
+    public String toString() {
+        if (this != null){
+        return "Chair{" + "weight=" + weight + ", cost=" + cost + ", wood=" + wood + ", serialNumber= " + serialNumber + '}';
+        } else {
+            return "NULL";
+        }
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    private void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
+    }
     
 
     public String getWood() {

@@ -197,6 +197,7 @@ public class HashTable implements HashTableInterface {
     public int hash(int value){
         return value % capacity();
     }
+    
     public int hash2(int value) { // pass it the value, it returns where to put it
         int indexLocation = value % this.capacity();
         if (containsKey2(indexLocation)) {//number already in that spot
