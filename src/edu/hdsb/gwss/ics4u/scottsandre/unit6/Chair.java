@@ -17,6 +17,7 @@ public class Chair {
     private int serialNumber;
     private double cost;
     private String wood;
+    private Chair next, previous;
     
     public Chair(){
         this(0, 0, null);
@@ -28,7 +29,26 @@ public class Chair {
         this.setWood(wood);
         this.setSerialNumber(numberCreated);
         numberCreated++;
+        this.next = null;
+        this.previous = null;
     }
+
+    public Chair getNext() {
+        return next;
+    }
+
+    public void setNext(Chair next) {
+        this.next = next;
+    }
+
+    public Chair getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Chair previous) {
+        this.previous = previous;
+    }
+    
 
     @Override
     public int hashCode() {

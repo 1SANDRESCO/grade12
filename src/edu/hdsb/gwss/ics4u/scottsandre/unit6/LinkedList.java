@@ -67,14 +67,15 @@ public class LinkedList implements LinkListInterface {
     }
 
     @Override
-    public void remove(String str) {
+    public void remove(String str) {//fix so it works even if list is empty
+        if (!isEmpty()){
         Node n = head;
         int x = 1;
         boolean found = false;
         //Node previousN = new Node(null);
         if (head.getData().equalsIgnoreCase(str)) {
             head = head.getNext();
-        } else {
+        } else if (size() > 1) {
             //try {
             while (found == false) {
                 if (n.getNext().getData().equalsIgnoreCase(str)) {//next one is string
@@ -99,6 +100,7 @@ public class LinkedList implements LinkListInterface {
                 }
             }
            
+        }
         }
     }
     
@@ -128,115 +130,73 @@ public class LinkedList implements LinkListInterface {
     }
 
     public static void main(String[] args) {
-        System.out.println("Linked Lists: ");
+        LinkedList ll = new LinkedList();     
+        ll.addAtFront("Scott");
+        ll.remove("tyler");
 
-        System.out.println();
-        System.out.println("Test Case 1: create new LinkedList");
-        LinkedList l = new LinkedList();
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 2: add node 'Scott' at FRONT");
-        l.addAtFront("Scott");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 3: add 3 other names to front");
-        l.addAtFront("Thomas");
-        l.addAtFront("Alex");
-        l.addAtFront("Tyler");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 4: add 'Nick' to back");
-        l.addAtEnd("Nick");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 5: add 'Ricky' to back");
-        l.addAtEnd("Ricky");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 6: remove 'Tyler' (front) exists");
-        l.remove("Tyler");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-
-        System.out.println();
-        System.out.println("Test Case 7: make empty ");
-        LinkedList l2 = new LinkedList();
-        l2.addAtFront("One");
-        l2.addAtFront("Two");
-        l2.addAtFront("Three");
-        l2.addAtFront("Four");
-        l2.addAtFront("Five");
-        System.out.println("Before: size is " + l2.size() + "\n" + l2.toString());
-        l2.makeEmpty();
-        System.out.println("After: size is " + l2.size() + "\n" + l2.toString());
-        
-        System.out.println();
-        System.out.println("Test Case 8: remove 'Scott' (middle) exists");
-        l.remove("Scott");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-        
-        System.out.println();
-        System.out.println("Test Case 9: remove 'Ricky' (last) exists");
-        l.remove("Ricky");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-        
-        System.out.println();
-        System.out.println("Test Case 10: add 'Jared' at end after end has been removed");
-        l.addAtEnd("Swagboi Jared");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-        
-        System.out.println();
-        System.out.println("Test Case 11: add another name at end after end was removed");
-        l.addAtEnd("T Law");
-        l.addAtFront("Brad");
-        System.out.println(l.toString());
-        System.out.println("List size: " + l.size());
-        
-        System.out.println();
-        System.out.println("Test Case 12: remove name, does not exist");
-        l.remove("asdf");
-        System.out.println("List size: " + l.size());
-
-        LinkedList l3 = new LinkedList();
-        System.out.println("Linked list 3: ");
-        l3.addAtEnd("Batman");
-        l3.addAtFront("Joker");
-        l3.addAtEnd("Superman");
-        System.out.println(l3.toString());
-        
-        LinkedList l4 = new LinkedList();
-        System.out.println("Linked list 4: ");
-        l4.addAtEnd("Happy");
-        l4.addAtFront("Mad");
-        l4.addAtEnd("Sad");
-        System.out.println(l4.toString());
-        
-        System.out.println("Make linked list 3 empty: ");
-        l3.makeEmpty();
-        System.out.println("Linked list 3 should be empty: ");
-        System.out.println(l3.toString());
-        System.out.println("empty? " + l3.isEmpty());
-        System.out.println("Linked list 4 should be fine: ");
-        System.out.println(l4.toString());
-        System.out.println(l4.size());
-        
-        
-        
-        
-        
+//        // EMPTY
+//        assert ( ll.size() == 0 );
+//        assert ( ll.isEmpty() );
+//
+//        // REMOVE: EMPTY
+//        System.out.println( "CASE 1: REMOVE NON EXISTING" );
+//        ll.remove( "ABC" );
+//
+//        // ADD @ FRONT; SIZE 1
+//        System.out.println( "CASE 2: ADD AT FRONT / REMOVE ONLY ELEMENT" );
+//        ll.addAtFront( "ABC" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        ll.remove( "ABC" );
+//        assert ( ll.size() == 0 );
+//        assert ( ll.isEmpty() );
+//
+//        // ADD @ END; SIZE 1
+//        System.out.println( "CASE 3: ADD AT END / REMOVE ONLY ELEMENT" );
+//        ll.addAtEnd( "ABC" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        ll.remove( "ABC" );
+//        assert ( ll.size() == 0 );
+//        assert ( ll.isEmpty() );
+//
+//        // ADD @ FRONT; SIZE 2
+//        System.out.println( "CASE 4: ADD AT FRONT / REMOVE 2 ELEMENT" );
+//        ll.addAtFront( "ABC" );
+//        ll.addAtFront( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 2 );
+//        ll.remove( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 1 );
+//        ll.remove( "ABC" );
+//        System.out.println( "DATA: " + ll.toString() );
+//
+//        // ADD @ BACK; SIZE 2
+//        System.out.println( "CASE 5: ADD AT END / REMOVE 2 ELEMENT" );
+//        ll.addAtEnd( "ABC" );
+//        ll.addAtEnd( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 2 );
+//        ll.remove( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 1 );
+//        ll.remove( "ABC" );
+//        System.out.println( "DATA: " + ll.toString() );
+//
+//        // REMOVE; MIDDLE
+//        System.out.println( "CASE 6: REMOVE TWO ELEMENTS" );
+//        ll.addAtFront( "ABC" );
+//        ll.addAtFront( "123" );
+//        ll.addAtFront( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 3 );
+//        ll.remove( "123" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 2 );
+//        ll.remove( "XYZ" );
+//        System.out.println( "DATA: " + ll.toString() );
+//        assert ( ll.size() == 1 );
+//        ll.remove( "ABC" );
+//        System.out.println( "DATA: " + ll.toString() );
 
     }
 

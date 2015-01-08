@@ -5,16 +5,15 @@
  */
 package edu.hdsb.gwss.ics4u.scottsandre.unit6;
 
-/**
- *
- * @author Scott
- */
+import static edu.hdsb.gwss.ics4u.scottsandre.unit6.HashTable.MAX_FACTOR;
+
+
 public class HashTable2 {
 
     public static final int EMPTY = -1;
     public static final double MAX_FACTOR = 0.75;
     public int expectedNumberInputs;
-    public int valueCausingResize;
+    public Chair valueCausingResize;
     public int collisions = 0;
     public Chair array[];
     public int size = 0;
@@ -64,13 +63,11 @@ public class HashTable2 {
 
     public int capacity() {
         return this.array.length;
-
     }
 
     public double loadFactor() {
         double loadFactor = (double) this.size() / (double) this.capacity();
         return loadFactor;
-
     }
 
     public int primeNumberInRange(int number) {
@@ -90,7 +87,25 @@ public class HashTable2 {
     }
 
     public void resize() {//at 0.75 load factor. make to 0.5 load factor, or 1.5 x
-        //TODO
+        System.out.println("resizing...");
+        Chair[] copyArray = this.array;
+        Chair[] largerArray = new Chair [primeNumberInRange(this.expectedNumberInputs * 3)];
+
+        for (int i = 0; i < largerArray.length; i++) {
+            largerArray[i] = null;
+        }
+        
+        this.array = largerArray;
+        expectedNumberInputs *= 3;
+        for (int i = 0; i < copyArray.length; i++) {
+                if (copyArray[i] != null) {
+                    put(copyArray[i]);
+                    //this.array[hash(copyArray[i].hashCode())] = copyArray[i];
+
+            }
+        }
+
+       
     }
 
     public int size() {
@@ -144,35 +159,58 @@ public class HashTable2 {
     public void put(Chair c) {
         int x = hash(c.hashCode());
         if (!indexLocationFull(x)) {
-            array[x] = c; // that spot is free
+            this.array[x] = c; // that spot is free
+            size++;
         } else {//spot is full
 
             while (indexLocationFull(x)) {
-                if (x == capacity() - 1) {//at the end
+                if (x == capacity() - 1) {//at the end so go to beginning
                     x = -1;
                 }
                 collisions++;
                 x++;
             }
-            array[x] = c;
+            this.array[x] = c;
+            size++;
 
+        }
+        if (loadFactor() > MAX_FACTOR) {
+            resize();
         }
 
     }
 
     public static void main(String[] args) {
-        HashTable2 h = new HashTable2(10);
+        HashTable2 h = new HashTable2(17);
         Chair c1 = new Chair(15, 22.2, "Maple");
         Chair c2 = new Chair(15, 22.2, "Maple");
         Chair c3 = new Chair(44, 33.676, "Oak");
         Chair c4 = new Chair(1, 1.2, "A");
+        Chair c5 = new Chair(33, 234423.2, "Red");
+        Chair c6 = new Chair (123, 321, "asdf");
+        Chair c7 = new Chair (99, 99, "99");
+        Chair c8 = new Chair (55, 15.2, "Yellow Submarine");
         System.out.println(h.capacity());
         h.put(c1);
+        h.put(c2);
         h.put(c3);
+        h.put(c4);
+        h.put(c5);
+        //h.resize();
+        //h.put(c4);
         h.displayArray();
         System.out.println("getting: " + h.get(1));
         System.out.println("Contains key (2) " + h.containsKey(2));
         System.out.println("number collisions: " + h.collisions);
+        System.out.println("load factor " + h.loadFactor() + " size: " + h.size());
+//        h.put(c1);
+//        h.put(c6);
+//        h.put(c5);
+//        h.put(c7);
+//        h.put(c8);
+//        h.displayArray();
+//        System.out.println(h.capacity());
+//    }
     }
 
 }
