@@ -37,7 +37,7 @@ public class LinkedList2 {
         if (size() == 0) {
             this.tail = newNode;
         }
-        
+
         newNode.setNext(this.head);
 
         this.head = newNode;
@@ -65,42 +65,29 @@ public class LinkedList2 {
             if (head.getSerialNumber() == key) {
                 head = head.getNext();
             } else if (size() > 1) {
-                while (!found){
-                    if ( n.getNext().getSerialNumber() == key) {//next one is it
-                        n.setNext(n.getNext().getNext());
-                        n.getNext().getNext().setPrevious(n);
-                        //tail what to do with it
-                    } else {//next one is not it
-                       x++;
-                       if (x == size()){
-                           found = true;//exit, NOT found
-                       } else {
-                           n = n.getNext();
-                       }
-                    }
-                    
-                }
                 while (found == false) {
-                    if (n.getNext().getSerialNumber() == key) {//next one is string
+                    if (n.getNext().getSerialNumber() == key) {//next one is it
+                        if (n.getNext() != tail){
+                            n.getNext().getNext().setPrevious(n); 
+                            System.out.println("not tail");
+                        }
+                        
                         n.setNext(n.getNext().getNext());
-                        if (x == size()) {
+                        if (x == size()) {//because size is now one less and node was at end
                             this.tail = n;
                         }
+                        found = true;
 
-                        n = n.getNext();
-                        n = null;
-
-                        found = true; //what if it is at the end. must set tail
-                    } else {
+                        //tail what to do with it
+                    } else {//next one is not it
                         x++;
-
                         if (x == size()) {
-                            System.out.println("that string does not exist");
-                            found = true;//exit, not found tho as it does not exist
+                            found = true;//exit, NOT found
                         } else {
                             n = n.getNext();
                         }
                     }
+
                 }
 
             }
@@ -122,10 +109,10 @@ public class LinkedList2 {
         if (this.head != null) {
             Chair n = this.head;
             do {
-                if(n == head){
+                if (n == head) {
                     s = s + "HEAD --";
-                } 
-                if (n == tail){
+                }
+                if (n == tail) {
                     s = s + "TAIL --";
                 }
                 s = s + n.toString() + "\n";
@@ -136,27 +123,28 @@ public class LinkedList2 {
         }
         return s;
     }
-    
+
     public static void main(String[] args) {
         LinkedList2 l = new LinkedList2();
-        System.out.println(l.size() + "  " +  l.isEmpty());
+        System.out.println(l.size() + "  " + l.isEmpty());
         Chair c1 = new Chair(15, 22.2, "Maple");
         Chair c2 = new Chair(15, 22.2, "Maple");
         Chair c3 = new Chair(44, 33.676, "Oak");
         Chair c4 = new Chair(1, 1.2, "A");
         Chair c5 = new Chair(33, 234423.2, "Red");
-        Chair c6 = new Chair (123, 321, "asdf");
-        Chair c7 = new Chair (99, 99, "99");
-        Chair c8 = new Chair (55, 15.2, "Yellow Submarine");
+        Chair c6 = new Chair(123, 321, "asdf");
+        Chair c7 = new Chair(99, 99, "99");
+        Chair c8 = new Chair(55, 15.2, "Yellow Submarine");
         l.addAtFront(c1);
         l.addAtFront(c2);
+        l.addAtEnd(c4);
         l.addAtEnd(c3);
         System.out.println(l.toString());
-        System.out.println(l.size() + "  " +  l.isEmpty());
-    
-    }   
+        System.out.println(l.size() + "  " + l.isEmpty());
+        l.remove(3);
+        System.out.println(l.toString());
+        System.out.println("tail previous..." + l.tail.getPrevious().toString());
+
+    }
 
 }
-
-
-

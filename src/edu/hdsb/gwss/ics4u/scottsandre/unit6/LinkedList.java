@@ -80,11 +80,12 @@ public class LinkedList implements LinkListInterface {
             while (found == false) {
                 if (n.getNext().getData().equalsIgnoreCase(str)) {//next one is string
                     n.setNext(n.getNext().getNext());
-                    if (x == size()) {
+                    if (x == size() ) {//because size is now one less
+                        System.out.println("test");
                         this.tail = n;
                     }
                     
-                    n = n.getNext();
+                 
                     n = null;
                     
                     found = true; //what if it is at the end. must set tail
@@ -94,6 +95,7 @@ public class LinkedList implements LinkListInterface {
                     if (x == size()){
                         System.out.println("that string does not exist");
                         found = true;//exit, not found tho as it does not exist
+                        
                     } else {
                     n = n.getNext();
                     }
@@ -132,7 +134,12 @@ public class LinkedList implements LinkListInterface {
     public static void main(String[] args) {
         LinkedList ll = new LinkedList();     
         ll.addAtFront("Scott");
-        ll.remove("tyler");
+        ll.addAtFront("jared");
+        ll.addAtFront("Thomas");
+        System.out.println(ll.size());
+        ll.remove("Scott");
+        System.out.println("t  " + ll.tail.getData());
+        System.out.println(ll.toString());
 
 //        // EMPTY
 //        assert ( ll.size() == 0 );
