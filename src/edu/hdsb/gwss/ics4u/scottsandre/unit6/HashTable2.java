@@ -124,7 +124,7 @@ public class HashTable2 {
     }
 
     public void makeEmpty() {
-        this.size = 0;
+        //this.size = 0;
         for (int i = 0; i < this.array.length; i++) {
             this.array[i] = null;
         }

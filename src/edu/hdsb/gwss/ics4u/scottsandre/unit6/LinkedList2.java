@@ -76,6 +76,7 @@ public class LinkedList2 {
                         if (x == size()) {//because size is now one less and node was at end
                             this.tail = n;
                         }
+                        n = null;
                         found = true;
 
                         //tail what to do with it
@@ -141,7 +142,7 @@ public class LinkedList2 {
         l.addAtEnd(c3);
         System.out.println(l.toString());
         System.out.println(l.size() + "  " + l.isEmpty());
-        l.remove(3);
+        l.remove(2);
         System.out.println(l.toString());
         System.out.println("tail previous..." + l.tail.getPrevious().toString());
 

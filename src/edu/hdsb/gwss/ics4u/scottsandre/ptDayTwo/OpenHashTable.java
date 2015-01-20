@@ -103,6 +103,8 @@ public class OpenHashTable {
             return true;
         }
         return false;
+        //CSStudent Student = get(key);
+        //return student != null;
     }
 
     /**
