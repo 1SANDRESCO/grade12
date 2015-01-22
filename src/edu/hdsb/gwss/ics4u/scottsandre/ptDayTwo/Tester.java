@@ -36,14 +36,23 @@ public class Tester {
         System.out.println("Empty? " + ht.isEmpty());
         
         System.out.println("Adding 8  students. Before size: " + ht.size());
-        ht.put(studentSS);
-        ht.put(studentLW);
-        ht.put(studentDS);
-        ht.put(studentFR2);
-        ht.put(studentFR);
-        ht.put(studentKB);
-        ht.put(studentAM);
         ht.put(studentTA);
+        ht.put(studentSA);
+        ht.put(studentKB);
+        ht.put(studentAG);
+        ht.put(studentFH);
+        ht.put(studentAK);
+        ht.put(studentAL);
+        ht.put(studentSL);
+        ht.put(studentAM);
+        ht.put(studentSN);
+        ht.put(studentRQ);
+        ht.put(studentFR);
+        ht.put(studentFR2);
+        ht.put(studentSS);
+        ht.put(studentDS);
+        ht.put(studentLW);
+        
         System.out.println( ht.toString() );
         System.out.println("After size: " + ht.size());
         

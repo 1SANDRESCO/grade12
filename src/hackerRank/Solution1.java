@@ -13,34 +13,51 @@ public class Solution1 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int[] array;
-        //int[] flipped = new int[32];
+        long[] solutions;
+
         int expectedN, x;
         expectedN = input.nextInt();//get total number
+        solutions = new long [expectedN];
 
         for (int i = 0; i < expectedN; i++) {
             x = input.nextInt();//check that x isn't too large
             array = decToBin(x);
-            displayArray(array);
+            
             for (int i2 = 0; i2 < array.length; i2++) {
                 if (array[i2] == 1) {
                     array[i2] = 0;
                 } else {
                     array[i2] = 1;
                 }
+
             }
-            System.out.println("Flipped: ");
-                displayArray(array);
+
+            //displayArray(array);
+            
+            solutions[i] = binToDec(array);
+        }
+        
+        displayArray(solutions);
+
+    }
+
+    public static long binToDec(int[] array) {
+
+        long sum = 0;
+
+        for (int i = array.length - 1; i >= 0; i--) {
+            if (array[i] == 1) {
+
+                sum = sum + (long) Math.pow(2, 31 - i);
+            }
         }
 
+        return sum;
     }
 
-    public static void binToDec() {
-
-    }
-
-    public static void displayArray(int[] data) {
+    public static void displayArray(long[] data) {
         for (int i = 0; i < data.length; i++) {
-            System.out.print(data[i] + ", ");
+            System.out.println(data[i]);
         }
 
     }
