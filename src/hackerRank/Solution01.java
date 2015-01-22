@@ -8,7 +8,7 @@ package hackerRank;
 import java.io.*;
 import java.util.*;
 
-public class Solution1 {
+public class Solution01 {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
