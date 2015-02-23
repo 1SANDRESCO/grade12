@@ -11,7 +11,7 @@ import edu.hdsb.gwss.muir.ics4u.u6.LinkListInterface;
  *
  * @author Owner
  */
-public class LinkedList implements LinkListInterface {
+public class LinkedList  {
 
     public Node head;
     public Node tail;
