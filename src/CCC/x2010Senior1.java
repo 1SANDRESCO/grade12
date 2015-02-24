@@ -16,6 +16,7 @@ public class x2010Senior1 {
     public static String[] names;
 
     public static void main(String[] args) {
+
         Scanner input = new Scanner(System.in);
 
         int n = Integer.parseInt(input.nextLine());
@@ -49,24 +50,37 @@ public class x2010Senior1 {
             space2 = sIn.indexOf(" ", space1);
             d = Integer.parseInt(sIn.substring(space1, space2));//DISK
             names[i] = name;
-            answer[i] = ((2 * r) + (3 * d) + d);
+            answer[i] = ((2 * r) + (3 * s) + d);
         }
 
-        bubbleSortArray(answer); // are now sorted, last index is greatest
-        //what if there is a tie
-        if (answer[n] != answer[n - 1]) {//no tie for first
-            System.out.println(names[n]);
+        bubbleSortArray(answer); // are now sorted, last index is greatest        
+        checkForTieAtIndex(answer, names, 1, n);
+        checkForTieAtIndex(answer, names, 2, n);
+
+    }
+
+    public static void checkForTieAtIndex(int[] answer, String[] names, int xx, int n) {//xx is 1 for first, xx is 2 for second
+        if (answer[n - xx] != answer[n - 1 - xx]) {//no tie for first
+            System.out.println(names[n - xx]);
         } else {//tie for first
-            int lowestLetter = 1000;
-            for (int i = 0; i < n - 1; i++) {
-                if (answer[i] == answer[n]) {//tie
-                    
+
+            int indexOfLowestLetter = -1;
+            for (int i = 0; i < n - xx; i++) {
+                if (answer[i] == answer[n - xx]) {//tie for first or second
+                    if (indexOfLowestLetter != - 1) {
+                        if (names[i].compareToIgnoreCase(names[n - xx]) < 0 && names[i].compareToIgnoreCase(names[indexOfLowestLetter]) < 0) {
+                            indexOfLowestLetter = i;
+                        }
+                    } else if (names[i].compareToIgnoreCase(names[n - xx]) < 0) { //lower, less than
+                        indexOfLowestLetter = i;
+                    } else {
+                        indexOfLowestLetter = n - xx;
+                    }
                 }
             }
+
+            System.out.println(names[indexOfLowestLetter]);
         }
-
-        displayArray(answer);
-
     }
 
     public static void displayArray(int[] data) {
