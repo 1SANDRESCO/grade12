@@ -24,7 +24,7 @@ public class x2011Senior1 {
         int sSum = 0;
         int tSum = 0;
         String s = "";
-        for (int i = 0; i < n; n++){
+        for (int i = 0; i < n; i++){
             s = input.nextLine();
            
             for (int k = 0; k < s.length(); k++){
