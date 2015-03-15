@@ -33,12 +33,17 @@ public class AssassinsNumbers {
             r = (int) (Math.random() * n) + 1;
             if (freeNumbers[r - 1] != -1 && freeNumbers[r - 1] != i) {
                 freeNumbers[r - 1] = -1;
+               
                 System.out.println("Person " + i + " --> " + r );
             } else {
                 i--;
             }
 
         }
+        
+       
 
     }
+    
+   
 }
