@@ -27,6 +27,7 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
     public static final int WINDOW_SIZE = 700;
     public static int numberPlayers;
     public static int screenNumber = 1;
+    public static int turnNumber = 1;
     public static int[] moneyHolder;
 
     private static final Dimension topPanelDimension = new Dimension(WINDOW_SIZE, 50);
@@ -34,6 +35,7 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
     private static final Dimension centralPanelScreen2Dimension = new Dimension(WINDOW_SIZE - 50, 400);
     private static final Dimension bottomPannelScreen2D = new Dimension(WINDOW_SIZE - 50, 150);
     private static Dimension playersD;
+    private static Dimension infoD;
 
     private final String ONE_PLAYER = "ONE PLAYER";
     private final String TWO_PLAYERS = "TWO PLAYERS";
@@ -52,11 +54,14 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
     private JPanel bottomPannelScreen2;
     private JPanel bottomPlayerHolder;
     private JPanel[] playersPanel;
+    private JPanel turnPanel;
+    private JPanel subjectsPanel;
 
     private JLabel topTitleText;
     private JLabel centreTextScreen1;
     private JLabel bottomTextScreen2;
     private JLabel[][] playersInfo;
+    private JLabel turnText;
 
     private JFrame window2;
 
@@ -165,6 +170,7 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
         //SCREEN 2 // window2
         moneyHolder = new int[numberPlayers];
         playersD = new Dimension(WINDOW_SIZE / (numberPlayers + 1), 150);
+        infoD = new Dimension (WINDOW_SIZE / (numberPlayers + 1), 30);
 
         this.topTitlePanel.setBackground(Color.blue);
         this.topTitleText.setForeground(Color.black);
@@ -174,9 +180,20 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
         this.centralPanelScreen2.setBorder(BorderFactory.createEtchedBorder());
         this.centralPanelScreen2.setSize(centralPanelScreen2Dimension);
         this.centralPanelScreen2.setLayout(new BoxLayout(centralPanelScreen2, BoxLayout.Y_AXIS));
+        
+        this.turnPanel = new JPanel();
+        this.turnPanel.setBorder(BorderFactory.createEtchedBorder());
+        this.turnPanel.setSize(topPanelDimension);
+        this.turnPanel.setPreferredSize(topPanelDimension);
+        
+        this.turnText = new JLabel("Player #" + turnNumber + ": It is your turn", SwingConstants.CENTER);
+        
+        this.subjectsPanel = new JPanel();
+        this.subjectsPanel.setBorder(BorderFactory.createEtchedBorder());
+        this.subjectsPanel.setBackground(Color.PINK);
 
         this.bottomPannelScreen2 = new JPanel();
-        this.bottomPannelScreen2.setBackground(Color.white);
+        this.bottomPannelScreen2.setBackground(Color.GRAY);
         this.bottomPannelScreen2.setBorder(BorderFactory.createEtchedBorder());
         this.bottomPannelScreen2.setSize(bottomPannelScreen2D);
         this.bottomPannelScreen2.setPreferredSize(bottomPannelScreen2D);
@@ -198,6 +215,8 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
         playersPanel[0] = new JPanel();
         playersPanel[0].setSize(playersD);
         playersPanel[0].setPreferredSize(playersD);
+        //playersPanel[0].setLayout(new BoxLayout(playersPanel[0], BoxLayout.Y_AXIS));
+        playersPanel[0].setBackground(Color.RED);
         bottomPlayerHolder.add(playersPanel[0]);
 
         for (int i = 1; i < numberPlayers + 1; i++) {
@@ -205,17 +224,18 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
 
             playersPanel[i].setSize(playersD);
             playersPanel[i].setPreferredSize(playersD);
+           // playersPanel[i].setLayout(new BoxLayout(playersPanel[i], BoxLayout.Y_AXIS));
             switch (i) {
-                case 0:
+                case 1:
                     playersPanel[i].setBackground(Color.CYAN);
                     break;
-                case 1:
+                case 2:
                     playersPanel[i].setBackground(Color.GREEN);
                     break;
-                case 2:
+                case 3:
                     playersPanel[i].setBackground(Color.YELLOW);
                     break;
-                case 3:
+                case 4:
                     playersPanel[i].setBackground(Color.MAGENTA);
                     break;
             }
@@ -226,17 +246,26 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
         playersInfo[0][0] = new JLabel("PLAYER #: ", SwingConstants.CENTER);
         playersInfo[0][1] = new JLabel("TURN: ", SwingConstants.CENTER);
         playersInfo[0][2] = new JLabel("MONEY: ", SwingConstants.CENTER);
+        
         playersPanel[0].add(playersInfo[0][0]);
         playersPanel[0].add(playersInfo[0][1]);
         playersPanel[0].add(playersInfo[0][2]);
 
         for (int i = 1; i < numberPlayers + 1; i++) {
-            playersInfo[i][0] = new JLabel("Player " + i, SwingConstants.CENTER);
+            playersInfo[i][0] = new JLabel("" + i, SwingConstants.CENTER);
             playersInfo[i][1] = new JLabel("XXX", SwingConstants.CENTER);
             playersInfo[i][2] = new JLabel("$" + moneyHolder[i - 1], SwingConstants.CENTER);
+            
             playersPanel[i].add(playersInfo[i][0]);
             playersPanel[i].add(playersInfo[i][1]);
             playersPanel[i].add(playersInfo[i][2]);
+        }
+        
+        for (int r = 0; r < numberPlayers + 1; r ++){//SET SIZES
+            for (int c = 0; c < 3; c++){
+                playersInfo[r][c].setSize(infoD);
+                playersInfo[r][c].setPreferredSize(infoD);
+            }
         }
 
         this.topTitleText = new JLabel("Welcome to Scott Sandre's Jeapordy game!", SwingConstants.CENTER);
@@ -246,6 +275,11 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
         this.topTitlePanel.add(topTitleText);
         this.bottomPannelScreen2.add(bottomTextScreen2);
         this.bottomPannelScreen2.add(bottomPlayerHolder);
+        
+        this.turnPanel.add(turnText);
+        
+        this.centralPanelScreen2.add(turnPanel);
+        this.centralPanelScreen2.add(subjectsPanel);
 
         this.window2.add(topTitlePanel, BorderLayout.NORTH);
         this.window2.add(centralPanelScreen2, BorderLayout.CENTER);
@@ -324,6 +358,7 @@ public class JeopardyGame extends JFrame implements ActionListener, MouseListene
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JeopardyGame().setVisible(true);
             }
