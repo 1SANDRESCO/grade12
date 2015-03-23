@@ -21,9 +21,9 @@ public class Spinner extends Console{
     private static final int START_XY = 200;
     private static final int LINE_LENGTH = circleR * 3;
     private static final int HALF_L = LINE_LENGTH / 2;
-    private static final int ROTATE_SPEED = 5;
+    private static final int ROTATE_SPEED = 13;
     private static final double RADS_SPEED = ROTATE_SPEED * Math.PI / 180;
-    private static final int SHIFT_SPEED = 10;
+    private static final int SHIFT_SPEED = 20;
     private static final int SIDE = (int) Math.sqrt(  (2 * Math.pow( HALF_L, 2)) - (2 * HALF_L * HALF_L * Math.cos(RADS_SPEED))                               );
             
     private static double calculatedLength;
@@ -74,7 +74,7 @@ public class Spinner extends Console{
         if (Math.abs(angle) == 180) {
             angle = 0;
         }
-        rads = angle * Math.PI / 180;
+        rads = angle * Math.PI / 180.0;
         yChange =  ( Math.sin(rads) * (LINE_LENGTH + circleR/2) );
         xChange = (Math.cos(rads) * (LINE_LENGTH + circleR/2) );
         x2 = xLoc - xChange;
@@ -89,7 +89,7 @@ public class Spinner extends Console{
     private void rotateCCW(){
         erase();
         angle -= ROTATE_SPEED;
-        if ( Math.abs(angle) == 180) {
+        if ( Math.abs(angle) == 180.0) {
             angle = 0;
         }
         rads = angle * Math.PI / 180;
@@ -103,12 +103,6 @@ public class Spinner extends Console{
         drawSpinner();
         
     }
-    
-
-    
-    
-    
-    
     
     
     private void drawSpinner(){
