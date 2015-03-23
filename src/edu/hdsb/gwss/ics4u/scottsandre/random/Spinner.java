@@ -26,7 +26,7 @@ public class Spinner extends Console{
     private static final int SHIFT_SPEED = 10;
     private static final int SIDE = (int) Math.sqrt(  (2 * Math.pow( HALF_L, 2)) - (2 * HALF_L * HALF_L * Math.cos(RADS_SPEED))                               );
             
-    
+    private static double calculatedLength;
     private static int xLoc;
     private static int yLoc;
     private static double x2, x3, y2, y3;
@@ -75,8 +75,8 @@ public class Spinner extends Console{
             angle = 0;
         }
         rads = angle * Math.PI / 180;
-        yChange =  (Math.sin(rads) * LINE_LENGTH );
-        xChange = (Math.cos(rads) * LINE_LENGTH );
+        yChange =  ( Math.sin(rads) * (LINE_LENGTH + circleR/2) );
+        xChange = (Math.cos(rads) * (LINE_LENGTH + circleR/2) );
         x2 = xLoc - xChange;
         x3 = xLoc + xChange + circleR;
         
@@ -104,13 +104,7 @@ public class Spinner extends Console{
         
     }
     
-//    private void rotatingSetLineValues(){ //xChange, yChange, 
-//        angle1 = angle - ROTATE_SPEED; //bottom angle
-//        angle2 = angle; //top angle
-//       
-//        
-//        
-//    }
+
     
     
     
