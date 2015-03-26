@@ -16,6 +16,7 @@ import java.awt.event.KeyEvent;
 public class Spinner extends Console{
     protected static Console c;
     private static int circleR = 30;
+    private static final int SMALL_CIRCLE_R = 15;
     //private int lineLength;
     
     private static final int START_XY = 200;
@@ -47,7 +48,15 @@ public class Spinner extends Console{
         System.out.println("SIDE: " + SIDE);
         System.out.println("RADS SPEED: " + RADS_SPEED);
         drawSpinner();
+        playGame();
+          
+    }
+    
+    public void playGame(){
         
+    }
+    
+    public void makeBlock(){//size, colour, x, y, speed
         
     }
 
@@ -110,6 +119,10 @@ public class Spinner extends Console{
         fillOval(xLoc, yLoc, circleR, circleR);
         setColor(Color.RED);
         drawLine( (int) x2, (int)y2, (int)x3, (int)y3);
+        setColor(Color.BLUE);
+        fillOval((int)x2 - SMALL_CIRCLE_R/2, (int)y2 - SMALL_CIRCLE_R/2, SMALL_CIRCLE_R, SMALL_CIRCLE_R);
+        fillOval( (int)x3 - SMALL_CIRCLE_R/2, (int) y3 - SMALL_CIRCLE_R/2, SMALL_CIRCLE_R, SMALL_CIRCLE_R);
+        
         System.out.println("Angle: " + angle);  
     }
     
@@ -117,6 +130,8 @@ public class Spinner extends Console{
         setColor(Color.WHITE);
         fillOval(xLoc, yLoc, circleR, circleR);
         drawLine( (int) x2, (int)y2, (int)x3, (int)y3);
+        fillOval((int)x2 - SMALL_CIRCLE_R/2, (int)y2 - SMALL_CIRCLE_R/2, SMALL_CIRCLE_R, SMALL_CIRCLE_R);
+        fillOval( (int)x3 - SMALL_CIRCLE_R/2, (int) y3 - SMALL_CIRCLE_R/2, SMALL_CIRCLE_R, SMALL_CIRCLE_R);
         
         
     }
