@@ -22,7 +22,7 @@ public class AssassinsGame {
      */
     public static RandomAccessFile file;
     public static ArrayList<AssassinStudent> allStudents = new ArrayList<>();
-    public static int numberPlayers = 50;
+    public static int numberPlayers = 56;
     public static int[] targets = new int[numberPlayers];
     private static char[] readInName = new char[AssassinStudent.NAME_LENGTH];
     private static char[] readInTarget = new char[AssassinStudent.NAME_LENGTH];
@@ -148,6 +148,12 @@ public class AssassinsGame {
             addNames("James Brett");
             addNames("Lisa Mishko");
             addNames("Alex Mehi");
+            addNames("Bree G");
+            addNames("Camil Zanzana");
+            addNames("Chelsea W");
+            addNames("Joseph Marturano");
+            addNames("Olivia Langill");
+            addNames("Nick Dias");
            
             file.seek(0);
             for (int i = 0; i < numberPlayers; i++) {

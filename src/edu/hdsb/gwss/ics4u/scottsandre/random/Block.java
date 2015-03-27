@@ -13,12 +13,14 @@ import java.awt.Color;
  * @author Scott
  */
 public class Block {
+
     protected static Console c;
     private int blockSize;
     private Color blockColour;
     private int blockSpeed;
     private int blockX, blockY;
     private int direction;
+    public static final int DELAY = 50;
 
     public Block(int blockX, int blockY, int blockSize, int blockSpeed, Color blockColour, int direction, Console xx) {
         this.c = xx;
@@ -30,10 +32,49 @@ public class Block {
         this.setDirection(direction);
         drawBlock();
     }
-    
-    public void drawBlock(){
-        
+
+    public void delay() {
+        try {
+            Thread.sleep(DELAY);
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void drawBlock() {
+        c.setColor(blockColour);
         c.fillRect(blockX, blockY, blockSize, blockSize);
+
+        delay();
+        erase();
+        switch (direction) {//1 up, 2 down, 3 left, 4 right
+            case 1:
+                this.blockY -= this.blockSpeed;
+                break;
+            case 2:
+                this.blockY += this.blockSpeed;
+                break;
+            case 3:
+                this.blockX -= this.blockSpeed;
+                break;
+            case 4:
+                this.blockX += this.blockSpeed;
+                break;
+        }
+        if (this.blockX < 0 || this.blockY > c.maxx() || this.blockY < 0 || this.blockY > c.maxy()) {
+            erase();
+            
+            
+        } else {
+            drawBlock();
+        }
+
+    }
+
+    public void erase() {
+        c.setColor(Color.white);
+        c.fillRect(blockX, blockY, blockSize, blockSize);
+
     }
 
     public int getBlockSize() {
@@ -83,10 +124,5 @@ public class Block {
     public void setDirection(int direction) {
         this.direction = direction;
     }
-    
-    
-    
-    
-    
-    
+
 }

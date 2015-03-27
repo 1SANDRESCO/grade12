@@ -13,7 +13,7 @@ import hsa.Console;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 
-public class Spinner  extends Console{
+public class Spinner extends Console {
 
     protected static Console c;
     private static int circleR = 30;
@@ -36,6 +36,8 @@ public class Spinner  extends Console{
     private static double rads;
 
     private static double xChange, yChange;
+    
+    
 
     public Spinner() {
 
@@ -48,16 +50,10 @@ public class Spinner  extends Console{
         System.out.println("SIDE: " + SIDE);
         System.out.println("RADS SPEED: " + RADS_SPEED);
         drawSpinner();
-        playGame();
 
     }
 
-    public void playGame(){
-        //make block
-        
-        
-    }
-    public void makeBlock() {//size, colour, x, y, speed
+    public void deleteBlock() {
 
     }
 
@@ -124,6 +120,7 @@ public class Spinner  extends Console{
         fillOval((int) x3 - SMALL_CIRCLE_R / 2, (int) y3 - SMALL_CIRCLE_R / 2, SMALL_CIRCLE_R, SMALL_CIRCLE_R);
 
         System.out.println("Angle: " + angle);
+
     }
 
     public void erase() {
@@ -210,8 +207,23 @@ public class Spinner  extends Console{
 
     public static void main(String[] args) {
         //makes spinner 
-        Spinner s = new Spinner();
-        Block b1 = new Block (300, 300, 50, 4, Color.red, 4, s);
+        int randX, randY, randD, randSpeed;
+        Block block;
+        Spinner s = new Spinner();//1 up, 2 down, 3 left, 4 right
+        Block b1 = new Block(200, 600, 30, 4, Color.red, 1, s);
+        Block b2 = new Block(100, 0, 30, 7, Color.red, 2, s);
+        Block b3 = new Block(500, 150, 30, 22, Color.red, 3, s);
+
+        Block b4 = new Block(34, 333, 30, 10, Color.red, 4, s);
+        
+//        for (int i = 0; i < 50; i++){
+//        randX = (int) Math.random() * 500;
+//        randY = (int) Math.random() * 500;
+//        randD = (int) Math.random() * 4 + 1;
+//        randSpeed = (int) Math.random() * 20 + 1;    
+//        block = new Block(randX, randY, 30, randSpeed, Color.red, randD, s);    
+//        }
+
     }
 
 }
