@@ -216,13 +216,7 @@ public class Spinner extends Console {
 
         Block b4 = new Block(34, 333, 30, 10, Color.red, 4, s);
         
-//        for (int i = 0; i < 50; i++){
-//        randX = (int) Math.random() * 500;
-//        randY = (int) Math.random() * 500;
-//        randD = (int) Math.random() * 4 + 1;
-//        randSpeed = (int) Math.random() * 20 + 1;    
-//        block = new Block(randX, randY, 30, randSpeed, Color.red, randD, s);    
-//        }
+
 
     }
 
