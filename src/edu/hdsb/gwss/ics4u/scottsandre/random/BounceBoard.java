@@ -19,7 +19,7 @@ public class BounceBoard extends Console {
     private static int height;
 
     private static Color boardColour;
-    private static final int GAP_FROM_EDGE = 20;
+    private static final int GAP_FROM_EDGE = 40;
     private static int xLoc, yLoc, speed, holder;
     private static final int MAX_X = 639;
     private static final int MAX_Y = 499;
@@ -37,13 +37,13 @@ public class BounceBoard extends Console {
     }
 
     public void drawBoard() {
-        System.out.println("TEST");
+        //System.out.println("TEST");
         setColor(boardColour);
         fillRect(xLoc, yLoc, width, height);
     }
 
     public void erase() {
-        System.out.println("ERASE");
+        //System.out.println("ERASE");
         setColor(Color.WHITE);
         fillRect(xLoc, yLoc, width, height);
     }
@@ -52,11 +52,11 @@ public class BounceBoard extends Console {
         setColor(Color.WHITE);
         switch (z){
             case 1://bottom left
-                System.out.println("CORNER " + z);
+                //System.out.println("CORNER " + z);
                 fillRect(xLoc, yLoc, width*2, height);
                 break;
             case 2://top left
-                System.out.println("CORNER " + z);
+                //System.out.println("CORNER " + z);
                 fillRect(xLoc, yLoc, width * 3, height * 2);
                 break;
             case 4:
@@ -245,12 +245,12 @@ public class BounceBoard extends Console {
         switch (keyPressed) {
 
             case KeyEvent.VK_LEFT:
-                System.out.println("ClockWise");
+                //System.out.println("ClockWise");
                 moveCW();
                 break;
 
             case KeyEvent.VK_RIGHT:
-                System.out.println("Counter ClockWise");
+                //System.out.println("Counter ClockWise");
                 moveCCW();
                 break;
 
@@ -259,9 +259,9 @@ public class BounceBoard extends Console {
 
     public static void main(String[] args) {
 
-        BounceBoard b = new BounceBoard(60, 15, Color.BLACK, MAX_X / 2, MAX_Y - GAP_FROM_EDGE, 12);
-        System.out.println("Max X value" + b.maxx());
-        System.out.println("Max y value" + b.maxy());
+        BounceBoard b = new BounceBoard(60, 22, Color.BLACK, MAX_X / 2, MAX_Y - GAP_FROM_EDGE, 20);
+        BounceBall ball1 = new BounceBall(30, 5, Color.ORANGE, b);
+       
 
     }
 
